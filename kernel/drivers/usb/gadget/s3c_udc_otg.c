@@ -427,7 +427,7 @@ EXPORT_SYMBOL(usb_gadget_unregister_driver);
 
 static int s3c_udc_power(struct s3c_udc *dev, char en)
 {
-    	int ret;
+	int ret;
 	pr_debug("%s : %s\n", __func__, en ? "ON" : "OFF");
 #ifdef USE_USB_LDO_CONTROL
 	if (en) {
@@ -1290,7 +1290,7 @@ static int s3c_udc_probe(struct platform_device *pdev)
 	if (retval != 0) {
 		DEBUG(KERN_ERR "%s: can't get irq %i, err %d\n", driver_name,
 		      IRQ_OTG, retval);
-		mutex_destroy(&dev->mutex);	
+		mutex_destroy(&dev->mutex);
 		return -EBUSY;
 	}
 

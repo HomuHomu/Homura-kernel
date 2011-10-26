@@ -1,8 +1,8 @@
-/* This file is auto generated, version DCM2 */
+/* This file is auto generated, version AOSP2a */
 /* SMP PREEMPT */
 #define UTS_MACHINE "arm"
-#define UTS_VERSION "#DCM2 SMP PREEMPT Tue Oct 25 20:51:43 JST 2011"
-#define LINUX_COMPILE_TIME "20:51:43"
+#define UTS_VERSION "#AOSP2a SMP PREEMPT Wed Oct 26 22:07:33 JST 2011"
+#define LINUX_COMPILE_TIME "22:07:33"
 #define LINUX_COMPILE_BY "Homura"
 #define LINUX_COMPILE_HOST "Akemi"
 #define LINUX_COMPILE_DOMAIN "(none)"

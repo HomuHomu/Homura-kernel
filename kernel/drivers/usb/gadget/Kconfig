@@ -961,7 +961,7 @@ config USB_ANDROID_RNDIS_WCEIS
          compatible.
 
 config USB_ANDROID_ACCESSORY
-	boolean "Android USB accessory function"  
+	boolean "Android USB accessory function"
 	depends on USB_ANDROID
 	help
 	  Provides Android USB Accessory support for android gadget driver.

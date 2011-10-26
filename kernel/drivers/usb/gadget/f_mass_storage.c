@@ -632,9 +632,10 @@ static int fsg_setup(struct usb_function *f,
 #ifdef CONFIG_USB_ANDROID_SAMSUNG_COMPOSITE
 		if (w_index != fsg->interface_number || w_value != 0)
 			return -EDOM;
-		*(u8 *) req->buf = fsg->common->nluns - 1;
 #endif
 		VDBG(fsg, "get max LUN: %d\n", fsg->common->nluns - 1);
+		*(u8 *) req->buf = fsg->common->nluns - 1;
+
 		/* Respond with data/status */
 		req->length = min((u16)1, w_length);
 		fsg->common->ep0req_name =

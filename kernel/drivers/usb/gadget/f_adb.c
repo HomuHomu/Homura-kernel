@@ -35,8 +35,8 @@
 #define BULK_BUFFER_SIZE           4096
 
 /* number of tx requests to allocate */
-#define RX_REQ_MAX 4
 #define TX_REQ_MAX 4
+#define RX_REQ_MAX 4
 
 static const char shortname[] = "android_adb";
 
@@ -215,10 +215,10 @@ static void adb_complete_out(struct usb_ep *ep, struct usb_request *req)
 {
 	struct adb_dev *dev = _adb_dev;
 
-	if (req->status != 0) {
+	if (req->status != 0){
 		dev->error = 1;
 		req_put(dev, &dev->rx_idle, req);
-	} else {
+	}else{
 		req_put(dev, &dev->rx_done, req);
 	}
 
@@ -253,13 +253,14 @@ static int __init create_bulk_endpoints(struct adb_dev *dev,
 	dev->ep_out = ep;
 
 	/* now allocate requests for our endpoints */
-	for (i = 0; i < RX_REQ_MAX; i++) {
+        for (i = 0; i < RX_REQ_MAX; i++) {
 		req = adb_request_new(dev->ep_out, BULK_BUFFER_SIZE);
-		if (!req)
-			goto fail;
-		req->complete = adb_complete_out;
-		req_put(dev, &dev->rx_idle, req);
-	}
+                if (!req)
+                	goto fail;
+                req->complete = adb_complete_out;
+               	req_put(dev, &dev->rx_idle, req);
+       }
+
 
 	for (i = 0; i < TX_REQ_MAX; i++) {
 		req = adb_request_new(dev->ep_in, BULK_BUFFER_SIZE);
@@ -300,76 +301,77 @@ static ssize_t adb_read(struct file *fp, char __user *buf,
 			return ret;
 		}
 	}
-
 	while (count > 0) {
-	if (dev->error) {
-		DBG(cdev, "adb_read dev->error\n");
-		r = -EIO;
-		break;
-	}
+        	if (dev->error) {
+                	DBG(cdev, "adb_read dev->error\n");
+                	r = -EIO;
+                       	break;
+               	}
 
-	/* if we have idle read requests, get them queued */
-	while ((req = req_get(dev, &dev->rx_idle))) {
+               /* if we have idle read requests, get them queued */
+      		while ((req = req_get(dev, &dev->rx_idle))) {
+
 requeue_req:
-	req->length = BULK_BUFFER_SIZE;
-	ret = usb_ep_queue(dev->ep_out, req, GFP_ATOMIC);
-	
-	if (ret < 0) {
-			r = -EIO;
-			dev->error = 1;
-			req_put(dev, &dev->rx_idle, req);
-			goto fail;
-		} else {
-			DBG(cdev, "rx %p queue\n", req);
-		}
-	}
+			 req->length = BULK_BUFFER_SIZE;
+			 ret = usb_ep_queue(dev->ep_out, req, GFP_ATOMIC);
 
-	/* if we have data pending, give it to userspace */
-	if (dev->read_count > 0) {
-		if (dev->read_count < count)
-			xfer = dev->read_count;
-		else
-			xfer = count;
+			if (ret < 0) {
+                        	r = -EIO;
+                               	dev->error = 1;
+                               	req_put(dev, &dev->rx_idle, req);
+                               	goto fail;
+                       	} else {
+                        	DBG(cdev, "rx %p queue\n", req);
+                       	}
+               	}
 
-		if (copy_to_user(buf, dev->read_buf, xfer)) {
-			r = -EFAULT;
-			break;
-		}
-		dev->read_buf += xfer;
-		dev->read_count -= xfer;
-		buf += xfer;
-		count -= xfer;
+               	/* if we have data pending, give it to userspace */
+               	if (dev->read_count > 0) {
+                       	if (dev->read_count < count)
+                               	xfer = dev->read_count;
+                       	else
+                               	xfer = count;
 
-		/* if we've emptied the buffer, release the request */
-		if (dev->read_count == 0) {
-			req_put(dev, &dev->rx_idle, dev->rx_req);
-			dev->rx_req = 0;
-		}
-		continue;
-	}
+                       	if (copy_to_user(buf, dev->read_buf, xfer)) {
+                        	r = -EFAULT;
+                               	break;
+                       	}
+                       	dev->read_buf += xfer;
+                       	dev->read_count -= xfer;
+                       	buf += xfer;
+                       	count -= xfer;
 
-	/* wait for a request to complete */
-	req = 0;
-	ret = wait_event_interruptible(dev->read_wq,
-		((req = req_get(dev, &dev->rx_done)) || dev->error));
-	if (req != 0) {
-		/* if we got a 0-len one we need to put it back into
-		** service.  if we made it the current read req we'd
-		** be stuck forever
-		 */
-		if (req->actual == 0)
-			goto requeue_req;
+                       	/* if we've emptied the buffer, release the request */
+                       	if (dev->read_count == 0) {
+                               	req_put(dev, &dev->rx_idle, dev->rx_req);
+                               	dev->rx_req = 0;
+                       	}
+                       	continue;
+               	}
 
-		dev->rx_req = req;
-		dev->read_count = req->actual;
-		dev->read_buf = req->buf;
-		DBG(cdev, "rx %p %d\n", req, req->actual);
-	}
+               	/* wait for a request to complete */
+               	req = 0;
+               	ret = wait_event_interruptible(dev->read_wq,
+                       	((req = req_get(dev, &dev->rx_done)) || dev->error));
+               	if (req != 0) {
+                       	/* if we got a 0-len one we need to put it back into
+                       	** service.  if we made it the current read req we'd
+                       	** be stuck forever
+                       	*/
+                       	if (req->actual == 0)
+                               	goto requeue_req;
 
-		if (ret < 0) {
-			r = ret;
-			break;
-		}
+                       	dev->rx_req = req;
+                       	dev->read_count = req->actual;
+                       	dev->read_buf = req->buf;
+                       	DBG(cdev, "rx %p %d\n", req, req->actual);
+               	}
+
+               	if (ret < 0) {
+                       	r = ret;
+                       	break;
+               	}
+
 	}
 
 fail:
