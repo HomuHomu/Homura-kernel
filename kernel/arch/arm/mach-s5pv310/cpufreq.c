@@ -117,7 +117,7 @@ static struct cpufreq_frequency_table s5pv310_lookup_freq_table[]= {
 	{L13, 300*1000},
 	{L14, 200*1000},
 	{L15, 100*1000},
-	{L16, 80*1000},
+	{L16, 50*1000},
 	{0, CPUFREQ_TABLE_END},
 };
 
@@ -175,7 +175,7 @@ static unsigned int clkdiv_cpu0_lookup[][7] = {
 	/* ARM L15: 100MHz */
 	{ 0, 3, 7, 3, 3, 1, 7 },
 
-	/* ARM L16: 80MHz */
+	/* ARM L16: 50MHz */
 	{ 0, 1, 3, 1, 3, 1, 7 },
 };
 
@@ -231,7 +231,7 @@ static unsigned int clkdiv_cpu1_lookup[][2] = {
 	/* ARM L15: 100MHz */
 	{ 3, 0 },
 
-	/* ARM L16: 80MHz */
+	/* ARM L16: 50MHz */
 	{ 3, 0 },
 };
 
@@ -254,7 +254,7 @@ static struct cpufreq_frequency_table s5pv310_freq_table[] = {
 	{L13, 300*1000},
 	{L14, 200*1000},
 	{L15, 100*1000},
-	{L16, 80*1000},
+	{L16, 50*1000},
 #endif
 	{0, CPUFREQ_TABLE_END},
 };
@@ -395,7 +395,7 @@ static unsigned int clkdiv_cpu0[CPUFREQ_LEVEL_END][7] = {
 	/* ARM L15: 100MHz */
 	{ 0, 3, 7, 3, 3, 1, 7 },
 
-	/* ARM L16: 80MHz */
+	/* ARM L16: 50MHz */
 	{ 0, 1, 3, 1, 3, 1, 7 },
 };
 
@@ -451,7 +451,7 @@ static unsigned int clkdiv_cpu1[CPUFREQ_LEVEL_END][2] = {
 	/* ARM L15: 100MHz */
 	{ 3, 0 },
 
-	/* ARM L16: 80MHz */
+	/* ARM L16: 50MHz */
 	{ 3, 0 },
 };
 #else
@@ -927,8 +927,8 @@ static unsigned int s5pv310_lookup_apll_pms_table[CPUFREQ_LEVEL_END] = {
 	/* APLL FOUT L15: 100MHz */
 	((200<<16)|(6<<8)|(0x4)),
 
-	/* APLL FOUT L16: 80MHz */
-	((160<<16)|(6<<8)|(0x4)),
+	/* APLL FOUT L16: 50MHz */
+	((200<<16)|(6<<8)|(0x5)),
 };
 
 #ifdef CONFIG_CPU_S5PV310_EVT1
@@ -1126,8 +1126,8 @@ static unsigned int s5pv310_apll_pms_table[CPUFREQ_LEVEL_END] = {
 	/* APLL FOUT L15: 100MHz */
 	((200<<16)|(6<<8)|(0x4)),
 
-	/* APLL FOUT L16: 80MHz */
-	((160<<16)|(6<<8)|(0x4)),
+	/* APLL FOUT L16: 50MHz */
+	((200<<16)|(6<<8)|(0x5)),
 };
 #else
 static struct cpufreq_voltage_table s5pv310_volt_table[CPUFREQ_LEVEL_END] = {
@@ -1608,7 +1608,7 @@ static int s5pv310_target(struct cpufreq_policy *policy,
 	unsigned int ondemandx = (strncmp(policy->governor->name, "ondemandX", CPUFREQ_NAME_LEN) == 0);
 	unsigned int brazilianwax = (strncmp(policy->governor->name, "brazilianwax", CPUFREQ_NAME_LEN) == 0);
 	unsigned int scary = (strncmp(policy->governor->name, "Scary", CPUFREQ_NAME_LEN) == 0);
-	unsigned int lagfree = (strncmp(policy->governor->name, "lagfree", CPUFREQ_NAME_LEN) == 0);	
+	unsigned int lagfree = (strncmp(policy->governor->name, "lagfree", CPUFREQ_NAME_LEN) == 0);
 
 	mutex_lock(&set_cpu_freq_change);
 
@@ -1664,7 +1664,7 @@ static int s5pv310_target(struct cpufreq_policy *policy,
 #ifdef CONFIG_FREQ_STEP_UP_L2_L0
 		//interactive, interactive governor, prevent stepping by tegrak
 		/* force jump 1 step by tegrak */
-		if (index == L0 && !interactive && !interactivex && !lulzactive && !smartass && !smartassV2 && !brazilianwax && !scary && !lagfree && !ondemand) {
+		if (index == L0 && !interactive && !interactivex && !lulzactive && !smartass && !smartassV2 && !brazilianwax && !scary && !lagfree && !ondemandx) {
 			if (old_index > L8)
 				index = L8;
 
@@ -1701,7 +1701,7 @@ static int s5pv310_target(struct cpufreq_policy *policy,
 		}
 #endif
 	} else {
-		/* Prevent from jumping to 1GHz directly */
+		/* Prevent from jumping to 0.8GHz directly */
 		if ((index == L0) && (old_index > L1))
 			index = L1;
 
@@ -2060,7 +2060,7 @@ int s5pv310_cpufreq_lock(unsigned int nId,
 	/* touch screen lock the minimum freq at 500MHz */
 	if (s5pv310_max_armclk == ARMCLOCK_1204MHZ) {
 		if (cpufreq_level != CPU_L0) {
-			cpufreq_level += 5;
+			cpufreq_level += 8;
 		}
 	}
 
@@ -2889,7 +2889,7 @@ static inline void s5pv310_asv_set_voltage()
 	case 100000:
 		asv_arm_index = 15;
 		break;
-	case 80000:
+	case 50000:
 		asv_arm_index = 16;
 		break;
 	}

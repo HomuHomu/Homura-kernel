@@ -8,7 +8,7 @@ KERNEL_PATH=$TOP_DIR/kernel
 TOOLCHAIN="/home/ecoco/CodeSourcery452/bin/arm-none-eabi-"
 ROOTFS_PATH="$TOP_DIR/initramfs_aosp"
 export LOCALVERSION="-Homura-kernel"
-export KBUILD_BUILD_VERSION="AOSP2a"
+export KBUILD_BUILD_VERSION="AOSP5"
 export WHOAMI_MOD="Homura"
 export HOSTNAME_MOD="Akemi"
 TAR_NAME=Homura_kernel_$KBUILD_BUILD_VERSION.tar
@@ -32,7 +32,7 @@ make -j8 -C $KERNEL_PATH ARCH=arm CROSS_COMPILE=$TOOLCHAIN CONFIG_INITRAMFS_SOUR
 
 # Copy Kernel Image
 cp -f $KERNEL_PATH/arch/arm/boot/zImage .
-rm $TAR_NAME
+rm $TAR_NAME.md5
 rm $ZIP_NAME
 tar --format=ustar -cf $TAR_NAME zImage
 md5sum -t $TAR_NAME >> $TAR_NAME
@@ -45,4 +45,7 @@ zip $ZIP_NAME zImage
 rm zImage
 java -jar signapk.jar testkey.x509.pem testkey.pk8 $ZIP_NAME ../$ZIP_NAME
 rm $ZIP_NAME
-cd ../
+cd $ROOTFS_PATH/lib/modules/
+rm *
+cd $KERNEL_PATH
+make -j8 clean

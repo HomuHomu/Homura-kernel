@@ -950,6 +950,7 @@
 0x4372ed24	ip_setsockopt	vmlinux	EXPORT_SYMBOL
 0xcaec760c	ip_getsockopt	vmlinux	EXPORT_SYMBOL
 0xe20c9214	snd_iprintf	vmlinux	EXPORT_SYMBOL
+0x7213ca5d	input_ff_create_memless	vmlinux	EXPORT_SYMBOL_GPL
 0x268c32bf	tty_encode_baud_rate	vmlinux	EXPORT_SYMBOL_GPL
 0x2a9e0e15	i2c_bit_add_numbered_bus	vmlinux	EXPORT_SYMBOL
 0xa53d32d1	device_register	vmlinux	EXPORT_SYMBOL_GPL
