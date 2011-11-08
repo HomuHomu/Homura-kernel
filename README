@@ -1,1 +1,36 @@
-暁美ほむらがビルドしているSC02C用カーネル
+Homura_kernel rev8 for DCM用 & AOSP系ROM用
+Tegrak 2nd Core supports!
+
+1.CPU scaling level is changed from 5 to 17
+(1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
+2.compatible with Tegrak Overclock (supports changing frequencies over 1000MHz)
+https://market.android.com/details?id=com.tegrak.overclock.ultimate
+3.supports CIFS
+4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/
+  PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive Governors(Default)
+5.ClockWorkMod Recovery 5.0.2.6 r4
+6.BFQ v2-r1 (default)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
+7.kernel compression mode LZMA
+8.supports bootanimation
+9.based on GT-I9100 gingerbread_update3 source
+10.Automatic Installation SU-3.0.5(DCM) & truetypeEmoji.ttf(AOSP）
+11.Automatic Replace sensors.smdkv310.so & lights.smdkv310.so vold-utf8(AOSP)
+12.supports Backlight Notification (creams Fixed BLN for Update2)
+13.Automation tether_dun_required=0
+※FRした時は、もう一度再起動de有効
+14.Include TweakGS2 ver0.4.0 alpha3 thx sakuramilk & CWM Manager2.0
+(CWM ManagerはTweakGS2が安定するまで残しておく）
+※GPU Controlには未対応→Tegrak Overclock Ultimateでやってね! ☆ミ
+15.gcc version 4.5.2(Sourcery G++Lite 2011.03-42)
+16.supports Tegrak Touch Move
+https://market.android.com/details?id=com.tegrak.touchmove
+17.supports Tegrak 2nd Core(New!)
+https://market.android.com/details?id=com.tegrak.secondcore
+
+前回との修正点
+supports Tegrak 2nd Core
+※これによりオミットした機能→「disable secondary cpu auto-hotplug when screen is off」
+
+既知の問題
+・だーかーらーAOSPでステータスバーからのサウンドトグルが効かねーって何回も三回も言ってるべ！。
+
