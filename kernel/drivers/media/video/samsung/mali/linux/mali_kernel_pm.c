@@ -46,6 +46,11 @@
 #include "mali_device_pause_resume.h"
 #include "mali_linux_pm.h"
 
+#ifdef CONFIG_GPU_CLOCK_CONTROL
+#include <../common/gpu_clock_control.h>
+#include <../common/gpu_voltage_control.h>
+#endif
+
 #if MALI_POWER_MGMT_TEST_SUITE
 #ifdef CONFIG_PM
 #include "mali_linux_pm_testsuite.h"
@@ -158,6 +163,7 @@ static void mali_pm_early_suspend(struct early_suspend *mali_dev);
 static void mali_pm_late_resume(struct early_suspend *mali_dev);
 #endif /* CONFIG_HAS_EARLYSUSPEND */
 
+#ifndef CONFIG_PM_RUNTIME
 #ifndef CONFIG_HAS_EARLYSUSPEND
 /* OS suspend and resume callbacks */
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(LINUX_KERNEL_MAJOR_VERSION,LINUX_KERNEL_MINOR_VERSION,LINUX_KERNEL_DEVELOPMENT_VERSION))
@@ -171,7 +177,8 @@ static int mali_pm_os_resume(struct platform_device *pdev);
 #else
 static int mali_pm_os_resume(struct device *dev);
 #endif
-#endif //CONFIG_HAS_EARLYSUSPEND
+#endif /* CONFIG_HAS_EARLYSUSPEND */
+#endif /* CONFIG_PM_RUNTIME */
 
 /* OS Hibernation suspend callback */
 static int mali_pm_os_suspend_on_hibernation(struct device *dev);
@@ -749,6 +756,11 @@ int _mali_dev_platform_register(void)
 	set_mali_parent_power_domain(&mali_gpu_device);
 #endif
 
+#ifdef CONFIG_GPU_CLOCK_CONTROL
+	gpu_clock_control_start();
+	gpu_voltage_control_start();
+#endif
+	
 #ifdef CONFIG_PM_RUNTIME
 #ifndef CONFIG_HAS_EARLYSUSPEND
 #if MALI_PMM_RUNTIME_JOB_CONTROL_ON

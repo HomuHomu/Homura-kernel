@@ -5,7 +5,7 @@ mount -o remount,rw /system /system
 
 rm /system/bin/su
 rm /system/xbin/su
-cat /vendor/files/su-3.0.5 > $DEST
+cat /vendor/files/su-3.0.3 > $DEST
 chown 0.0 /system/xbin/su
 chmod 6755 /system/xbin/su
 
@@ -17,9 +17,6 @@ chmod 644 /system/lib/hw/lights.SC-02C.so
 rm /system/app/CWMManager.apk
 rm /data/dalvik-cache/*CWMManager.apk*
 rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
-cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
-chown 0.0 /system/app/CWMManager.apk
-chmod 644 /system/app/CWMManager.apk
 
 rm /system/app/TweakGS2.apk
 rm /data/dalvik-cache/*TweakGS2.apk*
@@ -27,6 +24,12 @@ rm /data/app/net.sakuramilk.TweakGS2*.apk
 cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
 chown 0.0 /system/app/TweakGS2.apk
 chmod 644 /system/app/TweakGS2.apk
+
+rm /system/app/AppWidgetPicker.apk
+rm /data/dalvik-cache/*AppWidgetPicker.apk*
+cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
+chown 0.0 /system/app/AppWidgetPicker.apk
+chmod 644 /system/app/AppWidgetPicker.apk
 
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3

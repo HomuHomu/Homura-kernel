@@ -472,6 +472,12 @@ config LOG_BUF_SHIFT
 		     13 =>  8 KB
 		     12 =>  4 KB
 
+config GPU_UNDERVOLTING
+	bool "gpu undervolting"
+	default n
+	help
+	  enable undervolting. if unsure, say n.
+
 #
 # Architectures with an unreliable sched_clock() should select this:
 #
