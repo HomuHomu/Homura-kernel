@@ -25,6 +25,9 @@ chmod 644 /system/fonts/truetypeEmoji.ttf
 rm /system/app/CWMManager.apk
 rm /data/dalvik-cache/*CWMManager.apk*
 rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
+cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
+chown 0.0 /system/app/CWMManager.apk
+chmod 644 /system/app/CWMManager.apk
 
 rm /system/app/TweakGS2.apk
 rm /data/dalvik-cache/*TweakGS2.apk*
