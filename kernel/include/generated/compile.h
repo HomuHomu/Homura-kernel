@@ -1,8 +1,8 @@
-/* This file is auto generated, version DCM9 */
+/* This file is auto generated, version CyanogenMod1 */
 /* SMP PREEMPT */
 #define UTS_MACHINE "arm"
-#define UTS_VERSION "#DCM9 SMP PREEMPT Thu Nov 10 21:23:30 JST 2011"
-#define LINUX_COMPILE_TIME "21:23:30"
+#define UTS_VERSION "#CyanogenMod1 SMP PREEMPT Fri Nov 11 21:33:35 JST 2011"
+#define LINUX_COMPILE_TIME "21:33:35"
 #define LINUX_COMPILE_BY "Homura"
 #define LINUX_COMPILE_HOST "Akemi"
 #define LINUX_COMPILE_DOMAIN "(none)"

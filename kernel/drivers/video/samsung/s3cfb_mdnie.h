@@ -342,7 +342,11 @@
 #endif
 
 #ifdef CONFIG_BUILD_TARGET_CM7
+#ifdef CONFIG_CM7_LED
+#define MDNIE_TUNE_DIR	"/system/etc"
+#else
 #define MDNIE_TUNE_DIR	"/vendor/mdnie"
+#endif
 #else
 #define MDNIE_TUNE_DIR	"/system/etc"
 #endif

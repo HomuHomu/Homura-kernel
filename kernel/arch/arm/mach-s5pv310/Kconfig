@@ -561,6 +561,22 @@ config BUILD_TARGET_CM7
 	  This option makes to select build target CyanogenMod7.
 endmenu
 
+menu "build target CyanogenMod7 LED"
+config CM7_LED
+	bool "CM7 LED"
+	default n
+	help
+	  This option makes to select build target CyanogenMod7 LED.
+endmenu
+
+menu "build target CyanogenMod7 MDNIE"
+config CM7_MDNIE
+	bool "CM7 MDNIE"
+	default n
+	help
+	  This option makes to select build target CyanogenMod7 MDNIE.
+endmenu
+
 comment "GPS"
 menuconfig GPS_GLONASS
 	bool "GPS GLONASS"
