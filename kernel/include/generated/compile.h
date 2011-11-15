@@ -1,8 +1,8 @@
-/* This file is auto generated, version CyanogenMod2 */
+/* This file is auto generated, version Dualboot2 */
 /* SMP PREEMPT */
 #define UTS_MACHINE "arm"
-#define UTS_VERSION "#CyanogenMod2 SMP PREEMPT Mon Nov 14 00:45:52 JST 2011"
-#define LINUX_COMPILE_TIME "00:45:52"
+#define UTS_VERSION "#Dualboot2 SMP PREEMPT Wed Nov 16 01:01:45 JST 2011"
+#define LINUX_COMPILE_TIME "01:01:45"
 #define LINUX_COMPILE_BY "Homura"
 #define LINUX_COMPILE_HOST "Akemi"
 #define LINUX_COMPILE_DOMAIN "(none)"
