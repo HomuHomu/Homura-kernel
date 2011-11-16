@@ -121,18 +121,6 @@ loglevel 3
 # ko files for bthid
     insmod /lib/modules/bthid.ko
 
-# ko files for slow-work
-    insmod /lib/modules/slow-work.ko
-
-# ko files for logger
-    insmod /lib/modules/logger.ko
-
-# ko files for cifs
-    insmod /lib/modules/cifs.ko
-
-# ko files for NTFS
-    insmod /lib/modules/ntfs.ko
-
 on fs
     # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
@@ -1011,6 +999,9 @@ on property:sys.boot_completed=1
 on property:conf.androidLogger=1
     insmod /lib/modules/logger.ko
 
+on property:conf.cifs=1
+    insmod /lib/modules/slow-work.ko
+    insmod /lib/modules/cifs.ko
 
 # extra user init
 service userinit /data/local/userinit.rc
