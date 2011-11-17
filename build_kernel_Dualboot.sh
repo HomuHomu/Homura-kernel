@@ -9,10 +9,10 @@ TOOLCHAIN="$TOP_DIR/arm-2011.03/bin/arm-none-eabi-"
 ROOTFS_PATH="$TOP_DIR/initramfs_Dualboot"
 
 KERNEL_NAME="Homura-Kernel"
-CONFIG_FILE="$KERNEL_PATH/arch/arm/configs/Homura_dualboot_defconfig"
+CONFIG_FILE="$KERNEL_PATH/arch/arm/configs/Homura_Dualboot_defconfig"
 
 export LOCALVERSION="-$KERNEL_NAME"
-export KBUILD_BUILD_VERSION="-Dualboot3"
+export KBUILD_BUILD_VERSION="Dualboot3"
 export WHOAMI_MOD="Homura"
 export HOSTNAME_MOD="Akemi"
 
@@ -52,6 +52,7 @@ cd Auto-sign
 cp $CWM_ZIP $ZIP_NAME
 zip $ZIP_NAME zImage
 java -jar signapk.jar testkey.x509.pem testkey.pk8 $ZIP_NAME ../$ZIP_NAME
+rm $ZIP_NAME
 mv zImage $ROOTFS_PATH
 
 # Make Clean
