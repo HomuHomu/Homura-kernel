@@ -1,0 +1,32 @@
+#!/sbin/busybox sh
+export _PATH="$PATH"
+export PATH=/sbin
+
+if [ "$1" = 'none' ]; then
+  busybox cp -a /vendor/samsung/init.rc /init.rc
+  busybox cp -a /vendor/samsung/recovery.rc /recovery.rc
+  busybox mv /misc/recovery.fstab.2 /misc/recovery.fstab
+  busybox rm /misc/recovery.fstab.1
+  busybox rm /misc/recovery.fstab.0
+elif [ "$1" = 'secondary' ]; then
+  busybox cp -a /vendor/samsung/init.rc.1 /init.rc
+  busybox cp -a /vendor/samsung/recovery.rc.1 /recovery.rc
+  busybox mv /misc/recovery.fstab.1 /misc/recovery.fstab
+  busybox rm /misc/recovery.fstab.2
+  busybox rm /misc/recovery.fstab.0
+else
+  busybox cp -a /vendor/samsung/init.rc.0 /init.rc
+  busybox cp -a /vendor/samsung/recovery.rc.0 /recovery.rc
+  busybox mv /misc/recovery.fstab.0 /misc/recovery.fstab
+  busybox rm /misc/recovery.fstab.2
+  busybox rm /misc/recovery.fstab.1
+fi
+
+busybox cp -a /vendor/samsung/init.smdkc210.rc /
+busybox cp -a /vendor/samsung/init.smdkv310.rc /
+busybox cp -a /vendor/samsung/ueventd.rc /
+busybox cp -a /vendor/samsung/ueventd.smdkc210.rc /
+busybox cp -a /vendor/samsung/ueventd.smdkv310.rc /
+
+mv /_init /init
+exec /init
