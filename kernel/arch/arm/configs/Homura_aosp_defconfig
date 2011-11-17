@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.35.7
-# Thu Nov 10 20:28:17 2011
+# Thu Nov 17 19:13:33 2011
 #
 CONFIG_ARM=y
 CONFIG_HAVE_PWM=y
@@ -455,6 +455,16 @@ CONFIG_FREQ_STEP_UP_L2_L0=y
 # build target CyanogenMod7
 #
 CONFIG_BUILD_TARGET_CM7=y
+
+#
+# build target CyanogenMod7 LED
+#
+# CONFIG_CM7_LED is not set
+
+#
+# build target CyanogenMod7 MDNIE
+#
+# CONFIG_CM7_MDNIE is not set
 
 #
 # GPS
@@ -2307,9 +2317,7 @@ CONFIG_MSDOS_FS=y
 CONFIG_VFAT_FS=y
 CONFIG_FAT_DEFAULT_CODEPAGE=437
 CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
-CONFIG_NTFS_FS=m
-# CONFIG_NTFS_DEBUG is not set
-CONFIG_NTFS_RW=y
+# CONFIG_NTFS_FS is not set
 
 #
 # Pseudo filesystems

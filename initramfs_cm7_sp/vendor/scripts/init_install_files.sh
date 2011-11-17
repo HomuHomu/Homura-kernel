@@ -2,11 +2,6 @@
 
 mount -o remount,rw /system /system
 
-rm /system/bin/vold
-cat /vendor/files/vold-utf8 > /system/bin/vold
-chown 0.2000 /system/bin/vold
-chmod 755 /system/bin/vold
-
 rm /system/lib/hw/sensors.smdkv310.so
 cat /vendor/files/sensors.smdkv310.so > /system/lib/hw/sensors.smdkv310.so
 chown 0.0 /system/lib/hw/sensors.smdkv310.so
