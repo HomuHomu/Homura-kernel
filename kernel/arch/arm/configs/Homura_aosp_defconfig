@@ -469,8 +469,7 @@ CONFIG_BUILD_TARGET_CM7=y
 #
 # GPS
 #
-# CONFIG_GPS_GLONASS is not set
-
+CONFIG_GPS_GLONASS=y
 #
 # Processor Type
 #

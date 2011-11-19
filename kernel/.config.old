@@ -455,7 +455,6 @@ CONFIG_FREQ_STEP_UP_L2_L0=y
 # build target CyanogenMod7
 #
 CONFIG_BUILD_TARGET_CM7=y
-
 #
 # build target CyanogenMod7 LED
 #

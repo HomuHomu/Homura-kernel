@@ -5,7 +5,7 @@ busybox tar xvf /res/misc/dev.tar
 
 # check boot rom
 busybox mount -t ext4 /dev/block/mmcblk0p10 /xdata
-if [ "`/sbin/busybox find /xdata/ -name -maxdepth 0 boot.conf`" ]; then
+if [ -f /xdata/boot.conf ]; then
   if [ "`/sbin/busybox grep secondary /xdata/boot.conf`" ]; then
     busybox umount /xdata
     # secondary rom boot
@@ -40,4 +40,3 @@ else
     exec /vendor/aosp/init.aosp none
   fi
 fi
-

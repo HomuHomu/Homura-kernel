@@ -25,7 +25,7 @@ on init
 
     mkdir /mnt 0775 root root
 
-    #mount /tmp /tmp tmpfs   
+    mount /tmp /tmp tmpfs   
 
 on early-fs
 

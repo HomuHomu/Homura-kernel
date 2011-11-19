@@ -6435,11 +6435,7 @@ static void __init s5pv310_reserve(void)
 }
 #endif
 
-#ifdef CONFIG_BUILD_TARGET_CM7
-#define CUST_MACHINE_NAME  "SMDKV310"
-#else
-#define CUST_MACHINE_NAME  "SMDKC210"
-#endif
+#define CUST_MACHINE_NAME	"SMDKC210"
 
 MACHINE_START(C1, CUST_MACHINE_NAME)
 	/* Maintainer: Kukjin Kim <kgene.kim@samsung.com> */
