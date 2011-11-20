@@ -192,7 +192,7 @@ on post-fs
     #chown radio radio /efs
     #chmod 0771 /efs
 
-    mount rootfs rootfs / ro remount
+    # mount rootfs rootfs / ro remount
 
     # readahead files which are used in "preloadClasses"
     start sreadaheadd
