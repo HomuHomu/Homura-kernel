@@ -45,8 +45,17 @@ if [ "$r" == "" ]; then
 else
 /system/bin/sqlite3 /data/data/com.android.providers.settings/databases/settings.db "update secure set value='0' where name='tether_dun_required';"
 fi
-
 rm /system/bin/sqlite3
+
+# Bravia Engine Install
+rm /system/etc/be_movie
+rm /system/etc/be_photo
+cat /vendor/files/be_movie > /system/etc/be_movie
+cat /vendor/files/be_photo > /system/etc/be_photo
+chmod 0755 /system/etc/be_movie
+chmod 0755 /system/etc/be_photo
+chown 0.0 /system/etc/be_movie
+chown 0.0 /system/etc/be_photo
 
 mount -o remount,ro /system /system
 
