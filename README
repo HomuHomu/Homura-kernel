@@ -1,5 +1,5 @@
 Homura_kernel rev9 for DCM用 & AOSP系ROM用
-TweakGS2 GPU Control supports!!??
+SingleBoot & Dualboot
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -24,13 +24,9 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 https://market.android.com/details?id=com.tegrak.touchmove
 17.supports Tegrak 2nd Core
 https://market.android.com/details?id=com.tegrak.secondcore
-
-前回との修正点
-supports TweakGS2 GPU Control(かもしれない！？）
-※Tegrakの値とリンクしていないので、どっちかが反映されている？
-Add AppWidgetPicker(DCM)
-※相変わらずの余計なおせっかい機能
+18.Automatic Bravia Engine
 
 既知の問題
-・AOSPでステータスバー（ry
-↑cm7-Nightly110で直ったようだ
+AOSPでバイブがダンダン弱くなっていく…
+
+…もうゴールしていいでしょうかね？…

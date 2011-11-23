@@ -1,0 +1,6 @@
+#!/sbin/busybox sh
+
+busybox cp -a /vendor/samsung/init.rc.0 /init.rc
+
+mv /_init /init
+exec /init
