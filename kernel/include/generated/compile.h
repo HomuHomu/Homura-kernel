@@ -1,8 +1,8 @@
-/* This file is auto generated, version Single9 */
+/* This file is auto generated, version Dual9 */
 /* SMP PREEMPT */
 #define UTS_MACHINE "arm"
-#define UTS_VERSION "#Single9 SMP PREEMPT Thu Nov 24 04:01:35 JST 2011"
-#define LINUX_COMPILE_TIME "04:01:35"
+#define UTS_VERSION "#Dual9 SMP PREEMPT Fri Nov 25 18:59:18 JST 2011"
+#define LINUX_COMPILE_TIME "18:59:18"
 #define LINUX_COMPILE_BY "Homura"
 #define LINUX_COMPILE_HOST "Akemi"
 #define LINUX_COMPILE_DOMAIN "(none)"
