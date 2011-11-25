@@ -1,6 +1,14 @@
 #!/sbin/busybox sh
 
+busybox mount -t proc proc /proc
+busybox mount -t sysfs sysfs /sys
+echo 1 > /proc/sys/kernel/aosp_rom_mode
+echo 1 > /sys/devices/virtual/misc/bt_lpm/bt_mode
+
 busybox cp -a /vendor/aosp/init.rc.0 /init.rc
+
+busybox umount /sys
+busybox umount /proc
 
 mv /_init /init
 exec /init
