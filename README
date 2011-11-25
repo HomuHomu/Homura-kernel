@@ -1,5 +1,6 @@
-Homura_kernel rev9 for DCM用 & AOSP系ROM用
+Homura_kernel rev10 for DCM用 & AOSP系ROM用
 SingleBoot & Dualboot
+ほむほむ派以外にはオススメできない！
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -9,7 +10,7 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/
   PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4
-6.BFQ v2-r1 (default)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
+6.（脳内）BFQ v3-r1 (New!)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode LZMA
 8.supports bootanimation
 9.based on GT-I9100 gingerbread_update3 source
@@ -25,8 +26,14 @@ https://market.android.com/details?id=com.tegrak.touchmove
 17.supports Tegrak 2nd Core
 https://market.android.com/details?id=com.tegrak.secondcore
 18.Automatic Bravia Engine
+19.Custum boot logo(Homura Chan!) New!
+
+前回との修正点
+・BFQ V2-r1 → BFQ V3-r1 (無理やりビルドしt）
+・かなり、ほむらっぽくした。
 
 既知の問題
-AOSPでバイブがダンダン弱くなっていく…
+AOSPでバイブ（ry
+TwerkGS2でバイブ調整すると治るが、スリープすると元通り。
 
-…もうゴールしていいでしょうかね？…
+苦情、陳情は受け付けません。
