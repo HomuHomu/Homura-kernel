@@ -47,7 +47,7 @@ extern int gpu_voltage_control[2];
 #define MALI_DVFS_CLK_DEBUG 0
 #define MALI_CLK_VERIFICATION 0
 #define MALI_DVFS_PAUSE_RESUME_TEST 0
-#define MALI_DVFS_AGRESSIVE_POLICY
+//#define MALI_DVFS_AGRESSIVE_POLICY
 
 #if MALI_CLK_VERIFICATION
 #define NUM_OF_TEST_LOOP 2
@@ -405,7 +405,7 @@ static unsigned int decideNextStatus(unsigned int utilization)
 
 extern struct s5pv310_asv_info asv_info;
 
-static inline mali_bool mali_dvfs_table_update(void)
+static mali_bool mali_dvfs_table_update()
 {
 
 #ifdef CONFIG_S5PV310_HI_ARMCLK_THAN_1_2GHZ

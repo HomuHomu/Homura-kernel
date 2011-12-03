@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 ARM Limited. All rights reserved.
+ * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
  * 
  * This program is free software and is provided to you under the terms of the GNU General Public License version 2
  * as published by the Free Software Foundation, and any use by you of this program is subject to the terms of such GNU licence.
@@ -280,12 +280,6 @@ _mali_osk_errcode_t _ump_ukk_map_mem( _ump_uk_map_mem_s *args )
 		args->is_cached       = 1;
 		DBG_MSG(3, ("Mapping UMP secure_id: %d as cached.\n", args->secure_id));
 	}
-	else if ( args->is_cached)
-	{
-		mem->is_cached = 1;
-		descriptor->is_cached = 1;
-		DBG_MSG(3, ("Warning mapping UMP secure_id: %d. As cached, while it was allocated uncached.\n", args->secure_id));
-	}
 	else
 	{
 		descriptor->is_cached = 0;
@@ -390,4 +384,12 @@ void _ump_ukk_unmap_mem( _ump_uk_unmap_mem_s *args )
 
 	_ump_osk_mem_mapregion_term( descriptor );
 	_mali_osk_free(descriptor);
+}
+
+u32 _ump_ukk_report_memory_usage( void )
+{
+	if(device.backend->stat)
+		return device.backend->stat(device.backend);
+	else
+		return 0;
 }

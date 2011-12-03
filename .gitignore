@@ -32,6 +32,9 @@ modules.builtin
 *.patch
 *.gcno
 *.log
+*.version
+*.old
+*.config
 out
 build
 
@@ -56,9 +59,9 @@ build
 #
 # Generated include files
 #
-include/config
-include/linux/version.h
-include/generated
+kernel/include/config
+kernel/include/linux/version.h
+kernel/include/generated
 
 # stgit generated dirs
 patches-*
