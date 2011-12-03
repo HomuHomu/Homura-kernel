@@ -22,9 +22,6 @@
 #include <linux/tick.h>
 #include <linux/ktime.h>
 #include <linux/sched.h>
-#include <linux/notifier.h>
-
-#include <asm/idle.h>
 
 #define CPUMON 0
 
@@ -35,9 +32,11 @@
 
 #define DEF_FREQUENCY_DOWN_DIFFERENTIAL		(5)
 #define DEF_FREQUENCY_UP_THRESHOLD		(85)
+#define DEF_SAMPLING_DOWN_FACTOR    (1)
+#define MAX_SAMPLING_DOWN_FACTOR    (100000)
 #define MICRO_FREQUENCY_DOWN_DIFFERENTIAL	(3)
-#define MICRO_FREQUENCY_UP_THRESHOLD		(85)
-#define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(5000)
+#define MICRO_FREQUENCY_UP_THRESHOLD		(95)
+#define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(10000)
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 
@@ -54,28 +53,6 @@
 #define MIN_SAMPLING_RATE_RATIO			(2)
 
 static unsigned int min_sampling_rate;
-
-static DEFINE_PER_CPU(unsigned int, idle_start);
-static DEFINE_PER_CPU(unsigned int, idle_end);
-
-static int idle_event_handler(struct notifier_block *n,
-			unsigned long cmd, void *p)
-{
-	switch (cmd) {
-	case IDLE_START:
-		percpu_write(idle_start, jiffies);
-		break;
-	case IDLE_END:
-		percpu_write(idle_end, jiffies);
-		break;
-	}
-
-	return NOTIFY_DONE;
-}
-
-static struct notifier_block idle_notifier_block = {
-	.notifier_call  = idle_event_handler,
-};
 
 #define LATENCY_MULTIPLIER			(1000)
 #define MIN_LATENCY_MULTIPLIER			(100)
@@ -109,6 +86,7 @@ struct cpu_dbs_info_s {
 	unsigned int freq_lo;
 	unsigned int freq_lo_jiffies;
 	unsigned int freq_hi_jiffies;
+	unsigned int rate_mult;
 	int cpu;
 	unsigned int sample_type:1;
 	/*
@@ -135,16 +113,14 @@ static struct dbs_tuners {
 	unsigned int up_threshold;
 	unsigned int down_differential;
 	unsigned int ignore_nice;
+	unsigned int sampling_down_factor;
 	unsigned int powersave_bias;
-	unsigned int deep_sleep;
-	unsigned int fast_start;
 } dbs_tuners_ins = {
 	.up_threshold = DEF_FREQUENCY_UP_THRESHOLD,
+	.sampling_down_factor = DEF_SAMPLING_DOWN_FACTOR,
 	.down_differential = DEF_FREQUENCY_DOWN_DIFFERENTIAL,
 	.ignore_nice = 0,
-	.powersave_bias = 100,
-	.deep_sleep = 1,
-	.fast_start = 1,
+	.powersave_bias = 0,
 };
 
 static inline cputime64_t get_cpu_idle_time_jiffy(unsigned int cpu,
@@ -287,9 +263,8 @@ static ssize_t show_##file_name						\
 	return sprintf(buf, "%u\n", dbs_tuners_ins.object);		\
 }
 show_one(sampling_rate, sampling_rate);
-show_one(deep_sleep, deep_sleep);
-show_one(fast_start, fast_start);
 show_one(up_threshold, up_threshold);
+show_one(sampling_down_factor, sampling_down_factor);
 show_one(ignore_nice_load, ignore_nice);
 show_one(powersave_bias, powersave_bias);
 
@@ -335,40 +310,6 @@ static ssize_t store_sampling_rate(struct kobject *a, struct attribute *b,
 	return count;
 }
 
-static ssize_t store_deep_sleep(struct kobject *a, struct attribute *b,
-				   const char *buf, size_t count)
-{
-	unsigned int input;
-	int ret;
-
-	ret = sscanf(buf, "%u", &input);
-	if (ret != 1)
-		return -EINVAL;
-
-	mutex_lock(&dbs_mutex);
-	dbs_tuners_ins.deep_sleep = !!input;
-	mutex_unlock(&dbs_mutex);
-
-	return count;
-}
-
-static ssize_t store_fast_start(struct kobject *a, struct attribute *b,
-				   const char *buf, size_t count)
-{
-	unsigned int input;
-	int ret;
-
-	ret = sscanf(buf, "%u", &input);
-	if (ret != 1)
-		return -EINVAL;
-
-	mutex_lock(&dbs_mutex);
-	dbs_tuners_ins.fast_start = !!input;
-	mutex_unlock(&dbs_mutex);
-
-	return count;
-}
-
 static ssize_t store_up_threshold(struct kobject *a, struct attribute *b,
 				  const char *buf, size_t count)
 {
@@ -385,6 +326,29 @@ static ssize_t store_up_threshold(struct kobject *a, struct attribute *b,
 	dbs_tuners_ins.up_threshold = input;
 	mutex_unlock(&dbs_mutex);
 
+	return count;
+}
+
+static ssize_t store_sampling_down_factor(struct kobject *a,
+		struct attribute *b, const char *buf, size_t count)
+{
+	unsigned int input, j;
+	int ret;
+	ret = sscanf(buf, "%u", &input);
+	
+	if (ret != 1 || input > MAX_SAMPLING_DOWN_FACTOR || input < 1)
+		return -EINVAL;
+	mutex_lock(&dbs_mutex);
+	dbs_tuners_ins.sampling_down_factor = input;
+	
+	/* Reset down sampling multiplier in case it was active */
+	for_each_online_cpu(j) {
+		struct cpu_dbs_info_s *dbs_info;
+		dbs_info = &per_cpu(od_cpu_dbs_info, j);
+		dbs_info->rate_mult = 1;
+	}
+	mutex_unlock(&dbs_mutex);
+	
 	return count;
 }
 
@@ -447,9 +411,8 @@ static ssize_t store_powersave_bias(struct kobject *a, struct attribute *b,
 }
 
 define_one_global_rw(sampling_rate);
-define_one_global_rw(deep_sleep);
-define_one_global_rw(fast_start);
 define_one_global_rw(up_threshold);
+define_one_global_rw(sampling_down_factor);
 define_one_global_rw(ignore_nice_load);
 define_one_global_rw(powersave_bias);
 
@@ -458,10 +421,9 @@ static struct attribute *dbs_attributes[] = {
 	&sampling_rate_min.attr,
 	&sampling_rate.attr,
 	&up_threshold.attr,
+	&sampling_down_factor.attr,
 	&ignore_nice_load.attr,
 	&powersave_bias.attr,
-	&deep_sleep.attr,
-	&fast_start.attr,
 	NULL
 };
 
@@ -509,6 +471,17 @@ static struct attribute_group dbs_attr_group_old = {
 
 /************************** sysfs end ************************/
 
+static void dbs_freq_increase(struct cpufreq_policy *p, unsigned int freq)
+{
+	if (dbs_tuners_ins.powersave_bias)
+		freq = powersave_bias_target(p, freq, CPUFREQ_RELATION_H);
+	else if (p->cur == p->max)
+		return;
+		
+	__cpufreq_driver_target(p, freq, dbs_tuners_ins.powersave_bias ?
+		CPUFREQ_RELATION_L : CPUFREQ_RELATION_H);
+}
+
 static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 {
 	unsigned int max_load_freq;
@@ -544,47 +517,8 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 		unsigned int idle_time, wall_time, iowait_time;
 		unsigned int load, load_freq;
 		int freq_avg;
-		unsigned long start, end, delta, sampling_delta;
 
 		j_dbs_info = &per_cpu(od_cpu_dbs_info, j);
-
-		start = per_cpu(idle_start, j);
-		end = per_cpu(idle_end, j);
-		if (time_after(end, start))
-			delta = (long)end - (long)start;
-		else
-			delta = 0;
-		sampling_delta = usecs_to_jiffies(dbs_tuners_ins.sampling_rate);
-
-		/*
-		 * Deep sleep detection.
-		 *
-		 * If the previous low-power idle interval was 4x the sampling
-		 * rate or more, we're probably exiting or entering from a deep
-		 * sleep state.
-		 *
-		 * In both cases ignore the cpu activity, because probably
-		 * there's a big chance to get back to the deep sleep again.
-		 */
-		if (dbs_tuners_ins.deep_sleep) {
-			if (delta > 4 * sampling_delta)
-				continue;
-		}
-
-		/*
-		 * Fast start detection.
-		 *
-		 * If in the last 4 samples the cpu did not enter in low-power
-		 * idle state, probably the cpu is busy; try to jump to the
-		 * maximum speed.
-		 */
-		if (dbs_tuners_ins.fast_start) {
-			if (delta && time_is_before_jiffies(end +
-							4 * sampling_delta)) {
-				max_load_freq = UINT_MAX;
-				break;
-			}
-		}
 
 		cur_idle_time = get_cpu_idle_time(j, &cur_wall_time);
 		cur_iowait_time = get_cpu_iowait_time(j, &cur_wall_time);
@@ -651,19 +585,11 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 
 	/* Check for frequency increase */
 	if (max_load_freq > dbs_tuners_ins.up_threshold * policy->cur) {
-		/* if we are already at full speed then break out early */
-		if (!dbs_tuners_ins.powersave_bias) {
-			//if (policy->cur == policy->max)
-			//	return;
-
-			__cpufreq_driver_target(policy, policy->max,
-				CPUFREQ_RELATION_H);
-		} else {
-			int freq = powersave_bias_target(policy, policy->max,
-					CPUFREQ_RELATION_H);
-			__cpufreq_driver_target(policy, freq,
-				CPUFREQ_RELATION_L);
-		}
+		/* If switching to max speed, apply sampling_down_factor */
+		if (policy->cur < policy->max)
+			if (policy->cur < policy->max)
+				dbs_tuners_ins.sampling_down_factor;
+		dbs_freq_increase(policy, policy->max);
 		return;
 	}
 
@@ -687,6 +613,9 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 		freq_next = max_load_freq /
 				(dbs_tuners_ins.up_threshold -
 				 dbs_tuners_ins.down_differential);
+				 
+		/* No longer fully busy, reset rate_mult */
+		this_dbs_info->rate_mult = 1;
 
 		if (freq_next < policy->min)
 			freq_next = policy->min;
@@ -711,13 +640,11 @@ static void do_dbs_timer(struct work_struct *work)
 	int sample_type = dbs_info->sample_type;
 
 	/* We want all CPUs to do sampling nearly on same jiffy */
-	int delay = usecs_to_jiffies(dbs_tuners_ins.sampling_rate);
+	int delay = usecs_to_jiffies(dbs_tuners_ins.sampling_rate
+		* dbs_info->rate_mult);
 
-#if 0
-	/* Don't care too much about synchronizing the workqueue in both cpus */
 	if (num_online_cpus() > 1)
 		delay -= jiffies % delay;
-#endif
 
 	mutex_lock(&dbs_info->timer_mutex);
 
@@ -797,6 +724,7 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 			}
 		}
 		this_dbs_info->cpu = cpu;
+		this_dbs_info->rate_mult = 1;
 		ondemand_powersave_bias_init_cpu(cpu);
 		/*
 		 * Start the timerschedule work, when this governor
@@ -883,14 +811,11 @@ static int __init cpufreq_gov_dbs_init(void)
 			MIN_SAMPLING_RATE_RATIO * jiffies_to_usecs(8);
 	}
 
-	kondemand_wq = create_rt_workqueue("kondemand");
+	kondemand_wq = create_workqueue("kondemand");
 	if (!kondemand_wq) {
 		printk(KERN_ERR "Creation of kondemand failed\n");
 		return -EFAULT;
 	}
-
-	idle_notifier_register(&idle_notifier_block);
-
 	err = cpufreq_register_governor(&cpufreq_gov_ondemand);
 	if (err)
 		destroy_workqueue(kondemand_wq);
@@ -900,7 +825,6 @@ static int __init cpufreq_gov_dbs_init(void)
 
 static void __exit cpufreq_gov_dbs_exit(void)
 {
-	idle_notifier_unregister(&idle_notifier_block);
 	cpufreq_unregister_governor(&cpufreq_gov_ondemand);
 	destroy_workqueue(kondemand_wq);
 }
