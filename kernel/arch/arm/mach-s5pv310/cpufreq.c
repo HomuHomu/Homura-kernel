@@ -46,8 +46,6 @@
 #include <mach/regs-clock.h>
 #include <mach/pm-core.h>
 
-#include <mach/regs-tmu.h>
-
 static struct clk *arm_clk;
 static struct clk *moutcore;
 static struct clk *mout_mpll;
@@ -100,7 +98,7 @@ enum cpufreq_level_index{
 #endif
 
 /* Using lookup table to support 1200MHz/1000MHz by reading chip id */
-static struct cpufreq_frequency_table s5pv310_lookup_freq_table[]= {
+static struct cpufreq_frequency_table s5pv310_lookup_freq_table[] = {
 	{L0, 1204*1000},
 	{L1, 1152*1000},
 	{L2, 1120*1000},
@@ -292,7 +290,7 @@ static DEFINE_MUTEX(set_bus_freq_lock);
 enum busfreq_level_idx {
 	LV_0,
 	LV_1,
-#ifndef CONFIG_MACH_P6_REV02
+#if !defined(CONFIG_MACH_Q1_REV00) && !defined(CONFIG_MACH_Q1_REV02)
 	LV_2,
 #endif
 	LV_END
@@ -314,7 +312,7 @@ struct busfreq_table {
 static struct busfreq_table s5pv310_busfreq_table[] = {
 	{LV_0, 400000, 1100000},
 	{LV_1, 267000, 1000000},
-#ifndef CONFIG_MACH_P6_REV02
+#if !defined(CONFIG_MACH_Q1_REV00) && !defined(CONFIG_MACH_Q1_REV02)
 	{LV_2, 133000, 1000000},
 #endif
 	{0, 0, 0},
@@ -1688,17 +1686,7 @@ static int s5pv310_target(struct cpufreq_policy *policy,
 			
 			else if (old_index > L1)
 				index = L1;
-		}
-#else
-		/* change L2 -> L1 and change L1 -> L0 */
-		if (index == L0) {
-			printk(KERN_ERR "index= %d, old_index= %d\n", index, old_index);
-			if (old_index > L1)
-				index = L1;
-
-			if (old_index > L2)
-				index = L2;
-		}
+			}
 #endif
 	} else {
 		/* Prevent from jumping to 0.8GHz directly */
@@ -2507,7 +2495,7 @@ static int s5pv310_asv_init(void)
 	unsigned long sum_result = 0;
 	unsigned int tmp;
 	unsigned int hpm[LOOP_CNT];
-	static void __iomem * iem_base;
+	static void __iomem *iem_base;
 	struct clk *clk_iec;
 	struct clk *clk_apc;
 	struct clk *clk_hpm;
@@ -2703,11 +2691,10 @@ static int s5pv310_asv_table_update(void)
 	printk(KERN_INFO "ASV ids_group = %d hpm_group = %d asv_group = %d\n",
 		ids_group, hpm_group, asv_group);
 
-	if (s5pv310_max_armclk == ARMCLOCK_1204MHZ) {
+	if (s5pv310_max_armclk == ARMCLOCK_1204MHZ)
 		last_level = CPUFREQ_LEVEL_END - 1;
-	} else {
+	else
 		last_level = CPUFREQ_LEVEL_END - 2;
-	}
 
 	/* VDD_ARM level except the last level  */
 	for (i = 0; i < last_level; i++) {
@@ -2829,9 +2816,9 @@ static int s5pv310_asv_table_update(void)
 	return 0;
 }
 
-static inline void s5pv310_asv_set_voltage()
+static void s5pv310_asv_set_voltage(void)
 {
-	unsigned int asv_arm_index, asv_int_index;
+	unsigned int asv_arm_index = 0, asv_int_index = 0;
 	unsigned int asv_arm_volt, asv_int_volt;
 	unsigned int rate;
 
@@ -2895,7 +2882,7 @@ static inline void s5pv310_asv_set_voltage()
 	}
 
 	if (s5pv310_max_armclk != ARMCLOCK_1204MHZ)
-		asv_arm_index -= 1;
+		asv_arm_index -= 3;
 
 	asv_arm_volt = s5pv310_volt_table[asv_arm_index].arm_volt;
 #if defined(CONFIG_REGULATOR)
@@ -2936,12 +2923,12 @@ static inline void s5pv310_asv_set_voltage()
 
 #endif
 
-static inline int s5pv310_update_dvfs_table()
+static int s5pv310_update_dvfs_table(void)
 {
 	unsigned int i, j;
 	int ret = 0;
 
-	// Get the maximum arm clock */
+	/* Get the maximum arm clock */
 	s5pv310_max_armclk = s5pv310_get_max_speed();
 	printk(KERN_INFO "armclk set max %d \n", s5pv310_max_armclk);
 
