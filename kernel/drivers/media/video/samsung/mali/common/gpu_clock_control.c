@@ -20,7 +20,7 @@
 #define GPU_MAX_CLOCK 200
 #define GPU_MIN_CLOCK 100
 #else
-#define GPU_MAX_CLOCK 300
+#define GPU_MAX_CLOCK 400
 #define GPU_MIN_CLOCK 100
 #endif
 

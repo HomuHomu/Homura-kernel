@@ -19,8 +19,8 @@
 #include "gpu_voltage_control.h"
 
 #ifdef CONFIG_GPU_UNDERVOLTING
-#define MIN_VOLTAGE_GPU 900000
-#define MAX_VOLTAGE_GPU 950000
+#define MIN_VOLTAGE_GPU 750000
+#define MAX_VOLTAGE_GPU 1150000
 #else
 #define MIN_VOLTAGE_GPU  900000
 #define MAX_VOLTAGE_GPU 1100000
