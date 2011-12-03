@@ -32,6 +32,9 @@ modules.builtin
 *.patch
 *.gcno
 *.log
+*.config
+*.config.old
+*.version
 out
 build
 
@@ -79,10 +82,5 @@ GTAGS
 
 *.orig
 *~
-.config
-.config.old
-.version
 Module.symvers
-include/config/auto.conf
-include/generated/autoconf.h
 \#*#
