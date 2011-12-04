@@ -1607,6 +1607,9 @@ static int s5pv310_target(struct cpufreq_policy *policy,
 	unsigned int brazilianwax = (strncmp(policy->governor->name, "brazilianwax", CPUFREQ_NAME_LEN) == 0);
 	unsigned int scary = (strncmp(policy->governor->name, "Scary", CPUFREQ_NAME_LEN) == 0);
 	unsigned int lagfree = (strncmp(policy->governor->name, "lagfree", CPUFREQ_NAME_LEN) == 0);
+	unsigned int lazy = (strncmp(policy->governor->name, "lazy", CPUFREQ_NAME_LEN) == 0);
+	unsigned int intellidemand = (strncmp(policy->governor->name, "intellidemand", CPUFREQ_NAME_LEN) == 0);
+	
 
 	mutex_lock(&set_cpu_freq_change);
 
@@ -1662,7 +1665,7 @@ static int s5pv310_target(struct cpufreq_policy *policy,
 #ifdef CONFIG_FREQ_STEP_UP_L2_L0
 		//interactive, interactive governor, prevent stepping by tegrak
 		/* force jump 1 step by tegrak */
-		if (index == L0 && !interactive && !interactivex && !lulzactive && !smartass && !smartassV2 && !brazilianwax && !scary && !lagfree && !ondemandx) {
+		if (index == L0 && !interactive && !interactivex && !lulzactive && !smartass && !smartassV2 && !brazilianwax && !scary && !lagfree && !ondemandx && !lazy && !intellidemand) {
 			if (old_index > L8)
 				index = L8;
 
