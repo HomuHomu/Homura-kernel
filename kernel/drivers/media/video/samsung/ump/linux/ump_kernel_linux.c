@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
+ * Copyright (C) 2010 ARM Limited. All rights reserved.
  * 
  * This program is free software and is provided to you under the terms of the GNU General Public License version 2
  * as published by the Free Software Foundation, and any use by you of this program is subject to the terms of such GNU licence.
@@ -16,8 +16,6 @@
 #include <asm/uaccess.h>             /* user space access */
 #include <asm/atomic.h>
 #include <linux/device.h>
-#include <linux/debugfs.h>
-
 #include "arch/config.h"             /* Configuration for current platform. The symlinc for arch is set by Makefile */
 #include "ump_ioctl.h"
 #include "ump_kernel_common.h"
@@ -37,7 +35,7 @@
 
 
 /* Module parameter to control log level */
-int ump_debug_level = 2;
+int ump_debug_level = 3;
 module_param(ump_debug_level, int, S_IRUSR | S_IWUSR | S_IWGRP | S_IRGRP | S_IROTH); /* rw-rw-r-- */
 MODULE_PARM_DESC(ump_debug_level, "Higher number, more dmesg output");
 
@@ -50,9 +48,6 @@ MODULE_PARM_DESC(ump_major, "Device major number");
 static char ump_dev_name[] = "ump"; /* should be const, but the functions we call requires non-cost */
 
 
-#if UMP_LICENSE_IS_GPL
-static struct dentry *ump_debugfs_dir = NULL;
-#endif
 
 /*
  * The data which we attached to each virtual memory mapping request we get.
@@ -141,21 +136,6 @@ static void ump_cleanup_module(void)
 
 
 
-static ssize_t ump_memory_used_read(struct file *filp, char __user *ubuf, size_t cnt, loff_t *ppos)
-{
-        char buf[64];
-        size_t r;
-        u32 mem = _ump_ukk_report_memory_usage();
-
-        r = snprintf(buf, 64, "%u\n", mem);
-        return simple_read_from_buffer(ubuf, cnt, ppos, buf, r);
-}
-
-static const struct file_operations ump_memory_usage_fops = {
-        .owner = THIS_MODULE,
-        .read = ump_memory_used_read,
-};
-
 /*
  * Initialize the UMP device driver.
  */
@@ -163,17 +143,6 @@ int ump_kernel_device_initialize(void)
 {
 	int err;
 	dev_t dev = 0;
-#if UMP_LICENSE_IS_GPL
-	ump_debugfs_dir = debugfs_create_dir(ump_dev_name, NULL);
-	if (ERR_PTR(-ENODEV) == ump_debugfs_dir)
-	{
-			ump_debugfs_dir = NULL;
-	}
-	else
-	{
-		debugfs_create_file("memory_usage", 0400, ump_debugfs_dir, NULL, &ump_memory_usage_fops);
-	}
-#endif
 
 	if (0 == ump_major)
 	{
@@ -250,11 +219,6 @@ void ump_kernel_device_terminate(void)
 
 	/* free major */
 	unregister_chrdev_region(dev, 1);
-
-#if UMP_LICENSE_IS_GPL
-	if(ump_debugfs_dir)
-		debugfs_remove_recursive(ump_debugfs_dir);
-#endif
 }
 
 /*
@@ -436,6 +400,9 @@ EXPORT_SYMBOL(ump_dd_phys_blocks_get);
 EXPORT_SYMBOL(ump_dd_size_get);
 EXPORT_SYMBOL(ump_dd_reference_add);
 EXPORT_SYMBOL(ump_dd_reference_release);
+EXPORT_SYMBOL(ump_dd_meminfo_get);
+EXPORT_SYMBOL(ump_dd_meminfo_set);
+EXPORT_SYMBOL(ump_dd_handle_get_from_vaddr);
 
 /* Export our own extended kernel space allocator */
 EXPORT_SYMBOL(ump_dd_handle_create_from_phys_blocks);

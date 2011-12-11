@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 ARM Limited. All rights reserved.
+ * Copyright (C) 2010 ARM Limited. All rights reserved.
  * 
  * This program is free software and is provided to you under the terms of the GNU General Public License version 2
  * as published by the Free Software Foundation, and any use by you of this program is subject to the terms of such GNU licence.
@@ -20,6 +20,7 @@
 #include <linux/version.h>
 
 #include <linux/sched.h>
+#include <linux/mm.h>
 #include <linux/slab.h>
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,26)
 #include <linux/semaphore.h>
@@ -53,7 +54,7 @@ _mali_osk_notification_queue_t *_mali_osk_notification_queue_init( void )
 	result = (_mali_osk_notification_queue_t *)kmalloc(sizeof(_mali_osk_notification_queue_t), GFP_KERNEL);
 	if (NULL == result) return NULL;
 
-	sema_init(&result->mutex, 1);
+	init_MUTEX(&result->mutex);
 	init_waitqueue_head(&result->receive_queue);
 	INIT_LIST_HEAD(&result->head);
 
@@ -65,7 +66,7 @@ _mali_osk_notification_t *_mali_osk_notification_create( u32 type, u32 size )
 	/* OPT Recycling of notification objects */
     _mali_osk_notification_wrapper_t *notification;
 
-	notification = (_mali_osk_notification_wrapper_t *)kmalloc( sizeof(_mali_osk_notification_wrapper_t) + size, GFP_KERNEL );
+	notification = (_mali_osk_notification_wrapper_t *)kmalloc( sizeof(_mali_osk_notification_wrapper_t), GFP_KERNEL );
     if (NULL == notification)
     {
 		MALI_DEBUG_PRINT(1, ("Failed to create a notification object\n"));
@@ -75,13 +76,21 @@ _mali_osk_notification_t *_mali_osk_notification_create( u32 type, u32 size )
 	/* Init the list */
 	INIT_LIST_HEAD(&notification->list);
 
+	/* allocate memory for the buffer requested */
 	if (0 != size)
 	{
-		notification->data.result_buffer = ((u8*)notification) + sizeof(_mali_osk_notification_wrapper_t);
+		notification->data.result_buffer = kmalloc( size, GFP_KERNEL );
+		if ( NULL == notification->data.result_buffer )
+		{
+			/* failed to buffer, cleanup */
+			MALI_DEBUG_PRINT(1, ("Failed to allocate memory for notification object buffer of size %d\n", size));
+			kfree(notification);
+			return NULL;
+		}
 	}
 	else
 	{
-		notification->data.result_buffer = NULL;
+		notification->data.result_buffer  = 0;
 	}
 
 	/* set up the non-allocating fields */
@@ -101,6 +110,8 @@ void _mali_osk_notification_delete( _mali_osk_notification_t *object )
 
 	/* Remove from the list */
 	list_del(&notification->list);
+	/* Free the buffer */
+	kfree(notification->data.result_buffer);
 	/* Free the container */
 	kfree(notification);
 }

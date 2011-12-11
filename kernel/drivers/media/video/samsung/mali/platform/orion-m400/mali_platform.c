@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2010 ARM Limited. All rights reserved.
  * 
- * ported to galaxy s2 by gm
  * This program is free software and is provided to you under the terms of the GNU General Public License version 2
  * as published by the Free Software Foundation, and any use by you of this program is subject to the terms of such GNU licence.
  * 
@@ -296,10 +295,10 @@ static _mali_osk_errcode_t disable_mali_clocks(void)
 	MALI_SUCCESS;
 }
 
-void set_mali_parent_power_domain(void* dev)
+void set_mali_parent_power_domain(struct platform_device* dev)
 {
 #if MALI_PMM_RUNTIME_JOB_CONTROL_ON
-	((struct platform_device*)dev)->dev.parent = &s5pv310_device_pd[PD_G3D].dev;
+	dev->dev.parent = &s5pv310_device_pd[PD_G3D].dev;
 #endif
 }
 
@@ -357,7 +356,7 @@ _mali_osk_errcode_t g3d_power_domain_control(int bpower_on)
     MALI_SUCCESS;
 }
 
-_mali_osk_errcode_t mali_platform_init()
+_mali_osk_errcode_t mali_platform_init(_mali_osk_resource_t *resource)
 {
 	MALI_CHECK(init_mali_clock(), _MALI_OSK_ERR_FAULT);
 #if MALI_DVFS_ENABLED
@@ -369,9 +368,10 @@ _mali_osk_errcode_t mali_platform_init()
     MALI_SUCCESS;
 }
 
-_mali_osk_errcode_t mali_platform_deinit()
+_mali_osk_errcode_t mali_platform_deinit(_mali_osk_resource_type_t *type)
 {
 	deinit_mali_clock();
+
 #if MALI_DVFS_ENABLED
 	deinit_mali_dvfs_staus();
 	if (clk_register_map )
@@ -437,17 +437,15 @@ _mali_osk_errcode_t mali_platform_powerup(u32 cores)
 	MALI_SUCCESS;
 }
 
-_mali_osk_errcode_t mali_platform_power_mode_change(mali_power_mode power_mode)
-{
-    MALI_SUCCESS;
-}
-
 void mali_gpu_utilization_handler(u32 utilization)
 {	
+	if (bPoweroff==0) 
+	{
 #if MALI_DVFS_ENABLED
-    if(!mali_dvfs_handler(utilization))
-        MALI_DEBUG_PRINT(1,( "error on mali dvfs status in utilization\n"));
+		if(!mali_dvfs_handler(utilization))
+			MALI_DEBUG_PRINT(1,( "error on mali dvfs status in utilization\n"));
 #endif
+	}
 }
 
 #if MALI_POWER_MGMT_TEST_SUITE
