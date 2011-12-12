@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Sun Dec 11 12:56:08 2011
+ * Sun Dec 11 23:16:10 2011
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -260,6 +260,7 @@
 #define CONFIG_S5PV310_SETUP_I2C5 1
 #define CONFIG_NETFILTER_ADVANCED 1
 #define CONFIG_VIDEO_FIMC 1
+#define CONFIG_CPU_FREQ_GOV_HOTPLUG 1
 #define CONFIG_VIDEO_M5MO 1
 #define CONFIG_NETFILTER_NETLINK_LOG 1
 #define CONFIG_HAVE_DYNAMIC_FTRACE 1

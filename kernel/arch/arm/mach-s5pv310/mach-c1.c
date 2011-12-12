@@ -1985,7 +1985,7 @@ static struct regulator_init_data ldo13_init_data = {
 static struct regulator_init_data ldo17_init_data = {
 	.constraints	= {
 		.name		= "ldo17 range",
-		.min_uV		= 2000000,
+		.min_uV		= 3000000,
 		.max_uV		= 3000000,
 		.always_on	= 1,
 		.boot_on	= 1,
@@ -2258,12 +2258,12 @@ REGULATOR_INIT(ldo12, "VT_CAM_1.8V", 1800000, 1800000, 0,
 REGULATOR_INIT(ldo13, "VCC_3.0V_LCD", 3300000, 3300000, 1,
 		REGULATOR_CHANGE_STATUS, 0);
 #else
-REGULATOR_INIT(ldo13, "VCC_3.0V_LCD", 2500000, 2500000, 1,
+REGULATOR_INIT(ldo13, "VCC_3.0V_LCD", 3000000, 3000000, 1,
 		REGULATOR_CHANGE_STATUS, 1);
 #endif
-REGULATOR_INIT(ldo14, "VCC_2.8V_MOTOR", 2500000, 2500000, 0,
+REGULATOR_INIT(ldo14, "VCC_2.8V_MOTOR", 2800000, 2800000, 0,
 		REGULATOR_CHANGE_STATUS, 1);
-REGULATOR_INIT(ldo15, "LED_A_2.8V", 2500000, 2500000, 0,
+REGULATOR_INIT(ldo15, "LED_A_2.8V", 2800000, 2800000, 0,
 		REGULATOR_CHANGE_STATUS, 1);
 REGULATOR_INIT(ldo16, "CAM_SENSOR_IO_1.8V", 1800000, 1800000, 0,
 		REGULATOR_CHANGE_STATUS, 1);
@@ -2672,7 +2672,6 @@ static void max8997_muic_usb_cb(u8 usb_mode)
 	}
 }
 
-#ifdef CONFIG_VIDEO_MHL_V1
 extern void MHL_On(bool on);
 static void max8997_muic_mhl_cb(int attached)
 {
@@ -2685,7 +2684,6 @@ static void max8997_muic_mhl_cb(int attached)
 	}
 
 }
-#endif
 
 static bool max8997_muic_is_mhl_attached(void)
 {
@@ -2773,9 +2771,7 @@ static int max8997_muic_host_notify_cb(int enable)
 static struct max8997_muic_data max8997_muic = {
 	.usb_cb = max8997_muic_usb_cb,
 	.charger_cb = max8997_muic_charger_cb,
-#ifdef CONFIG_VIDEO_MHL_V1 
 	.mhl_cb = max8997_muic_mhl_cb,
-#endif
 	.is_mhl_attached = max8997_muic_is_mhl_attached,
 #ifdef CONFIG_TARGET_LOCALE_NA
 	.set_safeout = NULL,
