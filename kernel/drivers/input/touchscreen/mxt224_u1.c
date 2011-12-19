@@ -2456,26 +2456,6 @@ static ssize_t mxt_touchtype_show(struct device *dev, struct device_attribute *a
 	return strlen(buf);
 }
 
-static ssize_t store_threshold(struct device *dev,
-					struct device_attribute *attr,
-					char *buf, size_t count)
-{
-	unsigned int register_value;
-	int i;
-	i = sscanf(buf, "%u", &register_value);
-	if( i != 1 || register_value < 40 || register_value > 80) return -EINVAL;
-	threshold = register_value;
-	threshold_e = register_value;
-	return i;
-}
-
-static size_t show_threshold(struct device* dev, 
-							 struct device_attribute *attr,
-							 char *buf, size_t count)
-{
-	return sprintf(buf, "%u\nYou can set it between 40 and 80", threshold);
-}
-
 static DEVICE_ATTR(set_refer0, S_IRUGO | S_IWUSR | S_IWGRP, set_refer0_mode_show, NULL);
 static DEVICE_ATTR(set_delta0, S_IRUGO | S_IWUSR | S_IWGRP, set_delta0_mode_show, NULL);
 static DEVICE_ATTR(set_refer1, S_IRUGO | S_IWUSR | S_IWGRP, set_refer1_mode_show, NULL);
@@ -2513,14 +2493,12 @@ static DEVICE_ATTR(object_write, S_IRUGO | S_IWUSR | S_IWGRP, NULL, qt602240_obj
 static DEVICE_ATTR(dbg_switch, S_IRUGO | S_IWUSR | S_IWGRP, NULL, mxt224_debug_setting);
 
 static DEVICE_ATTR(mov_hysti, 0666, show_mov_hysti, store_mov_hysti);
-static DEVICE_ATTR(threshold, 0666, show_threshold, store_threshold);
 
 static struct attribute *qt602240_attrs[] = {
 	&dev_attr_object_show.attr,
 	&dev_attr_object_write.attr,
 	&dev_attr_dbg_switch,
 	&dev_attr_mov_hysti.attr,
-	&dev_attr_threshold.attr,
 	NULL
 };
 
