@@ -4281,6 +4281,7 @@
 0x0ae94106	sdev_evt_send_simple	vmlinux	EXPORT_SYMBOL_GPL
 0xc312e9b9	simple_attr_open	vmlinux	EXPORT_SYMBOL_GPL
 0x0c07cb9f	usb_root_hub_lost_power	vmlinux	EXPORT_SYMBOL_GPL
+0x80782eba	register_bln_implementation	vmlinux	EXPORT_SYMBOL
 0x85c10896	rcu_batches_completed_bh	vmlinux	EXPORT_SYMBOL_GPL
 0xde212bb1	cgroup_path	vmlinux	EXPORT_SYMBOL_GPL
 0xcc7fa952	local_bh_enable_ip	vmlinux	EXPORT_SYMBOL

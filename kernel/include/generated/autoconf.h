@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Tue Dec 13 23:35:15 2011
+ * Tue Dec 20 00:17:04 2011
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -693,6 +693,7 @@
 #define CONFIG_SERIAL_8250_NR_UARTS 4
 #define CONFIG_RTC_DRV_MAX8997 1
 #define CONFIG_GENERIC_LOCKBREAK 1
+#define CONFIG_GENERIC_BLN 1
 #define CONFIG_SND_S3C24XX_SOC 1
 #define CONFIG_DEFAULT_IOSCHED "bfq"
 #define CONFIG_CPU_FREQ_GOV_ONDEMANDX 1
