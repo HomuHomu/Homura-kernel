@@ -1,5 +1,5 @@
-Homura_kernel rev12
-ほむほむ派以外にはオススメしません。
+Homura_kernel rev13
+ほむほむ派以外お断り。
 ※Dualboot版以外未検証。（ゆえに起動しなくても笑って済ませれる人限定）
 
 1.CPU scaling level is changed from 5 to 17
@@ -9,14 +9,14 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 3.supports CIFS
 4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/intellidemand/Hotplug/
   PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive Governors(Default)
-5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.6 r6(Dualboot)
+5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
 6.（脳内）BFQ v3-r1/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode LZMA
 8.supports bootanimation
 9.based on GT-I9100 gingerbread_update3 source
 10.Automatic Installation SU-3.0.3(DCM) & truetypeEmoji.ttf
 11.Automatic Replace sensors.smdkv310.so(except for DCM) & lights.smdkv310.so
-12.supports Backlight Notification (creams Fixed BLN for Update2)
+12.supports Backlight Notification
 13.Automation tether_dun_required=0
 14.Include TweakGS2 ver0.4.0 alpha3 thx sakuramilk & CWM Manager 2.0 & AppWidgetPicker-1.2.3(DCM)
 15.gcc version 4.5.2(Sourcery G++Lite 2011.03-42)
@@ -31,13 +31,30 @@ https://market.android.com/details?id=com.tegrak.secondcore
 22.etc...etc..
 
 前回との修正点
-Add Hotplug Governors(2nd Coreを強制的に無効化するため非推奨）←じゃあなんで入れた。
-Updated mali and ump drivers→GalaxyNote MediaDriver
-lowered volatges on the LCD, touchscreen(LED)は不安定なので止め
-crypto driver from galaxy note(GalaxyNote厨なもんで）
-その他脳内調整
+
+BLNをCleams氏仕様→SKRMLK仕様(SKRMLKさん相変わらずGJ!)
+Disable Auto Replace lights.smdkv310.so(AOSP)
+
+/vendor/files/に入ってるのでBLN使いたい人は
+rm /system/lib/hw/ights.smdkv310.so
+cat /vendor/files/lights.smdkv310.so > /system/lib/hw/lights.smdkv310.so
+chmod 644 /system/lib/hw/lights.smdkv310.so
+chown 0.0 /system/lib/hw/lights.smdkv310.so
+reboot
+
+また、CyanogenMod7用のBLNを使いたい人は
+rm /system/lib/hw/ights.smdkv310.so
+cat /vendor/files/lights.smdkv310.so.cm7 > /system/lib/hw/lights.smdkv310.so
+chmod 644 /system/lib/hw/lights.smdkv310.so
+chown 0.0 /system/lib/hw/lights.smdkv310.so
+reboot
+
+え？シェルスクリプト入れとけって？
+そうだね。プロテインだね。
+
+その他アソコを戻したり。なんかやったり。（詳しくはHistory見て）
 
 既知の問題
-AOSPでバイブ（ry
+AOSPでバイ（ry
 
 決定的に変なとこあったらTwitterで…
