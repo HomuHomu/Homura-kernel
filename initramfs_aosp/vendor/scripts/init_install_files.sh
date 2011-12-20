@@ -49,8 +49,13 @@ if [ "$r" == "" ]; then
 else
 /system/bin/sqlite3 /data/data/com.android.providers.settings/databases/settings.db "update secure set value='0' where name='tether_dun_required';"
 fi
-
 rm /system/bin/sqlite3
+
+# Carrier indicate 1line
+rm  /system/etc/spn-conf.xml
+cat /vendor/files/spn-conf.xml > /system/etc/spn-conf.xml
+chown 0.0 /system/etc/spn-conf.xml
+chmod 644 /system/etc/spn-conf.xml
 
 mount -o remount,ro /system /system
 

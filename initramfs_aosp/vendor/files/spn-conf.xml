@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<spnOverrides> 
+<spnOverride numeric="44010" spn_display_rule="SPN_RULE_SHOW_PLMN" spn_override_only_on="44010"/> 
+</spnOverrides> 
