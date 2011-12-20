@@ -1,5 +1,5 @@
-Homura_kernel rev13
-ほむほむ派以外お断り。
+Homura_kernel rev14
+ほむらちゃん変えただけじゃないんだからね！
 ※Dualboot版以外未検証。（ゆえに起動しなくても笑って済ませれる人限定）
 
 1.CPU scaling level is changed from 5 to 17
@@ -24,15 +24,17 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 https://market.android.com/details?id=com.tegrak.touchmove
 17.supports Tegrak 2nd Core
 https://market.android.com/details?id=com.tegrak.secondcore
-18.Custum boot logo(Homura Chan!)
+18.Change Homura Chan Boot logo
 19.Change GlaxyNote MediaDriver
 20.etc...etc..
 
 前回との修正点
+・Killing Bravia Engine これでナオルのかどうかは知らん
+・ほむらちゃん
+・Add cache flush routines to ashmemAdd cache flush routines to ashmem
+・Dualboot＆Singlebootで、twframeworkがあるかないかでinit.rcを振り分けるように変更
 
-BLNをCleams氏仕様→SKRMLK仕様(SKRMLKさん相変わらずGJ!)
-Disable Auto Replace lights.smdkv310.so(AOSP)
-
+AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
 rm /system/lib/hw/ights.smdkv310.so
 cat /vendor/files/lights.smdkv310.so > /system/lib/hw/lights.smdkv310.so
@@ -46,13 +48,10 @@ cat /vendor/files/lights.smdkv310.so.cm7 > /system/lib/hw/lights.smdkv310.so
 chmod 644 /system/lib/hw/lights.smdkv310.so
 chown 0.0 /system/lib/hw/lights.smdkv310.so
 reboot
-
 え？シェルスクリプト入れとけって？
 そうだね。プロテインだね。
 
-その他アソコを戻したり。なんかやったり。（詳しくはHistory見て）
-
 既知の問題
-AOSPでバイ（ry
+AOSPでバ（ry
 
 決定的に変なとこあったらTwitterで…
