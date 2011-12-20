@@ -54,5 +54,11 @@ rm /system/bin/sqlite3
 rm /system/etc/be_movie
 rm /system/etc/be_photo
 
+# Carrier indicate 1line
+rm  /system/etc/spn-conf.xml
+cat /vendor/files/spn-conf.xml > /system/etc/spn-conf.xml
+chown 0.0 /system/etc/spn-conf.xml
+chmod 644 /system/etc/spn-conf.xml
+
 mount -o remount,ro /system /system
 
