@@ -34,6 +34,7 @@ https://market.android.com/details?id=com.tegrak.secondcore
 ・ほむらちゃん
 ・Add cache flush routines to ashmemAdd cache flush routines to ashmem
 ・Dualboot＆Singlebootで、twframeworkがあるかないかでinit.rcを振り分けるように変更
+・キャリア表示を一行に（SC-02B rootスレから）
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
