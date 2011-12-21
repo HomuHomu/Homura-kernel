@@ -516,7 +516,7 @@ void touchkey_work_func(struct work_struct *p)
 static irqreturn_t touchkey_interrupt(int irq, void *dummy)
 {
 #ifdef CONFIG_TOUCHKEY_BLN
-		printk(KERN_ERR "[TouchKey] interrupt touchkey\n");
+        printk(KERN_ERR "[TouchKey] interrupt touchkey\n");
 #endif
 	set_touchkey_debug('I');
 	disable_irq_nosync(IRQ_TOUCH_INT);
@@ -615,183 +615,183 @@ static int melfas_touchkey_late_resume(struct early_suspend *h)
 
 static void touchkey_activate(void){
 
-	if( !wake_lock_active(&bln_wake_lock) ){ 
-		printk(KERN_DEBUG "[TouchKey] touchkey get wake_lock\n");
-		wake_lock(&bln_wake_lock);
-	}
+        if( !wake_lock_active(&bln_wake_lock) ){ 
+            printk(KERN_DEBUG "[TouchKey] touchkey get wake_lock\n");
+            wake_lock(&bln_wake_lock);
+        }
 
-	printk(KERN_DEBUG "[TouchKey] touchkey activate.\n");
-	touchkey_ldo_on(1);
+        printk(KERN_DEBUG "[TouchKey] touchkey activate.\n");
+        touchkey_ldo_on(1);
 
-	msleep(50);
+        msleep(50);
 	touchkey_led_ldo_on(1);
 
-	touchkey_enable = 1;
+        touchkey_enable = 1;
 }
 
 static void touchkey_deactivate(void){
 
-	touchkey_led_ldo_on(0);
-	touchkey_ldo_on(0);
+        touchkey_led_ldo_on(0);
+        touchkey_ldo_on(0);
 
-	if( wake_lock_active(&bln_wake_lock) ){
-		printk(KERN_DEBUG "[TouchKey] touchkey clear wake_lock\n");
-		wake_unlock(&bln_wake_lock);
-	}
+        if( wake_lock_active(&bln_wake_lock) ){
+            printk(KERN_DEBUG "[TouchKey] touchkey clear wake_lock\n");
+            wake_unlock(&bln_wake_lock);
+        }
 
-	touchkey_enable = 0;
+        touchkey_enable = 0;
 }
 
 static void bln_early_suspend(struct early_suspend *h){
 
-	printk(KERN_DEBUG "[TouchKey] BLN suspend\n");
-	bln_suspended = true;
+        printk(KERN_DEBUG "[TouchKey] BLN suspend\n");
+        bln_suspended = true;
 
 }
 
 static void bln_late_resume(struct early_suspend *h){
 
-	printk(KERN_DEBUG "[TouchKey] BLN resume\n");
+        printk(KERN_DEBUG "[TouchKey] BLN resume\n");
 
-	bln_suspended = false;
-	if( wake_lock_active(&bln_wake_lock) ){
-		printk(KERN_DEBUG "[TouchKey] clear wake lock \n");
-		wake_unlock(&bln_wake_lock);
-	}
+        bln_suspended = false;
+        if( wake_lock_active(&bln_wake_lock) ){
+            printk(KERN_DEBUG "[TouchKey] clear wake lock \n");
+            wake_unlock(&bln_wake_lock);
+        }
 
 }
 
 static struct early_suspend bln_suspend_data = {
-	.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN + 1,
-	.suspend = bln_early_suspend,
-	.resume = bln_late_resume,
+    .level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN + 1,
+    .suspend = bln_early_suspend,
+    .resume = bln_late_resume,
 };
 
 static void enable_touchkey_backlights(void){
-	printk(KERN_ERR "[TouchKey] enable LED from BLN app\n");
-	int status = 1;
-	i2c_touchkey_write((u8 *)&status, 1 );
+        printk(KERN_ERR "[TouchKey] enable LED from BLN app\n");
+        int status = 1;
+        i2c_touchkey_write((u8 *)&status, 1 );
 }
 
 static void disable_touchkey_backlights(void){
-	printk(KERN_ERR "[TouchKey] disable LED from BLN app\n");
-	int status = 2;
-	i2c_touchkey_write((u8 *)&status, 1 );
+        printk(KERN_ERR "[TouchKey] disable LED from BLN app\n");
+        int status = 2;
+        i2c_touchkey_write((u8 *)&status, 1 );
 }
 
 static void enable_led_notification(void){
 
-	if( bln_enabled ){
-		if( touchkey_enable != 1 ){
-			if( bln_suspended ){
-				touchkey_activate();
-			}
-		}
-		if( touchkey_enable == 1 ){
-			printk(KERN_DEBUG "[TouchKey] BLN_ongoing set to true\n");
-			BLN_ongoing = true;
-			enable_touchkey_backlights();
-		}
-	}
+        if( bln_enabled ){
+            if( touchkey_enable != 1 ){
+                if( bln_suspended ){
+                    touchkey_activate();
+                }
+            }
+            if( touchkey_enable == 1 ){
+                printk(KERN_DEBUG "[TouchKey] BLN_ongoing set to true\n");
+                BLN_ongoing = true;
+                enable_touchkey_backlights();
+            }
+        }
 
 }
 
 static void disable_led_notification(void){
 
-	bln_blink_enabled = false;
-	BLN_ongoing = false;
-	printk(KERN_DEBUG "[TouchKey] BLN_ongoing set to false\n");
+        bln_blink_enabled = false;
+        BLN_ongoing = false;
+        printk(KERN_DEBUG "[TouchKey] BLN_ongoing set to false\n");
 
-	if( touchkey_enable == 1 ){
-		disable_touchkey_backlights();
-		if( bln_suspended ){
-			touchkey_deactivate();
-		}
-	}
+        if( touchkey_enable == 1 ){
+            disable_touchkey_backlights();
+            if( bln_suspended ){
+                touchkey_deactivate();
+            }
+        }
 
 }
 
 static ssize_t bln_status_read( struct device *dev, struct device_attribute *attr, char *buf ){
-	return sprintf(buf,"%u\n", (bln_enabled ? 1 : 0 ));
+        return sprintf(buf,"%u\n", (bln_enabled ? 1 : 0 ));
 }
 
 static ssize_t bln_status_write( struct device *dev, struct device_attribute *attr, const char *buf, size_t size ){
-	unsigned int data;
+        unsigned int data;
 
-	if(sscanf(buf,"%u\n", &data) == 1 ){
-		if( data == 0 || data == 1 ){
+        if(sscanf(buf,"%u\n", &data) == 1 ){
+            if( data == 0 || data == 1 ){
 
-			if( data == 1 ){
-				bln_enabled = true;
-			}
+                if( data == 1 ){
+                    bln_enabled = true;
+                }
 
-			if( data == 0 ){
-				bln_enabled = false;
-				if( BLN_ongoing )
-					disable_led_notification();
-			}
+                if( data == 0 ){
+                    bln_enabled = false;
+                    if( BLN_ongoing )
+                        disable_led_notification();
+                }
 
-		}else{
-			/* error */
-		}
-	}else{
-		/* error */
-	}
+            }else{
+                /* error */
+            }
+        }else{
+            /* error */
+        }
 
-	return size;
+        return size;
 }
 
 static ssize_t notification_led_status_read( struct device *dev, struct device_attribute *attr, char *buf ){
-	return sprintf(buf,"%u\n", (BLN_ongoing ? 1 : 0 ));
+        return sprintf(buf,"%u\n", (BLN_ongoing ? 1 : 0 ));
 }
 
 static ssize_t notification_led_status_write( struct device *dev, struct device_attribute *attr, const char *buf, size_t size ){
-	unsigned int data;
+        unsigned int data;
 
 
-	if(sscanf(buf,"%u\n", &data ) == 1 ){
-		if( data == 0 || data == 1 ){
-			if( data == 1 )
-				enable_led_notification();
+        if(sscanf(buf,"%u\n", &data ) == 1 ){
+            if( data == 0 || data == 1 ){
+                if( data == 1 )
+                    enable_led_notification();
 
-			if( data == 0 )
-				disable_led_notification();
-		}else{
-			/* error */
-		}
-	}else{
-		/* error */
-	}
+                if( data == 0 )
+                    disable_led_notification();
+            }else{
+                /* error */
+            }
+        }else{
+            /* error */
+        }
 
-	return size;
+        return size;
 }
 
 static ssize_t blink_control_read( struct device *dev, struct device_attribute *attr, char *buf ){
-	return sprintf( buf, "%u\n", (bln_blink_enabled ? 1 : 0 ) );
+        return sprintf( buf, "%u\n", (bln_blink_enabled ? 1 : 0 ) );
 }
 
 static ssize_t blink_control_write( struct device *dev, struct device_attribute *attr, const char *buf, size_t size ){
-	unsigned int data;
+        unsigned int data;
 
-	if( sscanf(buf, "%u\n", &data ) == 1 ){
-		if( data == 0 || data == 1 ){
-			if (data == 1){
-				bln_blink_enabled = true;
-				disable_touchkey_backlights();
-			}
+        if( sscanf(buf, "%u\n", &data ) == 1 ){
+            if( data == 0 || data == 1 ){
+                if (data == 1){
+                    bln_blink_enabled = true;
+                    disable_touchkey_backlights();
+                }
 
-			if(data == 0){
-				bln_blink_enabled = false;
-				enable_touchkey_backlights();
-			}
-		}
-	}
+                if(data == 0){
+                    bln_blink_enabled = false;
+                    enable_touchkey_backlights();
+                }
+            }
+        }
 
-	return size;
+        return size;
 }
 
 static ssize_t bln_version( struct device *dev, struct device_attribute *attr, char *buf ){
-	return sprintf(buf,"%u\n", BLN_VERSION);
+        return sprintf(buf,"%u\n", BLN_VERSION);
 }
 
 static DEVICE_ATTR(blink_control, S_IRUGO | S_IWUGO, blink_control_read, blink_control_write );
@@ -800,20 +800,20 @@ static DEVICE_ATTR(notification_led, S_IRUGO | S_IWUGO, notification_led_status_
 static DEVICE_ATTR(version, S_IRUGO, bln_version, NULL );
 
 static struct attribute *bln_notification_attributes[] = {
-	&dev_attr_blink_control.attr,
-	&dev_attr_enabled.attr,
-	&dev_attr_notification_led.attr,
-	&dev_attr_version.attr,
-	NULL
+        &dev_attr_blink_control.attr,
+        &dev_attr_enabled.attr,
+        &dev_attr_notification_led.attr,
+        &dev_attr_version.attr,
+        NULL
 };
 
 static struct attribute_group bln_notification_group = {
-	.attrs = bln_notification_attributes,
+        .attrs = bln_notification_attributes,
 };
 
 static struct miscdevice bln_device = {
-	.minor = MISC_DYNAMIC_MINOR,
-	.name  = "backlightnotification",
+        .minor = MISC_DYNAMIC_MINOR,
+        .name  = "backlightnotification",
 };
 
 #endif
@@ -909,20 +909,20 @@ static int i2c_touchkey_probe(struct i2c_client *client,
 	set_touchkey_debug('K');
 
 #ifdef CONFIG_TOUCHKEY_BLN
-	err = misc_register( &bln_device );
-	if( err ){
-		printk(KERN_ERR "[BLN] sysfs misc_register failed.\n");
-	}else{
-		if( sysfs_create_group( &bln_device.this_device->kobj, &bln_notification_group) < 0){
-			printk(KERN_ERR "[BLN] sysfs create group failed.\n");
-		} 
-	}
+        err = misc_register( &bln_device );
+        if( err ){
+            printk(KERN_ERR "[BLN] sysfs misc_register failed.\n");
+        }else{
+            if( sysfs_create_group( &bln_device.this_device->kobj, &bln_notification_group) < 0){
+                printk(KERN_ERR "[BLN] sysfs create group failed.\n");
+            } 
+        }
 
-	/* BLN early suspend */
-	register_early_suspend(&bln_suspend_data);
+        /* BLN early suspend */
+        register_early_suspend(&bln_suspend_data);
 
-	/* wake lock for BLN */
-	wake_lock_init(&bln_wake_lock, WAKE_LOCK_SUSPEND, "bln_wake_lock");
+        /* wake lock for BLN */
+        wake_lock_init(&bln_wake_lock, WAKE_LOCK_SUSPEND, "bln_wake_lock");
 #endif
 
 
@@ -1255,7 +1255,7 @@ static DEVICE_ATTR(touch_version, S_IRUGO | S_IWUSR | S_IWGRP,
 		   touch_version_read, touch_version_write);
 static DEVICE_ATTR(touch_update, S_IRUGO | S_IWUSR | S_IWGRP,
 		   touch_update_read, touch_update_write);
-static DEVICE_ATTR(brightness, S_IRUGO | S_IWUGO, NULL,
+static DEVICE_ATTR(brightness, S_IRUGO | S_IWUSR | S_IWGRP, NULL,
 		   touch_led_control);
 static DEVICE_ATTR(enable_disable, S_IRUGO | S_IWUSR | S_IWGRP, NULL,
 		   touchkey_enable_disable);
@@ -1474,8 +1474,8 @@ static void __exit touchkey_exit(void)
 	misc_deregister(&touchkey_update_device);
 
 #ifdef CONFIG_TOUCHKEY_BLN
-	misc_deregister(&bln_device);
-	wake_lock_destroy(&bln_wake_lock);
+        misc_deregister(&bln_device);
+        wake_lock_destroy(&bln_wake_lock);
 #endif
 
 	if (touchkey_wq) {
