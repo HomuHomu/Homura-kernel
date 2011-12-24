@@ -561,6 +561,14 @@ config BUILD_TARGET_CM7
 	  This option makes to select build target CyanogenMod7.
 endmenu
 
+menu "build target Dualboot"
+config BUILD_TARGET_DUALBOOT
+	bool "DUALBOOT"
+	default n
+	help
+	  This option makes to select build target DUALBOOT.
+endmenu
+
 comment "GPS"
 menuconfig GPS_GLONASS
 	bool "GPS GLONASS"
