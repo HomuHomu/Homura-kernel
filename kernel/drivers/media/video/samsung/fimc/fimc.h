@@ -453,10 +453,6 @@ struct fimc_control {
 #endif
 	struct timeval			curr_time;
 	struct timeval			before_time;
-#ifdef CONFIG_CPU_FREQ
-	atomic_t			busfreq_lock_cnt;	/* Bus frequency Lock count */
-	int				busfreq_flag;		/* context bus frequency flag*/
-#endif	
 };
 
 /* global */

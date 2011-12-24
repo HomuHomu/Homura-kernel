@@ -231,9 +231,10 @@ static void os_allocator_release(void * ctx, void * handle)
 
 static mali_physical_memory_allocation_result os_allocator_allocate_page_table_block(void * ctx, mali_page_table_block * block)
 {
-	int allocation_order = 6; /* _MALI_OSK_CPU_PAGE_SIZE << 6 */
+	const int allocation_order = 6; /* _MALI_OSK_CPU_PAGE_SIZE << 6 */
 	void *virt;
-	u32 size = _MALI_OSK_CPU_PAGE_SIZE << allocation_order;
+	const u32 pages_to_allocate = 1 << allocation_order;
+	const u32 size = _MALI_OSK_CPU_PAGE_SIZE << allocation_order;
 	os_allocator * info;
 
 	u32 cpu_phys_base;
@@ -244,46 +245,21 @@ static mali_physical_memory_allocation_result os_allocator_allocate_page_table_b
 	/* Ensure we don't allocate more than we're supposed to from the ctx */
 	if (_MALI_OSK_ERR_OK != _mali_osk_lock_wait(info->mutex, _MALI_OSK_LOCKMODE_RW)) return MALI_MEM_ALLOC_INTERNAL_FAILURE;
 
-	/* if the number of pages to be requested lead to exceeding the memory
-	* limit in info->num_pages_max, reduce the size that is to be requested. */
-	while ( (info->num_pages_allocated + (1 << allocation_order) > info->num_pages_max) 
-		&& _mali_osk_mem_check_allocated(info->num_pages_max * _MALI_OSK_CPU_PAGE_SIZE) )
+	if ( (info->num_pages_allocated + pages_to_allocate > info->num_pages_max) && _mali_osk_mem_check_allocated(info->num_pages_max * _MALI_OSK_CPU_PAGE_SIZE) )
 	{
-		if ( allocation_order > 0 ) {
-			--allocation_order;
-		} else {
-			/* return OOM */
-			_mali_osk_lock_signal(info->mutex, _MALI_OSK_LOCKMODE_RW);
-			return MALI_MEM_ALLOC_NONE;
-		}
-	}
-
-	/* try to allocate 2^(allocation_order) pages, if that fails, try
-	* allocation_order-1 to allocation_order 0 (inclusive) */
-	while ( allocation_order >= 0 )
-	{
-		size = _MALI_OSK_CPU_PAGE_SIZE << allocation_order;
-		virt = _mali_osk_mem_allocioregion( &cpu_phys_base, size );
-
-		if (NULL != virt) break;
-
-		--allocation_order;
-	}
-
-	if ( NULL == virt )
-	{
-		MALI_DEBUG_PRINT(1, ("Failed to allocate consistent memory. Is CONSISTENT_DMA_SIZE set too low?\n"));
 		/* return OOM */
 		_mali_osk_lock_signal(info->mutex, _MALI_OSK_LOCKMODE_RW);
 		return MALI_MEM_ALLOC_NONE;
 	}
 
-	MALI_DEBUG_PRINT(5, ("os_allocator_allocate_page_table_block: Allocation of order %i succeeded\n",
-				allocation_order));
+	virt = _mali_osk_mem_allocioregion( &cpu_phys_base, size );
 
-	/* we now know the size of the allocation since we know for what
-	 * allocation_order the allocation succeeded */
-	size = _MALI_OSK_CPU_PAGE_SIZE << allocation_order;
+	if ( NULL == virt )
+	{
+		/* return OOM */
+		_mali_osk_lock_signal(info->mutex, _MALI_OSK_LOCKMODE_RW);
+		return MALI_MEM_ALLOC_NONE;
+	}
 
 	block->release = os_allocator_page_table_block_release;
 	block->ctx = ctx;
@@ -292,7 +268,7 @@ static mali_physical_memory_allocation_result os_allocator_allocate_page_table_b
 	block->phys_base = cpu_phys_base - info->cpu_usage_adjust;
 	block->mapping = virt;
 
-	info->num_pages_allocated += (1 << allocation_order);
+	info->num_pages_allocated += pages_to_allocate;
 
 	_mali_osk_lock_signal(info->mutex, _MALI_OSK_LOCKMODE_RW);
 

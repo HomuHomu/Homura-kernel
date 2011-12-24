@@ -1,6 +1,6 @@
 /* drivers/media/video/samsung/fimg2d_android/fimg2d_core.c
  *
- * Copyright  2010 Samsung Electronics Co, Ltd. All Rights Reserved.
+ * Copyright  2010 Samsung Electronics Co, Ltd. All Rights Reserved. 
  *		      http://www.samsungsemi.com/
  *
  * This program is free software; you can redistribute it and/or modify
@@ -41,7 +41,7 @@ int g2d_clk_disable(struct g2d_global *g2d_dev)
 			clk_disable(g2d_dev->clock);
 			atomic_set(&g2d_dev->clk_enable_flag, 0);
 			return 0;
-		}
+		} 
 	}
 	return -1;
 }
@@ -119,12 +119,10 @@ int g2d_init_regs(struct g2d_global *g2d_dev, g2d_params *params)
 	if (g2d_check_params(params) < 0)
 		return -1;
 
-	g2d_reset(g2d_dev);
+	/* source image */	
+	blt_cmd |= g2d_set_src_img(g2d_dev, src_rect, flag);    
 
-	/* source image */
-	blt_cmd |= g2d_set_src_img(g2d_dev, src_rect, flag);
-
-	/* destination image */
+	/* destination image */		
 	blt_cmd |= g2d_set_dst_img(g2d_dev, dst_rect);
 
 	/* rotation */
@@ -136,7 +134,7 @@ int g2d_init_regs(struct g2d_global *g2d_dev, g2d_params *params)
 	/* color key */
 	blt_cmd |= g2d_set_color_key(g2d_dev, flag);
 
-	/* pattern */
+	/* pattern */	
 	blt_cmd |= g2d_set_pattern(g2d_dev, src_rect, flag);
 
 	/* rop & alpha blending */
@@ -150,14 +148,14 @@ int g2d_init_regs(struct g2d_global *g2d_dev, g2d_params *params)
 
 int g2d_do_blit(struct g2d_global *g2d_dev, g2d_params *params)
 {
-	unsigned long	pgd;
+	unsigned long 	pgd;
 	int need_dst_clean = true;
 
-	if ((params->src_rect.addr == NULL)
+	if ((params->src_rect.addr == NULL) 
 		|| (params->dst_rect.addr == NULL)) {
 		FIMG2D_ERROR("error : addr Null\n");
 		return false;
-	}
+	}		
 
 	if (params->flag.memory_type == G2D_MEMORY_KERNEL) {
 		params->src_rect.addr = (unsigned char *)phys_to_virt((unsigned long)params->src_rect.addr);
@@ -181,7 +179,7 @@ int g2d_do_blit(struct g2d_global *g2d_dev, g2d_params *params)
 			return false;
 		}
 
-		g2d_dev->dst_attribute =
+		g2d_dev->dst_attribute = 
 			g2d_check_pagetable((unsigned char *)GET_START_ADDR_C(params->dst_rect, params->clip),
 				(unsigned int)GET_RECT_SIZE_C(params->dst_rect, params->clip),
 					(u32)virt_to_phys((void *)pgd));
@@ -198,9 +196,9 @@ int g2d_do_blit(struct g2d_global *g2d_dev, g2d_params *params)
 				(u32)virt_to_phys((void *)pgd));
 
 		if (params->flag.render_mode & G2D_CACHE_OP) {
-			/*g2d_mem_cache_oneshot((void *)GET_START_ADDR(params->src_rect),
+			/*g2d_mem_cache_oneshot((void *)GET_START_ADDR(params->src_rect), 
 				(void *)GET_START_ADDR(params->dst_rect),
-				(unsigned int)GET_REAL_SIZE(params->src_rect),
+				(unsigned int)GET_REAL_SIZE(params->src_rect), 
 				(unsigned int)GET_REAL_SIZE(params->dst_rect));*/
 		//	need_dst_clean = g2d_check_need_dst_cache_clean(params);
 			g2d_mem_inner_cache(params);
@@ -227,8 +225,6 @@ int g2d_wait_for_finish(struct g2d_global *g2d_dev, g2d_params *params)
 {
 	if(atomic_read(&g2d_dev->is_mmu_faulted) == 1) {
 		FIMG2D_ERROR("error : sysmmu_faulted early\n");
-		FIMG2D_ERROR("faulted addr: 0x%x\n", g2d_dev->faulted_addr);
-		g2d_fail_debug(params);
 		atomic_set(&g2d_dev->is_mmu_faulted, 0);
 		return false;
 	}
@@ -237,7 +233,7 @@ int g2d_wait_for_finish(struct g2d_global *g2d_dev, g2d_params *params)
 		g2d_check_fifo_state_wait(g2d_dev);
 	} else {
 		if(wait_event_interruptible_timeout(g2d_dev->waitq,
-			g2d_dev->irq_handled == 1,
+			(atomic_read(&g2d_dev->in_use) == 0),
 			msecs_to_jiffies(G2D_TIMEOUT)) == 0) {
 			if(atomic_read(&g2d_dev->is_mmu_faulted) == 1) {
 				FIMG2D_ERROR("error : sysmmu_faulted\n");
@@ -251,13 +247,11 @@ int g2d_wait_for_finish(struct g2d_global *g2d_dev, g2d_params *params)
 			return false;
 		} else if(atomic_read(&g2d_dev->is_mmu_faulted) == 1) {
 			FIMG2D_ERROR("error : sysmmu_faulted but auto recoveried\n");
-			FIMG2D_ERROR("faulted addr: 0x%x\n", g2d_dev->faulted_addr);
-			g2d_fail_debug(params);
 			atomic_set(&g2d_dev->is_mmu_faulted, 0);
 			return false;
 		}
 	}
-
+	atomic_set(&g2d_dev->in_use, 0);
 	return true;
 }
 
@@ -294,3 +288,4 @@ int g2d_init_mem(struct device *dev, unsigned int *base, unsigned int *size)
 #endif
 	return 0;
 }
+
