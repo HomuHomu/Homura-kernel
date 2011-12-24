@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.35.7
-# Tue Dec 20 01:23:46 2011
+# Sat Dec 24 12:18:42 2011
 #
 CONFIG_ARM=y
 CONFIG_HAVE_PWM=y
@@ -455,6 +455,11 @@ CONFIG_FREQ_STEP_UP_L2_L0=y
 # build target CyanogenMod7
 #
 CONFIG_BUILD_TARGET_CM7=y
+
+#
+# build target Dualboot
+#
+CONFIG_BUILD_TARGET_DUALBOOT=y
 
 #
 # GPS

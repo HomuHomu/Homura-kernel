@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Sat Dec 24 10:49:21 2011
+ * Sat Dec 24 13:25:40 2011
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -484,6 +484,7 @@
 #define CONFIG_FUELGAUGE_MAX17042 1
 #define CONFIG_NETFILTER_XT_MATCH_CONNTRACK 1
 #define CONFIG_VFPv3 1
+#define CONFIG_BUILD_TARGET_DUALBOOT 1
 #define CONFIG_PACKET 1
 #define CONFIG_NETFILTER_XT_MATCH_IPRANGE 1
 #define CONFIG_SAMSUNG_MODULES_MODULE 1
