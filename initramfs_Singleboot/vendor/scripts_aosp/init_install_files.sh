@@ -47,9 +47,15 @@ else
 fi
 rm /system/bin/sqlite3
 
-# Remove Bravia Engine
+# Bravia Engine Install
 rm /system/etc/be_movie
 rm /system/etc/be_photo
+cat /vendor/files/be_movie > /system/etc/be_movie
+cat /vendor/files/be_photo > /system/etc/be_photo
+chmod 0755 /system/etc/be_movie
+chmod 0755 /system/etc/be_photo
+chown 0.0 /system/etc/be_movie
+chown 0.0 /system/etc/be_photo
 
 # Carrier indicate 1line
 rm  /system/etc/spn-conf.xml

@@ -34,9 +34,15 @@ cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
 chown 0.0 /system/app/AppWidgetPicker.apk
 chmod 644 /system/app/AppWidgetPicker.apk
 
-# Remove Bravia Engine
+# Bravia Engine Install
 rm /system/etc/be_movie
 rm /system/etc/be_photo
+cat /vendor/files/be_movie > /system/etc/be_movie
+cat /vendor/files/be_photo > /system/etc/be_photo
+chmod 0755 /system/etc/be_movie
+chmod 0755 /system/etc/be_photo
+chown 0.0 /system/etc/be_movie
+chown 0.0 /system/etc/be_photo
 
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3
