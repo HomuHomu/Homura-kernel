@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Sat Dec 24 14:18:52 2011
+ * Mon Dec 26 23:41:57 2011
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -250,6 +250,7 @@
 #define CONFIG_ANDROID_RAM_CONSOLE_ENABLE_VERBOSE 1
 #define CONFIG_PHONET 1
 #define CONFIG_SCSI_WAIT_SCAN_MODULE 1
+#define CONFIG_FM_SI4709_MODULE 1
 #define CONFIG_BACKLIGHT_CLASS_DEVICE 1
 #define CONFIG_CRYPTO_NULL 1
 #define CONFIG_NF_DEFRAG_IPV4 1

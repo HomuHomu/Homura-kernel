@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.35.7
-# Sat Dec 24 14:12:51 2011
+# Sat Dec 24 12:18:42 2011
 #
 CONFIG_ARM=y
 CONFIG_HAVE_PWM=y
@@ -2262,7 +2262,7 @@ CONFIG_ANDROID_LOW_MEMORY_KILLER=y
 # CONFIG_GPS is not set
 CONFIG_SAMSUNG_MODULES=m
 CONFIG_J4FS=m
-# CONFIG_FM_SI4709 is not set
+CONFIG_FM_SI4709=m
 CONFIG_VIBETONZ=m
 CONFIG_STORAGE=m
 CONFIG_LEVEL=m
