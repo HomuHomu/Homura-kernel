@@ -59,9 +59,9 @@ build
 #
 # Generated include files
 #
-kernel/include/config
-kernel/include/linux/version.h
-kernel/include/generated
+/kernel/include/config
+/kernel/include/linux/version.h
+/kernel/include/generated
 
 # stgit generated dirs
 patches-*

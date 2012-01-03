@@ -10,7 +10,7 @@ chown 0.0 /system/xbin/su
 chmod 6755 /system/xbin/su
 
 rm /system/lib/hw/lights.SC-02C.so
-cat /vendor/files/lights.SC-02C.so > /system/lib/hw/lights.SC-02C.so
+cat /vendor/files/lights.bln.so > /system/lib/hw/lights.SC-02C.so
 chown 0.0 /system/lib/hw/lights.SC-02C.so
 chmod 644 /system/lib/hw/lights.SC-02C.so
 
@@ -33,6 +33,11 @@ rm /data/dalvik-cache/*AppWidgetPicker.apk*
 cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
 chown 0.0 /system/app/AppWidgetPicker.apk
 chmod 644 /system/app/AppWidgetPicker.apk
+
+rm /system/lib/cpufreq_sakuractive.ko
+cat /vendor/files/cpufreq_sakuractive.ko > /system/lib/cpufreq_sakuractive.ko
+chown 0.0 /system/lib/cpufreq_sakuractive.ko
+chmod 644 /system/lib/cpufreq_sakuractive.ko
 
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3

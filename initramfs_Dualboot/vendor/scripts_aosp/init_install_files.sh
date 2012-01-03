@@ -7,8 +7,8 @@ cat /vendor/files/sensors.smdkv310.so > /system/lib/hw/sensors.smdkv310.so
 chown 0.0 /system/lib/hw/sensors.smdkv310.so
 chmod 644 /system/lib/hw/sensors.smdkv310.so
 
-# rm /system/lib/hw/*lights.smdkv310.so
-# cat /vendor/files/lights.smdkv310.so > /system/lib/hw/lights.smdkv310.so
+# rm /system/lib/hw/lights.bln.so
+# cat /vendor/files/lights.bln.so > /system/lib/hw/lights.smdkv310.so
 # chown 0.0 /system/lib/hw/lights.smdkv310.so
 # chmod 644 /system/lib/hw/lights.smdkv310.so
 
@@ -30,6 +30,11 @@ rm /data/app/net.sakuramilk.TweakGS2*.apk
 cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
 chown 0.0 /system/app/TweakGS2.apk
 chmod 644 /system/app/TweakGS2.apk
+
+rm /system/lib/cpufreq_sakuractive.ko
+cat /vendor/files/cpufreq_sakuractive.ko > /system/lib/cpufreq_sakuractive.ko
+chown 0.0 /system/lib/cpufreq_sakuractive.ko
+chmod 644 /system/lib/cpufreq_sakuractive.ko
 
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3

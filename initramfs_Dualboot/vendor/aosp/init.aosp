@@ -13,6 +13,12 @@ else
   busybox cp -a /vendor/aosp/init.rc.0 /init.rc
 fi
 
+busybox cp -a /vendor/aosp/init.smdkc210.rc /
+busybox cp -a /vendor/aosp/init.smdkv310.rc /
+busybox cp -a /vendor/aosp/ueventd.rc /
+busybox cp -a /vendor/aosp/ueventd.smdkc210.rc /
+busybox cp -a /vendor/aosp/ueventd.smdkv310.rc /
+
 busybox umount /sys
 busybox umount /proc
 

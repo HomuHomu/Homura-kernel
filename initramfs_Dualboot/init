@@ -25,4 +25,3 @@ fi
 
 # run vendor init script
 exec /vendor/$ROM_VENDOR/init.$ROM_VENDOR $BOOT_ROM
-

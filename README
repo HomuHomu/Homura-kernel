@@ -1,5 +1,5 @@
-Homura_kernel rev15
-あいかわらず未検証
+Homura_kernel rev16
+らるずあくてぃぶv2
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -7,7 +7,7 @@ Homura_kernel rev15
 https://market.android.com/details?id=com.tegrak.overclock.ultimate
 3.supports CIFS
 4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/intellidemand/Hotplug/
-  PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive Governors(Default)
+  PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive V2 Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
 6.（脳内）BFQ v3-r1/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode LZMA
@@ -26,15 +26,14 @@ https://market.android.com/details?id=com.tegrak.secondcore
 18.Change Homura Chan Boot logo
 19.Change GlaxyNote MediaDriver
 20.Carrier indicate 1line from 2ch@SC02B root Thread
-21.Bravia Engine(again)
-22.etc...etc..
+21.Bravia Engine
+22.supports Lulzactive(New!)
+https://market.android.com/details?id=com.tegrak.lulzactive
+23.etc...etc..
 
 前回との修正点
-・MadiaDriverのうちMali部分のみGalaxyNoteに変更(これで治ってるかな？）
-・Dualboot、SingleBootでのTouchkeyの改善（されてる？）
-・ほむらちゃん
-・問題の切り分けを行うため、Bravia Engine追加と、LCD&Touchscreen(LED)のUVを再度行う。
-・Bluetoothの動きが変だったため、一度Update3に巻き戻し。
+・Lulzactive V2!(Lulzactive対応）なんのこっちゃ
+・Backlight fix（THX! Sakuramilk)
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
@@ -54,13 +53,6 @@ reboot
 そうだね。プロテインだね。
 
 既知の問題
-AOSPでVi（ry
+AOSPでV（ry
 
-決定的に変なとこあったらTwitterで直接。（某所で言うなや）
-対応が遅れるし、荒れるし、なにより不愉快。（年末で疲れてるから余計に）
-つか、実験的に色々遊んでるから、安定してないとか言われても困るんだけど。
-どうしても気に入らない所あるなら
-git clone https://github.com/HomuHomu/Homura-kernel.git
-でコンパイラごと落ちてくるから
-好きなとおりに直して。
-
+それでは皆さん、よいお年をー！
