@@ -34,11 +34,6 @@ cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
 chown 0.0 /system/app/AppWidgetPicker.apk
 chmod 644 /system/app/AppWidgetPicker.apk
 
-rm /system/lib/cpufreq_sakuractive.ko
-cat /vendor/files/cpufreq_sakuractive.ko > /system/lib/cpufreq_sakuractive.ko
-chown 0.0 /system/lib/cpufreq_sakuractive.ko
-chmod 644 /system/lib/cpufreq_sakuractive.ko
-
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3
 
