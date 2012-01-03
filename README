@@ -1,5 +1,5 @@
-Homura_kernel rev16
-らるずあくてぃぶv2
+Homura_kernel rev17
+あけおめ！
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -27,13 +27,14 @@ https://market.android.com/details?id=com.tegrak.secondcore
 19.Change GlaxyNote MediaDriver
 20.Carrier indicate 1line from 2ch@SC02B root Thread
 21.Bravia Engine
-22.supports Lulzactive(New!)
+22.supports Lulzactive
 https://market.android.com/details?id=com.tegrak.lulzactive
 23.etc...etc..
 
 前回との修正点
-・Lulzactive V2!(Lulzactive対応）なんのこっちゃ
-・Backlight fix（THX! Sakuramilk)
+・Dualboot SingleBootでバイブfix(例によってSnglebootで未検証）
+・DCM版でBLN修正
+・デフォルトでホームキー遅延を修正（thx tegrak)
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
@@ -49,10 +50,7 @@ cat /vendor/files/lights.smdkv310.so.cm7 > /system/lib/hw/lights.smdkv310.so
 chmod 644 /system/lib/hw/lights.smdkv310.so
 chown 0.0 /system/lib/hw/lights.smdkv310.so
 reboot
-え？シェルスクリプト入れとけって？
-そうだね。プロテインだね。
 
 既知の問題
-AOSPでV（ry
+ない！（キリッ
 
-それでは皆さん、よいお年をー！

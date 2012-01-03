@@ -12,7 +12,7 @@ KERNEL_NAME="Homura-Kernel"
 CONFIG_FILE="$KERNEL_PATH/arch/arm/configs/Homura_aosp_defconfig"
 
 export LOCALVERSION="-$KERNEL_NAME"
-export KBUILD_BUILD_VERSION="aosp16"
+export KBUILD_BUILD_VERSION="aosp17"
 export WHOAMI_MOD="Homura"
 export HOSTNAME_MOD="Akemi"
 
