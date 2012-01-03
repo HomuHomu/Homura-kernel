@@ -10,7 +10,7 @@ chown 0.0 /system/xbin/su
 chmod 6755 /system/xbin/su
 
 rm /system/lib/hw/lights.SC-02C.so
-cat /vendor/files/lights.SC-02C.so > /system/lib/hw/lights.SC-02C.so
+cat /vendor/files/lights.bln.so > /system/lib/hw/lights.SC-02C.so
 chown 0.0 /system/lib/hw/lights.SC-02C.so
 chmod 644 /system/lib/hw/lights.SC-02C.so
 

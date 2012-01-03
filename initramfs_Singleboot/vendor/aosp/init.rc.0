@@ -20,6 +20,7 @@ loglevel 3
     export PHONE_STORAGE /mnt/emmc
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
+    export SD_EXT_DIRECTORY /sd-ext
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
 
 # Disable CFQ slice idle delay
@@ -46,7 +47,7 @@ loglevel 3
     symlink /mnt/usbdisk /usbdisk
 
     mkdir /system
-    mkdir /data 0775 system system
+    mkdir /xdata 0775 system system
     mkdir /cache 0771 system cache
     mkdir /config 0500 root root
 
@@ -67,6 +68,8 @@ loglevel 3
     # Filesystem image public mount points.
     mkdir /mnt/obb 0700 root system
     mount tmpfs tmpfs /mnt/obb mode=0755,gid=1000
+
+    mkdir /sd-ext 0771 system system
 
     # usb public mount points.
     mkdir /mnt/usb 0700 root system
@@ -116,11 +119,12 @@ on fs
     mount ext4 /dev/block/mmcblk0p9 /system wait ro
     mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
     exec check_filesystem /dev/block/mmcblk0p10 ext4
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait crypt discard,noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p10 /xdata nosuid nodev noatime wait crypt discard,noauto_da_alloc
 
     # create symbolic link for primary boot rom data dir
-    chown system system /data
-    chmod 0775 /data
+    chown system system /xdata
+    chmod 0775 /xdata
+    symlink /xdata/data0 /data
 
     # SEC_DMCRYPT move mounting efs befor apply_disk_policy, and set group id to system
     mkdir /efs
@@ -604,11 +608,6 @@ on boot
 	chmod 0777 /system/etc/audio/ArkamysTuning.txt
 
     class_start default
-
-# Sensor
-    chmod 666 /dev/accelerometer
-    chmod 666 /dev/akm8975
-    # chmod 666 /dev/tspdrv
 
 ## Daemon processes to be run by init.
 ##

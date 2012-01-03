@@ -7,8 +7,8 @@ cat /vendor/files/sensors.smdkv310.so > /system/lib/hw/sensors.smdkv310.so
 chown 0.0 /system/lib/hw/sensors.smdkv310.so
 chmod 644 /system/lib/hw/sensors.smdkv310.so
 
-# rm /system/lib/hw/*lights.smdkv310.so
-# cat /vendor/files/lights.smdkv310.so > /system/lib/hw/lights.smdkv310.so
+# rm /system/lib/hw/lights.bln.so
+# cat /vendor/files/lights.bln.so > /system/lib/hw/lights.smdkv310.so
 # chown 0.0 /system/lib/hw/lights.smdkv310.so
 # chmod 644 /system/lib/hw/lights.smdkv310.so
 

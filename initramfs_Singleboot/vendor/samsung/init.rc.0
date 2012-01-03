@@ -156,15 +156,16 @@ on post-fs
 
     # We chown/chmod /data again so because mount is run as root + defaults
     # use movinand second partition as /data.
-    mkdir /data
+    mkdir /xdata
 
     exec check_filesystem /dev/block/mmcblk0p10 ext4
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait crypt discard,noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p10 /xdata nosuid nodev noatime wait crypt discard,noauto_da_alloc
 
     # create symbolic link for primary boot rom data dir
 
-    chown system system /data
-    chmod 0775 /data
+    chown system system /xdata
+    chmod 0775 /xdata
+    symlink /xdata/data0 /data
 
     mkdir /data/dbdata
     chown system system /data/dbdata
@@ -1012,3 +1013,4 @@ on property:conf.cifs=1
 service userinit /data/local/userinit.rc
     user root
     oneshot
+

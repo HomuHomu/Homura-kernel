@@ -9,4 +9,3 @@ persist.service.adb.enable=1
 #Bravia Engine Service
 ro.service.swiqi.supported=true
 persist.service.swiqi.enable=1
-

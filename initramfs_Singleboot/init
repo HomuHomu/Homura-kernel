@@ -12,4 +12,3 @@ else
   /sbin/busybox umount /system
   exec /vendor/aosp/init.aosp
 fi
-
