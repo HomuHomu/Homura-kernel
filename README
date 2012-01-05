@@ -1,5 +1,5 @@
-Homura_kernel rev17
-あけおめ！
+Homura_kernel rev18
+Supports VooDoo LOUDER!(脳内）
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -9,7 +9,7 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/intellidemand/Hotplug/
   PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive V2 Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
-6.（脳内）BFQ v3-r1/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
+6.BFQ v3-r1/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode LZMA
 8.supports bootanimation
 9.based on GT-I9100 gingerbread_update3 source
@@ -18,6 +18,7 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 12.supports Backlight Notification
 13.Automation tether_dun_required=0
 14.Include TweakGS2 ver0.4.0 Beta2 thx sakuramilk & CWM Manager 2.0 & AppWidgetPicker-1.2.3(DCM)
+　 & SharedAppManager V0.0.2 THX! Ma34s (Dualboot) 
 15.gcc version 4.5.2(Sourcery G++Lite 2011.03-42)
 16.supports Tegrak Touch Move
 https://market.android.com/details?id=com.tegrak.touchmove
@@ -29,12 +30,14 @@ https://market.android.com/details?id=com.tegrak.secondcore
 21.Bravia Engine
 22.supports Lulzactive
 https://market.android.com/details?id=com.tegrak.lulzactive
-23.etc...etc..
+23.supports Voodoo LOUDER(NEW!)
+https://market.android.com/details?id=org.projectvoodoo.louder
+24.etc...etc..
 
 前回との修正点
-・Dualboot SingleBootでバイブfix(例によってSnglebootで未検証）
-・DCM版でBLN修正
-・デフォルトでホームキー遅延を修正（thx tegrak)
+supports Voodoo LOUDER!(99円かかっちゃうよ！）
+※TweakGS2とのコンフリクト？心配ない。プラシーボだ。
+Ma34s氏のSharedAppManagerをプリインストール（Dualboot)
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は

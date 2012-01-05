@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.35.7
-# Sat Dec 24 13:54:44 2011
+# Thu Jan  5 22:12:09 2012
 #
 CONFIG_ARM=y
 CONFIG_HAVE_PWM=y
@@ -2267,6 +2267,7 @@ CONFIG_J4FS=m
 CONFIG_VIBETONZ=m
 CONFIG_STORAGE=m
 CONFIG_LEVEL=m
+CONFIG_VOODOO_LOUDER=m
 CONFIG_SAMSUNG_PHONE_SVNET=y
 # CONFIG_SAMSUNG_PHONE_TTY is not set
 
