@@ -43,3 +43,7 @@ menuconfig LEVEL
 	default m
 	help
 	  Say Y to enable Debug Level support.
+
+menuconfig VOODOO_LOUDER
+	tristate "VOODOO_LOUDER"
+	default m

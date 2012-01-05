@@ -110,8 +110,8 @@ loglevel 3
 # ko files for bthid
     insmod /lib/modules/bthid.ko
 
-# ko files for FM Radio
-#   insmod /lib/modules/Si4709_driver.ko
+# ko files for Voodoo Louder
+    insmod /lib/modules/mc1n2_voodoo.ko
 
 on fs
 # mount mtd partitions
