@@ -15,24 +15,31 @@ chown 0.0 /system/lib/hw/lights.SC-02C.so
 chmod 644 /system/lib/hw/lights.SC-02C.so
 
 rm /system/app/CWMManager.apk
-rm /data/dalvik-cache/*CWMManager.apk*
+rm /data/dalvik-cache/*CWMManager*
 rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
 cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
 chown 0.0 /system/app/CWMManager.apk
 chmod 644 /system/app/CWMManager.apk
 
 rm /system/app/TweakGS2.apk
-rm /data/dalvik-cache/*TweakGS2.apk*
+rm /data/dalvik-cache/*TweakGS2*
 rm /data/app/net.sakuramilk.TweakGS2*.apk
 cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
 chown 0.0 /system/app/TweakGS2.apk
 chmod 644 /system/app/TweakGS2.apk
 
 rm /system/app/AppWidgetPicker.apk
-rm /data/dalvik-cache/*AppWidgetPicker.apk*
+rm /data/dalvik-cache/*AppWidgetPicker*
 cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
 chown 0.0 /system/app/AppWidgetPicker.apk
 chmod 644 /system/app/AppWidgetPicker.apk
+
+rm /system/app/SharedAppManager.apk
+rm /data/dalvik-cache/*SharedAppManager*
+rm /data/app/jp.ma34.SharedAppManager*.apk
+cat /vendor/files/SharedAppManager.apk > /system/app/SharedAppManager.apk
+chown 0.0 /system/app/SharedAppManager.apk
+chmod 644 /system/app/SharedAppManager.apk
 
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3
