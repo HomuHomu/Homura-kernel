@@ -28,13 +28,6 @@ cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
 chown 0.0 /system/app/TweakGS2.apk
 chmod 644 /system/app/TweakGS2.apk
 
-rm /system/app/SS_Tuner.apk
-rm /data/dalvik-cache/*sstuner*
-rm /data/app/ru.buzzzzer.sstuner*.apk
-cat /vendor/files/SS_Tuner.apk > /system/app/SS_Tuner.apk
-chown 0.0 /system/app/SS_Tuner.apk
-chmod 644 /system/app/SS_Tuner.apk
-
 rm /system/app/AppWidgetPicker.apk
 rm /data/dalvik-cache/*AppWidgetPicker*
 cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk

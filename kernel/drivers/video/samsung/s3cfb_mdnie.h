@@ -341,10 +341,10 @@
 #define SIG_MDNIE_ISDBT_COLD_MODE	32
 #endif
 
-#ifdef CONFIG_CM7_LED
-#define MDNIE_TUNE_DIR	"/system/etc"
-#else
+#ifdef CONFIG_BUILD_TARGET_CM7
 #define MDNIE_TUNE_DIR	"/vendor/mdnie"
+#else
+#define MDNIE_TUNE_DIR	"/system/etc"
 #endif
 
 #define UI_STANDARD_MODE_PATH				MDNIE_TUNE_DIR "/mdnie_tune_ui_standard_mode"
