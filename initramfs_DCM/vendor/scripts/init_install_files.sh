@@ -15,21 +15,28 @@ chown 0.0 /system/lib/hw/lights.SC-02C.so
 chmod 644 /system/lib/hw/lights.SC-02C.so
 
 rm /system/app/CWMManager.apk
-rm /data/dalvik-cache/*CWMManager.apk*
+rm /data/dalvik-cache/*CWMManager*
 rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
 cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
 chown 0.0 /system/app/CWMManager.apk
 chmod 644 /system/app/CWMManager.apk
 
 rm /system/app/TweakGS2.apk
-rm /data/dalvik-cache/*TweakGS2.apk*
+rm /data/dalvik-cache/*TweakGS2*
 rm /data/app/net.sakuramilk.TweakGS2*.apk
 cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
 chown 0.0 /system/app/TweakGS2.apk
 chmod 644 /system/app/TweakGS2.apk
 
+rm /system/app/SS_Tuner.apk
+rm /data/dalvik-cache/*sstuner*
+rm /data/app/ru.buzzzzer.sstuner*.apk
+cat /vendor/files/SS_Tuner.apk > /system/app/SS_Tuner.apk
+chown 0.0 /system/app/SS_Tuner.apk
+chmod 644 /system/app/SS_Tuner.apk
+
 rm /system/app/AppWidgetPicker.apk
-rm /data/dalvik-cache/*AppWidgetPicker.apk*
+rm /data/dalvik-cache/*AppWidgetPicker*
 cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
 chown 0.0 /system/app/AppWidgetPicker.apk
 chmod 644 /system/app/AppWidgetPicker.apk

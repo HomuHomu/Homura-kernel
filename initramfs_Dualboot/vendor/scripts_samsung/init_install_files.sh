@@ -41,6 +41,13 @@ cat /vendor/files/SharedAppManager.apk > /system/app/SharedAppManager.apk
 chown 0.0 /system/app/SharedAppManager.apk
 chmod 644 /system/app/SharedAppManager.apk
 
+rm /system/app/SS_Tuner.apk
+rm /data/dalvik-cache/*sstuner*
+rm /data/app/ru.buzzzzer.sstuner*.apk
+cat /vendor/files/SS_Tuner.apk > /system/app/SS_Tuner.apk
+chown 0.0 /system/app/SS_Tuner.apk
+chmod 644 /system/app/SS_Tuner.apk
+
 # copy sqlite3
 cat /vendor/files/sqlite3 > /system/bin/sqlite3
 
