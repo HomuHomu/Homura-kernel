@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Sat Jan  7 04:53:39 2012
+ * Sat Jan  7 06:07:43 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -900,7 +900,6 @@
 #define CONFIG_SAMSUNG_IRQ_VIC_TIMER 1
 #define CONFIG_HID_SUPPORT 1
 #define CONFIG_NET_ACTIVITY_STATS 1
-#define CONFIG_VOODOO_SCREEN_TUNER_MODULE 1
 #define CONFIG_NLS_DEFAULT "iso8859-1"
 #define CONFIG_NF_CT_PROTO_GRE 1
 #define CONFIG_NF_CT_NETLINK 1

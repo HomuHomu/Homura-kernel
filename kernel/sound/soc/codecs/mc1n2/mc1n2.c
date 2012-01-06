@@ -50,7 +50,6 @@
 
 #include <plat/gpio-cfg.h>
 #include <mach/gpio.h>
-#include <mach/cpufreq.h>
 
 #ifdef CONFIG_SND_SOC_MIC_A1026
 
@@ -93,7 +92,7 @@ static int audio_ctrl_mic_bias_gpio(struct mc1n2_platform_data *pdata, int mic, 
 #define MC1N2_HW_ID_AB 0x79
 
 enum {
-	MC1N2_MASK_NULL             = 0x00000000,
+    MC1N2_MASK_NULL             = 0x00000000,
 	MC1N2_MASK_DVOL_AD0         = 0x00000001,
 	MC1N2_MASK_DVOL_AENG6       = 0x00000002,
 	MC1N2_MASK_DVOL_PDM         = 0x00000004,
@@ -330,7 +329,6 @@ struct mc1n2_info_store mc1n2_info_store_tbl[] = {
 #define MC1N2_N_INFO_STORE (sizeof(mc1n2_info_store_tbl) / sizeof(struct mc1n2_info_store))
 
 int isVoiceSearch = 0;
-static int mc1n2_freq_lock = 0;
 
 static void mc1n2_set_codec_data(struct snd_soc_codec *codec)
 {
@@ -1396,8 +1394,8 @@ static inline int caribrate_vol(unsigned int reg, int vol, int carib_vol)
 		} else if ((vol + carib_vol) < 0) {
 			vol = 0;
 		} else {
-			vol = vol + carib_vol;
-		}
+            vol = vol + carib_vol;
+        }
 	}
 	return vol;
 }
@@ -1521,7 +1519,7 @@ static int write_reg_vol(struct snd_soc_codec *codec,
 			}
 			
 			db = mc1n2_vreg_map[reg].volmap[vol];
-			//printk(KERN_DEBUG "[MCDRV] update_reg_vol name=%s : volindex=%d, db=%d", vol_name_tbl[reg], vol, db);
+			printk(KERN_DEBUG "[MCDRV] update_reg_vol name=%s : volindex=%d, db=%d", vol_name_tbl[reg], vol, db);
 			*vp = db | MCDRV_VOL_UPDATE;
 		}
 	}
@@ -3832,11 +3830,8 @@ static int mc1n2_hwdep_ioctl_notify(struct snd_soc_codec *codec,
 		mc1n2->pdata->set_adc_power_contraints(1);
 		break;
 	case MCDRV_NOTIFY_MEDIA_PLAY_START:
-		if (mc1n2_freq_lock)
-			s5pv310_cpufreq_lock(DVFS_LOCK_ID_SND, CPU_L5); // CPU CLK lower lock 100MHz
 		break;
 	case MCDRV_NOTIFY_MEDIA_PLAY_STOP:
-		s5pv310_cpufreq_lock_free(DVFS_LOCK_ID_SND);
 		break;
 	case MCDRV_NOTIFY_FM_PLAY_START:
 		mc1n2_current_mode |= MC1N2_MODE_FM_ON;
@@ -4423,7 +4418,7 @@ static struct i2c_driver mc1n2_i2c_driver = {
 
 static ssize_t update_reg_vol(struct device *dev, struct device_attribute *attr, const char *buf, size_t size)
 {
-	struct snd_soc_codec* codec = mc1n2_codec;
+    struct snd_soc_codec* codec = mc1n2_codec;
 	MCDRV_VOL_INFO update;
 	SINT16 *vp;
 	u16 *cp;
@@ -4433,11 +4428,11 @@ static ssize_t update_reg_vol(struct device *dev, struct device_attribute *attr,
 
 	memset(&update, 0, sizeof(MCDRV_VOL_INFO));
 
-	for (reg = MC1N2_DVOL_AD0; reg <= MC1N2_AVOL_HP_GAIN; reg++) {
-		vp = (SINT16 *)((void *)&update + mc1n2_vreg_map[reg].offset);
-		cp = (u16 *)codec->reg_cache + reg;
-		for (i = 0; i < 2; i++, vp++) {
-			unsigned int c = (*cp >> (i*8)) & 0xff;
+    for (reg = MC1N2_DVOL_AD0; reg <= MC1N2_AVOL_HP_GAIN; reg++) {
+	    vp = (SINT16 *)((void *)&update + mc1n2_vreg_map[reg].offset);
+    	cp = (u16 *)codec->reg_cache + reg;
+	    for (i = 0; i < 2; i++, vp++) {
+		    unsigned int c = (*cp >> (i*8)) & 0xff;
 			int sw, vol;
 			SINT16 db;
 			sw = (reg < MC1N2_AVOL_MIC1_GAIN) ? (c & 0x80) : 1;
@@ -4445,127 +4440,127 @@ static ssize_t update_reg_vol(struct device *dev, struct device_attribute *attr,
 			switch (reg)
 			{
 			case MC1N2_DVOL_AD0:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_AD0)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_AD0)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_AD0);
 				break;
 			case MC1N2_DVOL_AENG6:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_AENG6)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_AENG6)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_AENG6);
 				break;
 			case MC1N2_DVOL_PDM:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_PDM)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_PDM)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_PDM);
 				break;
 			case MC1N2_DVOL_DIR0:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR0)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR0)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIR0);
 				break;
 			case MC1N2_DVOL_DIR1:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR1)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR1)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIR1);
 				break;
 			case MC1N2_DVOL_DIR2:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR2)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR2)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIR2);
 				break;
 			case MC1N2_DVOL_AD0_ATT:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_AD0_ATT)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_AD0_ATT)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_AD0_ATT);
 				break;
 			case MC1N2_DVOL_DIR0_ATT:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR0_ATT)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR0_ATT)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIR0_ATT);
 				break;
 			case MC1N2_DVOL_DIR1_ATT:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR1_ATT)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR1_ATT)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIR1_ATT);
 				break;
 			case MC1N2_DVOL_DIR2_ATT:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR2_ATT)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIR2_ATT)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIR2_ATT);
 				break;
 			case MC1N2_DVOL_SIDETONE:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_SIDETONE)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_SIDETONE)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_SIDETONE);
 				break;
 			case MC1N2_DVOL_DAC_MASTER:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DAC_MASTER)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DAC_MASTER)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DAC_MASTER);
 				break;
 			case MC1N2_DVOL_DAC_VOICE:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DAC_VOICE)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DAC_VOICE)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DAC_VOICE);
 				break;
 			case MC1N2_DVOL_DAC_ATT:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DAC_ATT)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DAC_ATT)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DAC_ATT);
 				break;
 			case MC1N2_DVOL_DIT0:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIT0)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIT0)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIT0);
 				break;
 			case MC1N2_DVOL_DIT1:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIT1)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIT1)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIT1);
 				break;
 			case MC1N2_DVOL_DIT2:
-				if (!(update_vol_mask & MC1N2_MASK_DVOL_DIT2)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_DVOL_DIT2)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_DVOL_DIT2);
 				break;
 			case MC1N2_AVOL_AD0:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_AD0)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_AD0)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_AD0);
 				break;
 			case MC1N2_AVOL_LIN1:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_LIN1)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_LIN1)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_LIN1);
 				break;
 			case MC1N2_AVOL_MIC1:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC1)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC1)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_MIC1);
 				break;
 			case MC1N2_AVOL_MIC2:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC2)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC2)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_MIC2);
 				break;
 			case MC1N2_AVOL_MIC3:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC3)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC3)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_MIC3);
 				break;
 			case MC1N2_AVOL_HP:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_HP)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_HP)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_HP);
 				break;
 			case MC1N2_AVOL_SP:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_SP)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_SP)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_SP);
 				break;
 			case MC1N2_AVOL_RC:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_RC)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_RC)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_RC);
 				break;
 			case MC1N2_AVOL_LOUT1:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_LOUT1)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_LOUT1)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_LOUT1);
 				break;
 			case MC1N2_AVOL_LOUT2:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_LOUT2)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_LOUT2)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_LOUT2);
 				break;
 			case MC1N2_AVOL_MIC1_GAIN:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC1_GAIN)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC1_GAIN)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_MIC1_GAIN);
 				break;
 			case MC1N2_AVOL_MIC2_GAIN:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC2_GAIN)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC2_GAIN)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_MIC2_GAIN);
 				break;
 			case MC1N2_AVOL_MIC3_GAIN:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC3_GAIN)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_MIC3_GAIN)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_MIC3_GAIN);
 				break;
 			case MC1N2_AVOL_HP_GAIN:
-				if (!(update_vol_mask & MC1N2_MASK_AVOL_HP_GAIN)) continue;
+                if (!(update_vol_mask & MC1N2_MASK_AVOL_HP_GAIN)) continue;
 				vol = caribrate_vol(reg, vol, mc1n2_carib_AVOL_HP_GAIN);
 				break;
 			}
@@ -4587,23 +4582,6 @@ static ssize_t update_reg_vol(struct device *dev, struct device_attribute *attr,
 }
 
 static DEVICE_ATTR(update_volume, S_IWUSR | S_IWGRP, NULL, update_reg_vol);
-
-
-static ssize_t mc1n2_show_freq_lock(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	return sprintf(buf,"%d\n", mc1n2_freq_lock);
-}
-
-static ssize_t mc1n2_store_freq_lock(struct device *dev, struct device_attribute *attr, const char *buf, size_t size)
-{
-	int data;
-	if (sscanf(buf, "%d\n", &data) > 0) {
-		mc1n2_freq_lock = data;
-	}
-	return size;
-}
-
-static DEVICE_ATTR(freq_lock, S_IRUGO | S_IWUSR | S_IWGRP, mc1n2_show_freq_lock, mc1n2_store_freq_lock);
 
 
 /*
@@ -4710,9 +4688,6 @@ static int __init mc1n2_init(void)
 	}
 	if (device_create_file(sound_mc1n2, &dev_attr_update_volume)< 0) {
 		printk(KERN_ERR "Failed to create device file(%s)!\n", dev_attr_update_volume.attr.name);
-	}
-	if (device_create_file(sound_mc1n2, &dev_attr_freq_lock)< 0) {
-		printk(KERN_ERR "Failed to create device file(%s)!\n", dev_attr_freq_lock.attr.name);
 	}
 	
 	return i2c_add_driver(&mc1n2_i2c_driver);
