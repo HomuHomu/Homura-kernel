@@ -47,3 +47,8 @@ menuconfig LEVEL
 menuconfig VOODOO_LOUDER
 	tristate "VOODOO_LOUDER"
 	default m
+
+menuconfig VOODOO_SCREEN_TUNER
+	tristate "VOODOO_SCREEN_TUNER"
+	default m
+
