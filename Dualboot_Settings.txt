@@ -1,0 +1,28 @@
+チラ裏的　Dualboot導入memo rev4
+お約束ですが自己責任でやってください。
+
+1.チタニウムでデータを全部バックアップ
+
+2.Dualboot用AOSP ROMの準備
+・どっかでCWM ZIPタイプのAOSP ROMを入手する。
+・一撃ツールでサインする。（MIUIの場合は、sppushを通さないで一撃を通す）
+http://dl.dropbox.com/u/14219187/ICHIGEKI_HomuHomu_SC02C_v4.zip
+・SDCARDにROMと同梱カーネルぶっこむ
+
+3.DOCOMO@ROMの状態で、Recoveryに入る
+
+4.DualBoot用のROMを焼く(Install zip)
+
+5.DualBoot対応カーネルを焼く(Install zip)
+
+6.Factory Reset & Reboot
+
+7.DoCoMo ROMで初期設定を済ませる。
+
+8.TweakGS2→General→Boot RoMでsecondaryにセット
+※時々書き込まれない事があるため、戻って確認しておくとベター
+
+9.再起動
+
+10.Secondary ROMで起動されるはず…
+

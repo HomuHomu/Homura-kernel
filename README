@@ -1,5 +1,5 @@
-Homura_kernel rev18
-Supports VooDoo LOUDER!(脳内）
+Homura_kernel rev19
+すげーいじった。
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -10,7 +10,7 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
   PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive V2 Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
 6.BFQ v3-r1/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
-7.kernel compression mode LZMA
+7.kernel compression mode XZ
 8.supports bootanimation
 9.based on GT-I9100 gingerbread_update3 source
 10.Automatic Installation SU-3.0.3(DCM) & truetypeEmoji.ttf
@@ -30,14 +30,17 @@ https://market.android.com/details?id=com.tegrak.secondcore
 21.Bravia Engine
 22.supports Lulzactive
 https://market.android.com/details?id=com.tegrak.lulzactive
-23.supports Voodoo LOUDER(NEW!)
+23.supports Voodoo LOUDER
 https://market.android.com/details?id=org.projectvoodoo.louder
-24.etc...etc..
+24.Ultra-Optimised EXT4 filesystem (from 3.2 linux kernel)
+25.etc...etc..
 
 前回との修正点
-supports Voodoo LOUDER!(99円かかっちゃうよ！）
-※TweakGS2とのコンフリクト？心配ない。プラシーボだ。
-Ma34s氏のSharedAppManagerをプリインストール（Dualboot)
+カーネル圧縮をXZに変更(LZMAより、かなりちっちゃくなった）
+ext4最適化（変わった？）
+また、GalaxyNoteから色々マージ（NoteカワイイヨNote)
+Multi-core scheduler
+その他拾い食い山盛り。
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
@@ -55,5 +58,6 @@ chown 0.0 /system/lib/hw/lights.smdkv310.so
 reboot
 
 既知の問題
-ない！（キリッ
+多分、今回はスゲーある！！（キリッ
+すげー弄ったから。
 
