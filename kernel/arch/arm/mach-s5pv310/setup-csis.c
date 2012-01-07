@@ -41,8 +41,11 @@ void s3c_csis0_cfg_phy_global(int on)
 		__raw_writel(cfg, S5P_MIPI_CONTROL0);
 
 		cfg = __raw_readl(S5P_MIPI_CONTROL0);
-		cfg |= S5P_MIPI_DPHY_EN;
-		__raw_writel(cfg, S5P_MIPI_CONTROL0);
+		if (cfg & (1<<2) != (1<<2)) 
+		{
+			cfg &= ~S5P_MIPI_DPHY_EN;
+			__raw_writel(cfg, S5P_MIPI_CONTROL0);
+		}
 
 		printk(KERN_INFO "csis0 on\n");
 	} else {
