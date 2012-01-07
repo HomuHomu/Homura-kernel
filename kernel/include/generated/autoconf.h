@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Sat Jan  7 21:28:13 2012
+ * Sat Jan  7 23:35:42 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -123,7 +123,6 @@
 #define CONFIG_SEC_DEV_JACK 1
 #define CONFIG_ARM_GIC 1
 #define CONFIG_SERIO 1
-#define CONFIG_SCHEDSTATS 1
 #define CONFIG_REGULATOR_SAMSUNG_POWER_DOMAIN 1
 #define CONFIG_RTC_INTF_SYSFS 1
 #define CONFIG_BLK_DEV_INITRD 1
