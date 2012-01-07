@@ -85,4 +85,6 @@ GTAGS
 *.zip
 *.tar
 *.md5
+*zImage
+
 \#*#
