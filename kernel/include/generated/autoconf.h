@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Sat Jan  7 06:07:43 2012
+ * Sat Jan  7 13:22:11 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -308,7 +308,6 @@
 #define CONFIG_INET_XFRM_MODE_TRANSPORT 1
 #define CONFIG_CRYPTO_MD5 1
 #define CONFIG_VIDEO_TSI 1
-#define CONFIG_DEBUG_USER 1
 #define CONFIG_PM_OPS 1
 #define CONFIG_MEDIA_TUNER_TEA5767 1
 #define CONFIG_OABI_COMPAT 1
@@ -519,7 +518,6 @@
 #define CONFIG_VIDEO_JPEG 1
 #define CONFIG_EXT4_USE_FOR_EXT23 1
 #define CONFIG_BT_HCIUART_H4 1
-#define CONFIG_DEBUG_ERRORS 1
 #define CONFIG_NF_CONNTRACK_MARK 1
 #define CONFIG_NETFILTER 1
 #define CONFIG_NETFILTER_XT_MATCH_HASHLIMIT 1
