@@ -2524,7 +2524,7 @@ CONFIG_ARM_UNWIND=y
 # CONFIG_DEBUG_STACK_USAGE is not set
 # CONFIG_DEBUG_LL is not set
 # CONFIG_OC_ETM is not set
-CONFIG_DEBUG_S3C_UART=2
+# CONFIG_DEBUG_S3C_UART is not set
 
 #
 # Security options
