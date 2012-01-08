@@ -1,7 +1,11 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
+<<<<<<< HEAD
  * Sun Jan  8 22:21:57 2012
+=======
+ * Sat Jan  7 13:22:11 2012
+>>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -415,7 +419,6 @@
 #define CONFIG_SUSPEND 1
 #define CONFIG_CRYPTO_CBC 1
 #define CONFIG_SERIAL_8250_RUNTIME_UARTS 4
-#define CONFIG_FS_MBCACHE 1
 #define CONFIG_RTC_CLASS 1
 #define CONFIG_HAVE_LATENCYTOP_SUPPORT 1
 #define CONFIG_S3C_DEV_I2C11_EMUL 1
@@ -482,6 +485,7 @@
 #define CONFIG_SND_JACK 1
 #define CONFIG_NETFILTER_XT_TARGET_TCPMSS 1
 #define CONFIG_S5P_GPIO_DRVSTR 1
+#define CONFIG_EXT2_FS 1
 #define CONFIG_FUELGAUGE_MAX17042 1
 #define CONFIG_NETFILTER_XT_MATCH_CONNTRACK 1
 #define CONFIG_VFPv3 1
@@ -892,7 +896,6 @@
 #define CONFIG_RTC_INTF_DEV 1
 #define CONFIG_SAMSUNG_IRQ_VIC_TIMER 1
 #define CONFIG_HID_SUPPORT 1
-#define CONFIG_EXT4_FS_XATTR 1
 #define CONFIG_NET_ACTIVITY_STATS 1
 #define CONFIG_NLS_DEFAULT "iso8859-1"
 #define CONFIG_NF_CT_PROTO_GRE 1

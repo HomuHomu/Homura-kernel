@@ -1061,10 +1061,7 @@ static int crypt_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 		goto bad_cipher;
 	}
 
-	if (cipher != NULL)
-		strcpy(cc->cipher, cipher);
-	else
-		cc->cipher[0] = '\0';
+	strcpy(cc->cipher, cipher);
 	strcpy(cc->chainmode, chainmode);
 	cc->tfm = tfm;
 
