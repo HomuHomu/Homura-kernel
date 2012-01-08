@@ -1,7 +1,11 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
+<<<<<<< HEAD
  * Sun Jan  8 03:08:14 2012
+=======
+ * Sun Jan  8 21:39:42 2012
+>>>>>>> CameraBugFix
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
