@@ -533,7 +533,6 @@
 0xb0e52e16	bdi_unregister	vmlinux	EXPORT_SYMBOL
 0x4f9f472b	inet6_csk_search_req	vmlinux	EXPORT_SYMBOL_GPL
 0x865029ac	__hw_addr_sync	vmlinux	EXPORT_SYMBOL
-<<<<<<< HEAD
 0x65aa7228	dev_uc_init	vmlinux	EXPORT_SYMBOL
 0x472a9032	dev_mc_init	vmlinux	EXPORT_SYMBOL
 0xc83572e2	get_sii9234_client	vmlinux	EXPORT_SYMBOL
@@ -541,15 +540,6 @@
 0x06834eae	scsi_setup_blk_pc_cmnd	vmlinux	EXPORT_SYMBOL
 0x295e8b9b	kobject_uevent_env	vmlinux	EXPORT_SYMBOL_GPL
 0x59be645b	mb_cache_entry_alloc	vmlinux	EXPORT_SYMBOL
-=======
-0xd0e08eec	dev_uc_init	vmlinux	EXPORT_SYMBOL
-0xd58ecdaf	dev_mc_init	vmlinux	EXPORT_SYMBOL
-0x2839d5e4	get_sii9234_client	vmlinux	EXPORT_SYMBOL
-0x970a7fb7	xc5000_attach	vmlinux	EXPORT_SYMBOL
-0x45661774	scsi_setup_blk_pc_cmnd	vmlinux	EXPORT_SYMBOL
-0x4de1ceac	kobject_uevent_env	vmlinux	EXPORT_SYMBOL_GPL
-0x93a299d3	mb_cache_entry_alloc	vmlinux	EXPORT_SYMBOL
->>>>>>> CameraBugFix
 0x7d02520f	_raw_read_unlock	vmlinux	EXPORT_SYMBOL
 0x7426f76c	init_timer_key	vmlinux	EXPORT_SYMBOL
 0xf39bf4d9	put_cmsg	vmlinux	EXPORT_SYMBOL
@@ -1314,13 +1304,8 @@
 0x5b2df128	kernel_sock_ioctl	vmlinux	EXPORT_SYMBOL
 0xc4a545a1	usb_stor_disconnect	vmlinux	EXPORT_SYMBOL_GPL
 0x8ffdb3b8	crc16	vmlinux	EXPORT_SYMBOL
-<<<<<<< HEAD
 0x61016380	mb_cache_entry_insert	vmlinux	EXPORT_SYMBOL
 0x24cc62b4	kallsyms_on_each_symbol	vmlinux	EXPORT_SYMBOL_GPL
-=======
-0x9e603590	mb_cache_entry_insert	vmlinux	EXPORT_SYMBOL
-0x602b0686	kallsyms_on_each_symbol	vmlinux	EXPORT_SYMBOL_GPL
->>>>>>> CameraBugFix
 0xd2a8caf0	work_on_cpu	vmlinux	EXPORT_SYMBOL_GPL
 0x8ce29a40	nfnetlink_unicast	vmlinux	EXPORT_SYMBOL_GPL
 0x764b55d9	blk_put_request	vmlinux	EXPORT_SYMBOL
@@ -1812,7 +1797,6 @@
 0x918d2205	tty_port_raise_dtr_rts	vmlinux	EXPORT_SYMBOL
 0xa81cd42a	blk_queue_io_opt	vmlinux	EXPORT_SYMBOL
 0x935ba6b5	ct_sip_parse_request	vmlinux	EXPORT_SYMBOL_GPL
-<<<<<<< HEAD
 0x6877d819	scsi_adjust_queue_depth	vmlinux	EXPORT_SYMBOL
 0x3ea865a7	s3c24xx_serial_remove	vmlinux	EXPORT_SYMBOL_GPL
 0x562c8cc2	mb_cache_entry_find_first	vmlinux	EXPORT_SYMBOL
@@ -1820,15 +1804,6 @@
 0x5203c7a1	ppp_unregister_compressor	vmlinux	EXPORT_SYMBOL
 0x2baba264	bio_split	vmlinux	EXPORT_SYMBOL
 0xfe9211b5	lock_rename	vmlinux	EXPORT_SYMBOL
-=======
-0xbb9d0fbc	scsi_adjust_queue_depth	vmlinux	EXPORT_SYMBOL
-0xd8e3f732	s3c24xx_serial_remove	vmlinux	EXPORT_SYMBOL_GPL
-0xa2a9960a	mb_cache_entry_find_first	vmlinux	EXPORT_SYMBOL
-0x26aa2627	tcp_unregister_congestion_control	vmlinux	EXPORT_SYMBOL_GPL
-0xdd2c145a	ppp_unregister_compressor	vmlinux	EXPORT_SYMBOL
-0xfdbf5fe7	bio_split	vmlinux	EXPORT_SYMBOL
-0xab5d94c3	lock_rename	vmlinux	EXPORT_SYMBOL
->>>>>>> CameraBugFix
 0xec7865cf	s3c2410_dma_ctrl	vmlinux	EXPORT_SYMBOL
 0x55d13561	v4l2_chip_match_i2c_client	vmlinux	EXPORT_SYMBOL
 0x4372a6c1	i2c_bit_add_bus	vmlinux	EXPORT_SYMBOL
@@ -2852,7 +2827,6 @@
 0x59759dac	install_exec_creds	vmlinux	EXPORT_SYMBOL
 0xf3a4f58c	sched_setscheduler	vmlinux	EXPORT_SYMBOL_GPL
 0x7a2a837d	strict_strtol	vmlinux	EXPORT_SYMBOL
-<<<<<<< HEAD
 0x226908ee	ip_mc_rejoin_group	vmlinux	EXPORT_SYMBOL
 0x3e215349	udp_prot	vmlinux	EXPORT_SYMBOL
 0x4880574c	nat_h245_hook	vmlinux	EXPORT_SYMBOL_GPL
@@ -2862,17 +2836,6 @@
 0x0d6fe647	sdio_reset_comm	vmlinux	EXPORT_SYMBOL
 0xe40601e6	v4l2_event_queue	vmlinux	EXPORT_SYMBOL_GPL
 0x93e3d5d2	mb_cache_shrink	vmlinux	EXPORT_SYMBOL
-=======
-0x07dd6e71	ip_mc_rejoin_group	vmlinux	EXPORT_SYMBOL
-0x14a4016b	udp_prot	vmlinux	EXPORT_SYMBOL
-0xfadf0467	nat_h245_hook	vmlinux	EXPORT_SYMBOL_GPL
-0xdc027f24	snd_ctl_register_ioctl	vmlinux	EXPORT_SYMBOL
-0xb571b2c7	mmc_card_sleep	vmlinux	EXPORT_SYMBOL
-0x672cca53	inet6_sk_rebuild_header	vmlinux	EXPORT_SYMBOL_GPL
-0x766ef985	sdio_reset_comm	vmlinux	EXPORT_SYMBOL
-0xd057d1bf	v4l2_event_queue	vmlinux	EXPORT_SYMBOL_GPL
-0x9f68ba53	mb_cache_shrink	vmlinux	EXPORT_SYMBOL
->>>>>>> CameraBugFix
 0xf1e98c74	avenrun	vmlinux	EXPORT_SYMBOL
 0x40a6f522	__arm_ioremap	vmlinux	EXPORT_SYMBOL
 0xaf50e76d	elf_set_personality	vmlinux	EXPORT_SYMBOL
@@ -2901,7 +2864,6 @@
 0x706d0660	blk_queue_update_dma_pad	vmlinux	EXPORT_SYMBOL
 0x9b1dd81b	open_exec	vmlinux	EXPORT_SYMBOL
 0x2f79f841	s5p_i2s_do_resume_for_rp	vmlinux	EXPORT_SYMBOL
-<<<<<<< HEAD
 0xf090e538	s5p_i2s_do_resume_stream	vmlinux	EXPORT_SYMBOL
 0xd0322635	mb_cache_entry_find_next	vmlinux	EXPORT_SYMBOL
 0xa551f59d	inode_init_owner	vmlinux	EXPORT_SYMBOL
@@ -2909,15 +2871,6 @@
 0x4f37251f	queue_delayed_work_on	vmlinux	EXPORT_SYMBOL_GPL
 0x77361cd9	pm_runtime_idle	vmlinux	EXPORT_SYMBOL_GPL
 0x3767d1b5	devres_open_group	vmlinux	EXPORT_SYMBOL_GPL
-=======
-0x723252ef	s5p_i2s_do_resume_stream	vmlinux	EXPORT_SYMBOL
-0xa1ddcf06	mb_cache_entry_find_next	vmlinux	EXPORT_SYMBOL
-0xb21c2058	inode_init_owner	vmlinux	EXPORT_SYMBOL
-0xa792e7dc	rt_mutex_destroy	vmlinux	EXPORT_SYMBOL_GPL
-0x07e406d0	queue_delayed_work_on	vmlinux	EXPORT_SYMBOL_GPL
-0xb96a188a	pm_runtime_idle	vmlinux	EXPORT_SYMBOL_GPL
-0x8d4acc88	devres_open_group	vmlinux	EXPORT_SYMBOL_GPL
->>>>>>> CameraBugFix
 0x5b19634d	div_s64_rem	vmlinux	EXPORT_SYMBOL
 0x1b29d25e	__set_page_dirty_nobuffers	vmlinux	EXPORT_SYMBOL
 0xd7d79132	put_online_cpus	vmlinux	EXPORT_SYMBOL_GPL
@@ -3686,7 +3639,6 @@
 0x6716169e	skb_store_bits	vmlinux	EXPORT_SYMBOL
 0x5f428248	page_cache_sync_readahead	vmlinux	EXPORT_SYMBOL_GPL
 0x6892088c	unregister_pm_notifier	vmlinux	EXPORT_SYMBOL_GPL
-<<<<<<< HEAD
 0x6b03a8eb	pl330_add	vmlinux	EXPORT_SYMBOL
 0x60f18029	inet_unregister_protosw	vmlinux	EXPORT_SYMBOL
 0x511b7d2d	snd_soc_get_volsw	vmlinux	EXPORT_SYMBOL_GPL
@@ -3696,17 +3648,6 @@
 0xbb5c6b8e	mb_cache_entry_free	vmlinux	EXPORT_SYMBOL
 0xe6b3dba2	ethtool_op_get_flags	vmlinux	EXPORT_SYMBOL
 0x0669a4c9	blkcipher_walk_phys	vmlinux	EXPORT_SYMBOL_GPL
-=======
-0x38a6ee35	pl330_add	vmlinux	EXPORT_SYMBOL
-0x1e5a25f3	inet_unregister_protosw	vmlinux	EXPORT_SYMBOL
-0x533c9de1	snd_soc_get_volsw	vmlinux	EXPORT_SYMBOL_GPL
-0x07f50009	snd_soc_put_volsw	vmlinux	EXPORT_SYMBOL_GPL
-0x79701dd4	i2c_smbus_read_byte	vmlinux	EXPORT_SYMBOL
-0x81688ba7	platform_create_bundle	vmlinux	EXPORT_SYMBOL_GPL
-0xfd941602	mb_cache_entry_free	vmlinux	EXPORT_SYMBOL
-0xff4a8a7e	ethtool_op_get_flags	vmlinux	EXPORT_SYMBOL
-0xab120ab1	blkcipher_walk_phys	vmlinux	EXPORT_SYMBOL_GPL
->>>>>>> CameraBugFix
 0x3dfc897c	seq_hlist_start_head	vmlinux	EXPORT_SYMBOL
 0xc1b679ed	clocksource_change_rating	vmlinux	EXPORT_SYMBOL
 0x18402be0	hci_conn_check_link_mode	vmlinux	EXPORT_SYMBOL
@@ -3924,21 +3865,12 @@
 0x6e224a7a	need_conntrack	vmlinux	EXPORT_SYMBOL_GPL
 0x4a358252	__bitmap_subset	vmlinux	EXPORT_SYMBOL
 0x1c1af916	set_normalized_timespec	vmlinux	EXPORT_SYMBOL
-<<<<<<< HEAD
 0x1bd2eb8e	eth_type_trans	vmlinux	EXPORT_SYMBOL
 0xd5195a91	debugfs_create_blob	vmlinux	EXPORT_SYMBOL_GPL
 0xf61f9043	mb_cache_entry_get	vmlinux	EXPORT_SYMBOL
 0xeed35c8d	vm_insert_mixed	vmlinux	EXPORT_SYMBOL
 0x827f8554	send_sig	vmlinux	EXPORT_SYMBOL
 0xc8301866	tcp_shutdown	vmlinux	EXPORT_SYMBOL
-=======
-0x30bf786e	eth_type_trans	vmlinux	EXPORT_SYMBOL
-0xc0584b7e	debugfs_create_blob	vmlinux	EXPORT_SYMBOL_GPL
-0xb4ef9268	mb_cache_entry_get	vmlinux	EXPORT_SYMBOL
-0x30e18949	vm_insert_mixed	vmlinux	EXPORT_SYMBOL
-0xf48fa4fb	send_sig	vmlinux	EXPORT_SYMBOL
-0xed3b7d5b	tcp_shutdown	vmlinux	EXPORT_SYMBOL
->>>>>>> CameraBugFix
 0x602c96f0	copy_to_user_fromio	vmlinux	EXPORT_SYMBOL
 0x5667d8e8	switch_dev_register	vmlinux	EXPORT_SYMBOL_GPL
 0xfe3e13a2	usb_stor_set_xfer_buf	vmlinux	EXPORT_SYMBOL_GPL
@@ -4348,7 +4280,6 @@
 0x65422496	hid_dump_input	vmlinux	EXPORT_SYMBOL_GPL
 0x1b5e2363	dm_requeue_unmapped_request	vmlinux	EXPORT_SYMBOL_GPL
 0xfcfa6075	v4l2_int_ioctl_1	vmlinux	EXPORT_SYMBOL_GPL
-<<<<<<< HEAD
 0xf61509c4	usb_disable_autosuspend	vmlinux	EXPORT_SYMBOL_GPL
 0x77a4e175	usb_get_dev	vmlinux	EXPORT_SYMBOL_GPL
 0x2ae31caf	mb_cache_create	vmlinux	EXPORT_SYMBOL
@@ -4362,21 +4293,6 @@
 0x6d926e19	blk_alloc_queue	vmlinux	EXPORT_SYMBOL
 0xd5263820	mb_cache_destroy	vmlinux	EXPORT_SYMBOL
 0xd6e9d026	get_gendisk	vmlinux	EXPORT_SYMBOL
-=======
-0xee4e2f08	usb_disable_autosuspend	vmlinux	EXPORT_SYMBOL_GPL
-0x4451ca55	usb_get_dev	vmlinux	EXPORT_SYMBOL_GPL
-0x588614f6	mb_cache_create	vmlinux	EXPORT_SYMBOL
-0x33bd0954	inotify_find_update_watch	vmlinux	EXPORT_SYMBOL_GPL
-0x507e0beb	iunique	vmlinux	EXPORT_SYMBOL
-0x01a4ea6d	unregister_die_notifier	vmlinux	EXPORT_SYMBOL_GPL
-0x5614b010	xfrm_policy_walk_done	vmlinux	EXPORT_SYMBOL
-0xde62faf0	inet_dgram_ops	vmlinux	EXPORT_SYMBOL
-0x836aed82	input_release_device	vmlinux	EXPORT_SYMBOL
-0xc02abbb2	scsi_put_command	vmlinux	EXPORT_SYMBOL
-0x20c2d8ee	blk_alloc_queue	vmlinux	EXPORT_SYMBOL
-0xd5263820	mb_cache_destroy	vmlinux	EXPORT_SYMBOL
-0x79f76841	get_gendisk	vmlinux	EXPORT_SYMBOL
->>>>>>> CameraBugFix
 0x99bfbe39	get_unused_fd	vmlinux	EXPORT_SYMBOL
 0xef6eba41	proc_doulongvec_minmax	vmlinux	EXPORT_SYMBOL
 0x0bfdb509	tcp_proc_unregister	vmlinux	EXPORT_SYMBOL
@@ -4456,13 +4372,8 @@
 0x225ef04c	usb_ifnum_to_if	vmlinux	EXPORT_SYMBOL_GPL
 0x4f1ad206	debugfs_create_x16	vmlinux	EXPORT_SYMBOL_GPL
 0x061651be	strcat	vmlinux	EXPORT_SYMBOL
-<<<<<<< HEAD
 0x23168898	inet6_destroy_sock	vmlinux	EXPORT_SYMBOL_GPL
 0x8f1442b4	mb_cache_entry_release	vmlinux	EXPORT_SYMBOL
-=======
-0xdc0080a4	inet6_destroy_sock	vmlinux	EXPORT_SYMBOL_GPL
-0x714dae47	mb_cache_entry_release	vmlinux	EXPORT_SYMBOL
->>>>>>> CameraBugFix
 0x74c97f9c	_raw_spin_unlock_irqrestore	vmlinux	EXPORT_SYMBOL
 0xcb9b0e18	usb_gadget_unregister_driver	vmlinux	EXPORT_SYMBOL
 0xdc63049e	crypto_register_shash	vmlinux	EXPORT_SYMBOL_GPL
