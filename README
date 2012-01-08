@@ -1,5 +1,5 @@
-Homura_kernel rev19
-すげーいじった。
+Homura_kernel rev19a
+カメラ直った？
 
 1.CPU scaling level is changed from 5 to 17
 (1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -18,29 +18,32 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 12.supports Backlight Notification
 13.Automation tether_dun_required=0
 14.Include TweakGS2 ver0.4.0 Beta2 thx sakuramilk & CWM Manager 2.0 & AppWidgetPicker-1.2.3(DCM)
-　 & SharedAppManager V0.0.2 THX! Ma34s (Dualboot) 
+　 & SharedAppManager V0.0.4 THX! Ma34s (Dualboot) 
 15.gcc version 4.5.2(Sourcery G++Lite 2011.03-42)
 16.supports Tegrak Touch Move
 https://market.android.com/details?id=com.tegrak.touchmove
 17.supports Tegrak 2nd Core
 https://market.android.com/details?id=com.tegrak.secondcore
 18.Change Homura Chan Boot logo
-19.Change GlaxyNote MediaDriver
-20.Carrier indicate 1line from 2ch@SC02B root Thread
-21.Bravia Engine
-22.supports Lulzactive
+19.Carrier indicate 1line from 2ch@SC02B root Thread
+20.Bravia Engine
+21.supports Lulzactive
 https://market.android.com/details?id=com.tegrak.lulzactive
-23.supports Voodoo LOUDER
+22.supports Voodoo LOUDER
 https://market.android.com/details?id=org.projectvoodoo.louder
-24.Ultra-Optimised EXT4 filesystem (from 3.2 linux kernel)
-25.etc...etc..
+23.Ultra-Optimised EXT4 filesystem (from 3.2 linux kernel)
+24.JHash3
+25.Multi-core scheduler
+26.ARM cpu topology definition
+27.Disabled all the big debugging
+28.New ARM Mali-400 Drivers (November '11)
+29.AFTR ARM Idle Mode
+30.800MHz Sleep Death Fix
+31.etc...etc..
+↑とりあえず覚えてる範囲で全部書いた。
 
 前回との修正点
-カーネル圧縮をXZに変更(LZMAより、かなりちっちゃくなった）
-ext4最適化（変わった？）
-また、GalaxyNoteから色々マージ（NoteカワイイヨNote)
-Multi-core scheduler
-その他拾い食い山盛り。
+前回のGalaxyNoteマージを巻き戻し。（カメラ修正）←すまなかった…
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
@@ -58,6 +61,6 @@ chown 0.0 /system/lib/hw/lights.smdkv310.so
 reboot
 
 既知の問題
-多分、今回はスゲーある！！（キリッ
-すげー弄ったから。
+多分、まだ問題はスゲーある！！（キリ
 
+githubのコミットログ汚くなったので、あまり見ないで＞＜
