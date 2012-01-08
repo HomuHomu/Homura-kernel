@@ -548,6 +548,9 @@
 0x970a7fb7	xc5000_attach	vmlinux	EXPORT_SYMBOL
 0x45661774	scsi_setup_blk_pc_cmnd	vmlinux	EXPORT_SYMBOL
 0x4de1ceac	kobject_uevent_env	vmlinux	EXPORT_SYMBOL_GPL
+<<<<<<< HEAD
+>>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
+=======
 >>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
 0x7d02520f	_raw_read_unlock	vmlinux	EXPORT_SYMBOL
 0x7426f76c	init_timer_key	vmlinux	EXPORT_SYMBOL
@@ -1314,9 +1317,12 @@
 0xc4a545a1	usb_stor_disconnect	vmlinux	EXPORT_SYMBOL_GPL
 0x8ffdb3b8	crc16	vmlinux	EXPORT_SYMBOL
 <<<<<<< HEAD
+<<<<<<< HEAD
 0x61016380	mb_cache_entry_insert	vmlinux	EXPORT_SYMBOL
 0x24cc62b4	kallsyms_on_each_symbol	vmlinux	EXPORT_SYMBOL_GPL
 =======
+=======
+>>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
 0x602b0686	kallsyms_on_each_symbol	vmlinux	EXPORT_SYMBOL_GPL
 >>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
 0xd2a8caf0	work_on_cpu	vmlinux	EXPORT_SYMBOL_GPL
@@ -2868,6 +2874,9 @@
 0x672cca53	inet6_sk_rebuild_header	vmlinux	EXPORT_SYMBOL_GPL
 0x766ef985	sdio_reset_comm	vmlinux	EXPORT_SYMBOL
 0xd057d1bf	v4l2_event_queue	vmlinux	EXPORT_SYMBOL_GPL
+<<<<<<< HEAD
+>>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
+=======
 >>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
 0xf1e98c74	avenrun	vmlinux	EXPORT_SYMBOL
 0x40a6f522	__arm_ioremap	vmlinux	EXPORT_SYMBOL
@@ -4452,6 +4461,9 @@
 0x8f1442b4	mb_cache_entry_release	vmlinux	EXPORT_SYMBOL
 =======
 0xdc0080a4	inet6_destroy_sock	vmlinux	EXPORT_SYMBOL_GPL
+<<<<<<< HEAD
+>>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
+=======
 >>>>>>> parent of 02f7c35... Some merges GalaxyNote source more
 0x74c97f9c	_raw_spin_unlock_irqrestore	vmlinux	EXPORT_SYMBOL
 0xcb9b0e18	usb_gadget_unregister_driver	vmlinux	EXPORT_SYMBOL
