@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Wed Jan 11 02:54:35 2012
+ * Wed Jan 11 04:30:42 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -193,6 +193,7 @@
 #define CONFIG_V4L_USB_DRIVERS 1
 #define CONFIG_WEXT_CORE 1
 #define CONFIG_NLS 1
+#define CONFIG_SCHED_AUTOGROUP 1
 #define CONFIG_S3C_MEM 1
 #define CONFIG_HID_MAGICMOUSE 1
 #define CONFIG_I2C_GPIO 1
