@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Wed Jan 11 05:38:11 2012
+ * Wed Jan 11 07:14:17 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -306,6 +306,7 @@
 #define CONFIG_FB_S3C_LD9040 1
 #define CONFIG_TREE_RCU 1
 #define CONFIG_LBDAF 1
+#define CONFIG_GPU_CLOCK_CONTROL 1
 #define CONFIG_INET_XFRM_MODE_TRANSPORT 1
 #define CONFIG_CRYPTO_MD5 1
 #define CONFIG_VIDEO_TSI 1
