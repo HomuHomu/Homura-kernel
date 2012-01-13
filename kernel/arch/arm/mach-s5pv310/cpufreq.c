@@ -827,55 +827,55 @@ static struct cpufreq_voltage_table s5pv310_lookup_volt_table[] = {
 	}, {
 		.index		= L4,
 		.arm_volt	= 1250000,
-		.int_volt	= 1100000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L5,
 		.arm_volt	= 1200000,
-		.int_volt	= 1100000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L6,
-		.arm_volt	= 1200000,
-		.int_volt	= 1100000,
+		.arm_volt	= 1150000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L7,
-		.arm_volt	= 1150000,
-		.int_volt	= 1100000,
+		.arm_volt	= 1125000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L8,
 		.arm_volt	= 1100000,
-		.int_volt	= 1100000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L9,
-		.arm_volt	= 1075000,
-		.int_volt	= 1000000,
+		.arm_volt	= 1050000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L10,
-		.arm_volt	= 1050000,
-		.int_volt	= 1000000,
+		.arm_volt	= 1025000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L11,
-		.arm_volt	= 1025000,
-		.int_volt	= 1000000,
+		.arm_volt	= 975000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L12,
-		.arm_volt	= 1000000,
-		.int_volt	= 1000000,
+		.arm_volt	= 950000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L13,
-		.arm_volt	= 975000,
-		.int_volt	= 1000000,
+		.arm_volt	= 900000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L14,
-		.arm_volt	= 950000,
-		.int_volt	= 1000000,
+		.arm_volt	= 875000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L15,
-		.arm_volt	= 925000,
-		.int_volt	= 1000000,
+		.arm_volt	= 850000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L16,
-		.arm_volt	= 900000,
-		.int_volt	= 1000000,
+		.arm_volt	= 825000,
+		.int_volt	= 850000,
 	},
 };
 
@@ -954,55 +954,55 @@ static struct cpufreq_voltage_table s5pv310_volt_table[CPUFREQ_LEVEL_END] = {
 	}, {
 		.index		= L4,
 		.arm_volt	= 1250000,
-		.int_volt	= 1100000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L5,
 		.arm_volt	= 1200000,
-		.int_volt	= 1100000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L6,
-		.arm_volt	= 1200000,
-		.int_volt	= 1100000,
+		.arm_volt	= 1150000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L7,
-		.arm_volt	= 1150000,
-		.int_volt	= 1100000,
+		.arm_volt	= 1125000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L8,
 		.arm_volt	= 1100000,
-		.int_volt	= 1100000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L9,
-		.arm_volt	= 1075000,
-		.int_volt	= 1000000,
+		.arm_volt	= 1050000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L10,
-		.arm_volt	= 1050000,
-		.int_volt	= 1000000,
+		.arm_volt	= 1025000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L11,
-		.arm_volt	= 1025000,
-		.int_volt	= 1000000,
+		.arm_volt	= 975000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L12,
-		.arm_volt	= 1000000,
-		.int_volt	= 1000000,
+		.arm_volt	= 950000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L13,
-		.arm_volt	= 975000,
-		.int_volt	= 1000000,
+		.arm_volt	= 900000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L14,
-		.arm_volt	= 950000,
-		.int_volt	= 1000000,
+		.arm_volt	= 875000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L15,
-		.arm_volt	= 925000,
-		.int_volt	= 1000000,
+		.arm_volt	= 850000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L16,
-		.arm_volt	= 900000,
-		.int_volt	= 1000000,
+		.arm_volt	= 825000,
+		.int_volt	= 850000,
 	},
 };
 #else
@@ -1026,55 +1026,55 @@ static struct cpufreq_voltage_table s5pv310_volt_table[CPUFREQ_LEVEL_END] = {
 	}, {
 		.index		= L4,
 		.arm_volt	= 1250000,
-		.int_volt	= 1100000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L5,
 		.arm_volt	= 1200000,
-		.int_volt	= 1100000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L6,
-		.arm_volt	= 1200000,
-		.int_volt	= 1100000,
+		.arm_volt	= 1150000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L7,
-		.arm_volt	= 1150000,
-		.int_volt	= 1100000,
+		.arm_volt	= 1125000,
+		.int_volt	= 1000000,
 	}, {
 		.index		= L8,
 		.arm_volt	= 1100000,
-		.int_volt	= 1100000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L9,
-		.arm_volt	= 1075000,
-		.int_volt	= 1000000,
+		.arm_volt	= 1050000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L10,
-		.arm_volt	= 1050000,
-		.int_volt	= 1000000,
+		.arm_volt	= 1025000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L11,
-		.arm_volt	= 1025000,
-		.int_volt	= 1000000,
+		.arm_volt	= 975000,
+		.int_volt	= 950000,
 	}, {
 		.index		= L12,
-		.arm_volt	= 1000000,
-		.int_volt	= 1000000,
+		.arm_volt	= 950000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L13,
-		.arm_volt	= 975000,
-		.int_volt	= 1000000,
+		.arm_volt	= 900000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L14,
-		.arm_volt	= 950000,
-		.int_volt	= 1000000,
+		.arm_volt	= 875000,
+		.int_volt	= 900000,
 	}, {
 		.index		= L15,
-		.arm_volt	= 925000,
-		.int_volt	= 1000000,
-	},{
+		.arm_volt	= 850000,
+		.int_volt	= 900000,
+	}, {
 		.index		= L16,
-		.arm_volt	= 900000,
-		.int_volt	= 1000000,
+		.arm_volt	= 825000,
+		.int_volt	= 850000,
 	},
 };
 #endif
