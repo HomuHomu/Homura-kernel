@@ -104,7 +104,7 @@ enum cpufreq_level_index{
 static struct cpufreq_frequency_table s5pv310_lookup_freq_table[] = {
 	{L0, 1600*1000},
 	{L1, 1500*1000},
-	{L2, 1120*1000},
+	{L2, 1400*1000},
 	{L3, 1100*1000},
 	{L4, 1056*1000},
 	{L5, 1024*1000},
@@ -134,7 +134,7 @@ static unsigned int clkdiv_cpu0_lookup[][7] = {
 	/* ARM L1: 1500MHz */
 	{ 0, 3, 7, 3, 4, 1, 7 },
 
-	/* ARM L2: 1120MHz */
+	/* ARM L2: 1400MHz */
 	{ 0, 3, 7, 3, 4, 1, 7 },
 
 	/* ARM L3: 1100MHz */
@@ -190,7 +190,7 @@ static unsigned int clkdiv_cpu1_lookup[][2] = {
 	/* ARM L1: 1500MHz */
 	{ 5, 0 },
 
-	/* ARM L2: 1120MHz */
+	/* ARM L2: 1400MHz */
 	{ 5, 0 },
 
 	/* ARM L3: 1100MHz */
@@ -240,7 +240,7 @@ static unsigned int clkdiv_cpu1_lookup[][2] = {
 static struct cpufreq_frequency_table s5pv310_freq_table[] = {
 	{L0, 1600*1000},
 	{L1, 1500*1000},
-	{L2, 1120*1000},
+	{L2, 1400*1000},
 	{L3, 1100*1000},
 	{L4, 1056*1000},
 	{L5, 1024*1000},
@@ -354,7 +354,7 @@ static unsigned int clkdiv_cpu0[CPUFREQ_LEVEL_END][7] = {
 	/* ARM L1: 1500MHz */
 	{ 0, 3, 7, 3, 4, 1, 7 },
 
-	/* ARM L2: 1120MHz */
+	/* ARM L2: 1400MHz */
 	{ 0, 3, 7, 3, 4, 1, 7 },
 
 	/* ARM L3: 1100MHz */
@@ -410,7 +410,7 @@ static unsigned int clkdiv_cpu1[CPUFREQ_LEVEL_END][2] = {
 	/* ARM L1: 1500MHz */
 	{ 5, 0 },
 
-	/* ARM L2: 1120MHz */
+	/* ARM L2: 1400MHz */
 	{ 5, 0 },
 
 	/* ARM L3: 1100MHz */
@@ -818,7 +818,7 @@ static struct cpufreq_voltage_table s5pv310_lookup_volt_table[] = {
 		.int_volt	= 1100000,
 	}, {
 		.index		= L2,
-		.arm_volt	= 1250000,
+		.arm_volt	= 1350000,
 		.int_volt	= 1100000,
 	}, {
 		.index		= L3,
@@ -886,8 +886,8 @@ static unsigned int s5pv310_lookup_apll_pms_table[CPUFREQ_LEVEL_END] = {
 	/* APLL FOUT L1: 1500MHz */
 	((375<<16)|(6<<8)|(0x1)),
 
-	/* APLL FOUT L2: 1120MHz */
-	((280<<16)|(6<<8)|(0x1)),
+	/* APLL FOUT L2: 1400MHz */
+	((175<<16)|(3<<8)|(0x1)),
 
 	/* APLL FOUT L3: 1100MHz */
 	((275<<16)|(6<<8)|(0x1)),
@@ -945,7 +945,7 @@ static struct cpufreq_voltage_table s5pv310_volt_table[CPUFREQ_LEVEL_END] = {
 		.int_volt	= 1100000,
 	}, {
 		.index		= L2,
-		.arm_volt	= 1250000,
+		.arm_volt	= 1350000,
 		.int_volt	= 1100000,
 	}, {
 		.index		= L3,
@@ -1017,7 +1017,7 @@ static struct cpufreq_voltage_table s5pv310_volt_table[CPUFREQ_LEVEL_END] = {
 		.int_volt	= 1100000,
 	}, {
 		.index		= L2,
-		.arm_volt	= 1250000,
+		.arm_volt	= 1350000,
 		.int_volt	= 1100000,
 	}, {
 		.index		= L3,
@@ -1085,8 +1085,8 @@ static unsigned int s5pv310_apll_pms_table[CPUFREQ_LEVEL_END] = {
 	/* APLL FOUT L1: 1500MHz */
 	((375<<16)|(6<<8)|(0x1)),
 
-	/* APLL FOUT L2: 1120MHz */
-	((280<<16)|(6<<8)|(0x1)),
+	/* APLL FOUT L2: 1400MHz */
+	((175<<16)|(3<<8)|(0x1)),
 
 	/* APLL FOUT L3: 1100MHz */
 	((275<<16)|(6<<8)|(0x1)),
@@ -2852,7 +2852,7 @@ static void s5pv310_asv_set_voltage(void)
 	case 1500000:
 		asv_arm_index = 1;
 		break;
-	case 1120000:
+	case 1400000:
 		asv_arm_index = 2;
 		break;
 	case 1100000:
