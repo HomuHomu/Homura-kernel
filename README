@@ -41,17 +41,17 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 30.800MHz Sleep Death Fix
 31.SLQB allocator(New!)
 32.Automatic process group scheduler(New!)
-33.Supports CPUFreq VoltageColtrol for setCPU(New!)
-34.Supports GPUFreq VoltageColtrol for TweakGS2(again)
+33.Supports CPUFreq VoltageControl for setCPU(New!)
+34.Supports GPUFreq VoltageControl for TweakGS2(again)
 35.UnderVoltage arm And Internal
 35.etc...etc..
 
 前回との修正点
 SLQB allocator
 Automatic process group scheduler
-CPUFreq VoltageColtrol(setCPU)
-GPUFreq VoltageColtrol(TweakGS2)
-VoltageColtrolはTegrakモジュールが走ると制御がTegrak側に移る）
+CPUFreq VoltageControl(setCPU)
+GPUFreq VoltageControl(TweakGS2)
+VoltageControlはTegrakモジュールが走ると制御がTegrak側に移る）
 Default OC (1.6GHz~)
 Arm And Internal UnderVoltage
 (eg.settings.pngの+25mv程度）
