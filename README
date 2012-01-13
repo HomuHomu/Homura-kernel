@@ -1,8 +1,8 @@
-Homura_kernel rev19a
-カメラ直った？
+Homura_kernel rev20
+テストできない。
 
 1.CPU scaling level is changed from 5 to 17
-(1204/1152/1120/1100/1056/1024/1000/900/800/700/600/500/400/300/200/100/50MHz)
+(1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
 2.compatible with Tegrak Overclock (supports changing frequencies over 1000MHz)
 https://market.android.com/details?id=com.tegrak.overclock.ultimate
 3.supports CIFS
@@ -36,14 +36,28 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 25.Multi-core scheduler
 26.ARM cpu topology definition
 27.Disabled all the big debugging
-28.New ARM Mali-400 Drivers (November '11)
+28.New ARM Mali-400 Drivers(From GalaxyNote)
 29.AFTR ARM Idle Mode
 30.800MHz Sleep Death Fix
-31.etc...etc..
-↑とりあえず覚えてる範囲で全部書いた。
+31.SLQB allocator(New!)
+32.Automatic process group scheduler(New!)
+33.Supports CPUFreq VoltageColtrol for setCPU(New!)
+34.Supports GPUFreq VoltageColtrol for TweakGS2(again)
+35.UnderVoltage arm And Internal
+35.etc...etc..
 
 前回との修正点
-前回のGalaxyNoteマージを巻き戻し。（カメラ修正）←すまなかった…
+SLQB allocator
+Automatic process group scheduler
+CPUFreq VoltageColtrol(setCPU)
+GPUFreq VoltageColtrol(TweakGS2)
+VoltageColtrolはTegrakモジュールが走ると制御がTegrak側に移る）
+Default OC (1.6GHz~)
+Arm And Internal UnderVoltage
+(eg.settings.pngの+25mv程度）
+init.rc OMKL4最適化
+SingleBootのinit.rcを修正
+※起動出来なかったですよね？すみませんでした。
 
 AOSPのBLNについて
 /vendor/files/に入ってるのでBLN使いたい人は
@@ -61,6 +75,4 @@ chown 0.0 /system/lib/hw/lights.smdkv310.so
 reboot
 
 既知の問題
-多分、まだ問題はスゲーある！！（キリ
-
-githubのコミットログ汚くなったので、あまり見ないで＞＜
+もう持ってないから、わからない。と言ってみるテスト
