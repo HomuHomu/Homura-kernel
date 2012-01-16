@@ -2817,10 +2817,10 @@ static int __devinit mxt224_probe(struct i2c_client *client, const struct i2c_de
 	}
 
 	if (data->family_id == 0x80) {	/*  : MXT-224 */
-		tsp_config = pdata->config;
+		tsp_config = (u8 **)pdata->config;
 		printk(KERN_ERR "[TSP] TSP chip is MXT224\n");
 	} else if (data->family_id == 0x81)  {	/* tsp_family_id - 0x81 : MXT-224E */
-		tsp_config = pdata->config_e;
+		tsp_config = (u8 **)pdata->config_e;
 		printk(KERN_ERR "[TSP] TSP chip is MXT224-E\n");
 		atchcalst = 4;/*9*/
 		atchcalsthr = 35;/*35*/

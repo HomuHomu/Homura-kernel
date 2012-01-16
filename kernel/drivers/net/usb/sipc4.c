@@ -298,15 +298,16 @@ static int sipc4_check_hdlc_start(struct sipc4_rx_data *data, char *buf)
 static void print_buf(const char *buf, size_t len, const char* tag)
 {
 	int i;
-	char *b = buf;
+	const char *b = buf;
 
 	for(i=0;i < len/16 + 1; i++) {
 		printk(KERN_DEBUG
 		"%s:%02X %02X %02X %02X  %02X %02X %02X %02X  "
 		"%02X %02X %02X %02X  %02X %02X %02X %02X\n",
-		(tag) ? tag : "buf", *b++, *b++, *b++, *b++, *b++, *b++, *b++,
-		*b++, *b++, *b++, *b++, *b++, *b++, *b++, *b++, *b++
+		(tag) ? tag : "buf", *(b+0), *(b+1), *(b+2), *(b+3), *(b+4), *(b+5), *(b+6), *(b+7),
+		                     *(b+8), *(b+9), *(b+10), *(b+11), *(b+12), *(b+13), *(b+14), *(b+15)
 		);
+		b+=16;
 	}
 }
 
@@ -501,7 +502,7 @@ static int sipc4_hdlc_rx(struct sipc4_rx_data *data)
 	int rest = data->size;
 	char *buf = page_address(data->page);
 	int len;
-	int err;
+	int err = -ERANGE;
 
 	if (rest <= 0)
 		goto end;
