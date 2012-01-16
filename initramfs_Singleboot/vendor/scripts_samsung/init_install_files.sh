@@ -1,45 +1,50 @@
-#!/system/bin/sh
+#!/sbin/busybox sh
 DEST=/system/xbin/su
 
-mount -o remount,rw /system /system
+/sbin/busybox mount -o remount,rw /system /system
 
-rm /system/bin/su
-rm /system/xbin/su
-cat /vendor/files/su-3.0.3 > $DEST
-chown 0.0 /system/xbin/su
-chmod 6755 /system/xbin/su
+/sbin/busybox rm /system/bin/su
+/sbin/busybox rm /system/xbin/su
+/sbin/busybox cat /vendor/files/su-3.0.3 > $DEST
+/sbin/busybox chown 0.0 /system/xbin/su
+/sbin/busybox chmod 6755 /system/xbin/su
 
-rm /system/lib/hw/lights.SC-02C.so
-cat /vendor/files/lights.bln.so > /system/lib/hw/lights.SC-02C.so
-chown 0.0 /system/lib/hw/lights.SC-02C.so
-chmod 644 /system/lib/hw/lights.SC-02C.so
+lightsmd5sum=`/sbin/busybox md5sum /system/lib/hw/lights.SC-02C.so | /sbin/busybox awk '{print $1}'`
+blnlightsmd5sum=`/sbin/busybox md5sum /vendor/files/lights.bln.so | /sbin/busybox awk '{print $1}'`
+if [ "${lightsmd5sum}a" != "${blnlightsmd5sum}a" ]; then
+    echo "Copying liblights"
+    /sbin/busybox mv /system/lib/hw/lights.SC-02C.so /system/lib/hw/lights.SC-02C.so.BAK
+    /sbin/busybox cp /vendor/files/lights.bln.so /system/lib/hw/lights.SC-02C.so
+    /sbin/busybox chown 0.0 /system/lib/hw/lights.SC-02C.so
+    /sbin/busybox chmod 644 /system/lib/hw/lights.SC-02C.so
+fi;
 
-rm /system/app/CWMManager.apk
-rm /data/dalvik-cache/*CWMManager*
-rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
-cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
-chown 0.0 /system/app/CWMManager.apk
-chmod 644 /system/app/CWMManager.apk
+/sbin/busybox rm /system/app/CWMManager.apk
+/sbin/busybox rm /data/dalvik-cache/*CWMManager*
+/sbin/busybox rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
+/sbin/busybox cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
+/sbin/busybox chown 0.0 /system/app/CWMManager.apk
+/sbin/busybox chmod 644 /system/app/CWMManager.apk
 
-rm /system/app/TweakGS2.apk
-rm /data/dalvik-cache/*TweakGS2*
-rm /data/app/net.sakuramilk.TweakGS2*.apk
-cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
-chown 0.0 /system/app/TweakGS2.apk
-chmod 644 /system/app/TweakGS2.apk
+/sbin/busybox rm /system/app/TweakGS2.apk
+/sbin/busybox rm /data/dalvik-cache/*TweakGS2*
+/sbin/busybox rm /data/app/net.sakuramilk.TweakGS2*.apk
+/sbin/busybox cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
+/sbin/busybox chown 0.0 /system/app/TweakGS2.apk
+/sbin/busybox chmod 644 /system/app/TweakGS2.apk
 
-rm /system/app/AppWidgetPicker.apk
-rm /data/dalvik-cache/*AppWidgetPicker*
-cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
-chown 0.0 /system/app/AppWidgetPicker.apk
-chmod 644 /system/app/AppWidgetPicker.apk
+/sbin/busybox rm /system/app/AppWidgetPicker.apk
+/sbin/busybox rm /data/dalvik-cache/*AppWidgetPicker*
+/sbin/busybox cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
+/sbin/busybox chown 0.0 /system/app/AppWidgetPicker.apk
+/sbin/busybox chmod 644 /system/app/AppWidgetPicker.apk
 
 # copy sqlite3
-cat /vendor/files/sqlite3 > /system/bin/sqlite3
+/sbin/busybox cat /vendor/files/sqlite3 > /system/bin/sqlite3
 
 # set sqlite3 permissions
-chown 0.2000 /system/bin/sqlite3
-chmod 775 /system/bin/sqlite3
+/sbin/busybox chown 0.2000 /system/bin/sqlite3
+/sbin/busybox chmod 775 /system/bin/sqlite3
 
 # tether_dun_required 0
 r=`/system/bin/sqlite3 /data/data/com.android.providers.settings/databases/settings.db "select * from secure where name='tether_dun_required';"`
@@ -48,23 +53,23 @@ if [ "$r" == "" ]; then
 else
 /system/bin/sqlite3 /data/data/com.android.providers.settings/databases/settings.db "update secure set value='0' where name='tether_dun_required';"
 fi
-rm /system/bin/sqlite3
+/sbin/busybox rm /system/bin/sqlite3
 
 # Bravia Engine Install
-rm /system/etc/be_movie
-rm /system/etc/be_photo
-cat /vendor/files/be_movie > /system/etc/be_movie
-cat /vendor/files/be_photo > /system/etc/be_photo
-chmod 0755 /system/etc/be_movie
-chmod 0755 /system/etc/be_photo
-chown 0.0 /system/etc/be_movie
-chown 0.0 /system/etc/be_photo
+/sbin/busybox rm /system/etc/be_movie
+/sbin/busybox rm /system/etc/be_photo
+/sbin/busybox cat /vendor/files/be_movie > /system/etc/be_movie
+/sbin/busybox cat /vendor/files/be_photo > /system/etc/be_photo
+/sbin/busybox chmod 0755 /system/etc/be_movie
+/sbin/busybox chmod 0755 /system/etc/be_photo
+/sbin/busybox chown 0.0 /system/etc/be_movie
+/sbin/busybox chown 0.0 /system/etc/be_photo
 
 # Carrier indicate 1line
-rm  /system/etc/spn-conf.xml
-cat /vendor/files/spn-conf.xml > /system/etc/spn-conf.xml
-chown 0.0 /system/etc/spn-conf.xml
-chmod 644 /system/etc/spn-conf.xml
+/sbin/busybox rm  /system/etc/spn-conf.xml
+/sbin/busybox cat /vendor/files/spn-conf.xml > /system/etc/spn-conf.xml
+/sbin/busybox chown 0.0 /system/etc/spn-conf.xml
+/sbin/busybox chmod 644 /system/etc/spn-conf.xml
 
-mount -o remount,ro /system /system
+/sbin/busybox mount -o remount,ro /system /system
 
