@@ -2,7 +2,7 @@
 # EFS Backup script
 
 if [ ! -d /sdcard/Homura ]; then
-	mkdir  /sdcard/Homura
+  /sbin/busybox mkdir  /sdcard/Homura
 else
 	echo "Homura folder already exists"
 fi;
