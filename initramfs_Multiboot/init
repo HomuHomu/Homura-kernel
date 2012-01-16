@@ -1,0 +1,38 @@
+#!/sbin/busybox sh
+
+# extract block devices
+/sbin/busybox tar xvf /misc/dev.tar
+
+# check boot partition
+/sbin/busybox mount -t ext4 /dev/block/mmcblk0p10 /xdata
+
+
+
+if [ "`/sbin/busybox grep tertiary /xdata/boot.conf`" ]; then
+	  BOOT_PARTITION=mmcblk1p2
+	  BOOT_ROM=tertiary
+else
+	if [ "`/sbin/busybox grep secondary /xdata/boot.conf`" ]; then
+	  BOOT_PARTITION=mmcblk0p12
+	  BOOT_ROM=secondary
+	else
+	  BOOT_PARTITION=mmcblk0p9
+	  BOOT_ROM=primary
+	fi
+fi
+
+
+
+/sbin/busybox umount /xdata
+
+# check rom vendor
+/sbin/busybox mount -t ext4 /dev/block/$BOOT_PARTITION /system
+if [ -f /system/framework/twframework.jar ]; then
+  ROM_VENDOR=samsung
+else
+  ROM_VENDOR=aosp
+fi
+/sbin/busybox umount /system
+
+# run vendor init script
+exec /vendor/$ROM_VENDOR/init.$ROM_VENDOR $BOOT_ROM
