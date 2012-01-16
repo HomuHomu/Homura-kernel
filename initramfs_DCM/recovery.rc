@@ -11,6 +11,11 @@ on init
     # for clockworkmod
     symlink /misc /etc
 
+    # override device prop
+    setprop ro.product.device galaxys2
+    setprop ro.build.product galaxys2
+    setprop ro.product.board galaxys2
+
 # create mountpoints
     mkdir /sdcard 0000 system system
     mkdir /emmc 0000 system system
