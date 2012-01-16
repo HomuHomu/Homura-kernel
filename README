@@ -1,5 +1,5 @@
-Homura_kernel rev20
-テストできない。
+Homura_kernel rev21
+自分の趣味を押し付けるからこうなるんだろ。
 
 1.CPU scaling level is changed from 5 to 17
 (1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -47,32 +47,17 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 35.etc...etc..
 
 前回との修正点
-SLQB allocator
-Automatic process group scheduler
-CPUFreq VoltageControl(setCPU)
-GPUFreq VoltageControl(TweakGS2)
-VoltageControlはTegrakモジュールが走ると制御がTegrak側に移る）
-Default OC (1.6GHz~)
-Arm And Internal UnderVoltage
-(eg.settings.pngの+25mv程度）
-init.rc OMKL4最適化
-SingleBootのinit.rcを修正
-※起動出来なかったですよね？すみませんでした。
-
-AOSPのBLNについて
-/vendor/files/に入ってるのでBLN使いたい人は
-rm /system/lib/hw/ights.smdkv310.so
-cat /vendor/files/lights.smdkv310.so > /system/lib/hw/lights.smdkv310.so
-chmod 644 /system/lib/hw/lights.smdkv310.so
-chown 0.0 /system/lib/hw/lights.smdkv310.so
-reboot
-
-また、CyanogenMod7用のBLNを使いたい人は
-rm /system/lib/hw/ights.smdkv310.so
-cat /vendor/files/lights.smdkv310.so.cm7 > /system/lib/hw/lights.smdkv310.so
-chmod 644 /system/lib/hw/lights.smdkv310.so
-chown 0.0 /system/lib/hw/lights.smdkv310.so
-reboot
+ブートロゴが評判悪かったため、多少マシなのにチェンジ
+反映されてない箇所が多数あったため
+init_scriptで値を無理やり反映（Multi-core schedulerなど）
+SDCARDの読み込み速度を最適化
+Miscellaneous tweaks
+EXT4 Speed Tweaks
+TCP tweaks
+setprop debug.performance.tuning 1; 
+setprop video.accelerate.hw 1;
+setprop debug.sf.hw 1;
+メモリ電圧を1.2V→1.1V
 
 既知の問題
-もう持ってないから、わからない。と言ってみるテスト
+もう持ってないから、わからない。と言ってみるテス（ry
