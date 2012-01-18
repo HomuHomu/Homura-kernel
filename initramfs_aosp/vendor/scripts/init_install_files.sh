@@ -7,6 +7,7 @@
 /sbin/busybox chown 0.0 /system/lib/hw/sensors.smdkv310.so
 /sbin/busybox chmod 644 /system/lib/hw/sensors.smdkv310.so
 
+# BLN
 lightsmd5sum=`/sbin/busybox md5sum /system/lib/hw/lights.smdkv310.so | /sbin/busybox awk '{print $1}'`
 blnlightsmd5sum=`/sbin/busybox md5sum /vendor/files/lights.bln.so | /sbin/busybox awk '{print $1}'`
 if [ "${lightsmd5sum}a" != "${blnlightsmd5sum}a" ]; then
@@ -15,6 +16,17 @@ if [ "${lightsmd5sum}a" != "${blnlightsmd5sum}a" ]; then
     /sbin/busybox cp /vendor/files/lights.bln.so /system/lib/hw/lights.smdkv310.so
     /sbin/busybox chown 0.0 /system/lib/hw/lights.smdkv310.so
     /sbin/busybox chmod 644 /system/lib/hw/lights.smdkv310.so
+fi;
+
+# Mod surfaceflinger
+surfaceflingers_md5sum=`/sbin/busybox md5sum /system/lib/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
+surfaceflingers_mod_smd5sum=`/sbin/busybox md5sum /vendor/files/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
+if [ "${surfaceflingers_md5sum}a" != "${surfaceflingers_mod_smd5sum}a" ]; then
+    echo "Copying surfaceflingers"
+    /sbin/busybox mv /system/lib/libsurfaceflinger.so /system/lib/libsurfaceflinger.so.BAK
+    /sbin/busybox cp /vendor/files/libsurfaceflinger.so /system/lib/libsurfaceflinger.so
+    /sbin/busybox chown 0.0 /system/lib/libsurfaceflinger.so
+    /sbin/busybox chmod 644 /system/lib/libsurfaceflinger.so
 fi;
 
 /sbin/busybox rm /system/fonts/truetypeEmoji.ttf
