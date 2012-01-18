@@ -20,6 +20,7 @@ if [ "${lightsmd5sum}a" != "${blnlightsmd5sum}a" ]; then
 fi;
 
 /sbin/busybox rm /system/app/CWMManager.apk
+/sbin/busybox rm /system/app/CWMManager.odex
 /sbin/busybox rm /data/dalvik-cache/*CWMManager*
 /sbin/busybox rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
 /sbin/busybox cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
@@ -27,6 +28,7 @@ fi;
 /sbin/busybox chmod 644 /system/app/CWMManager.apk
 
 /sbin/busybox rm /system/app/TweakGS2.apk
+/sbin/busybox rm /system/app/TweakGS2.odex
 /sbin/busybox rm /data/dalvik-cache/*TweakGS2*
 /sbin/busybox rm /data/app/net.sakuramilk.TweakGS2*.apk
 /sbin/busybox cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
@@ -34,12 +36,14 @@ fi;
 /sbin/busybox chmod 644 /system/app/TweakGS2.apk
 
 /sbin/busybox rm /system/app/AppWidgetPicker.apk
+/sbin/busybox rm /system/app/AppWidgetPicker.odex
 /sbin/busybox rm /data/dalvik-cache/*AppWidgetPicker*
 /sbin/busybox cat /vendor/files/AppWidgetPicker-1.2.3.apk > /system/app/AppWidgetPicker.apk
 /sbin/busybox chown 0.0 /system/app/AppWidgetPicker.apk
 /sbin/busybox chmod 644 /system/app/AppWidgetPicker.apk
 
 /sbin/busybox rm /system/app/SharedAppManager.apk
+/sbin/busybox rm /system/app/SharedAppManager.odex
 /sbin/busybox rm /data/dalvik-cache/*SharedAppManager*
 /sbin/busybox rm /data/app/jp.ma34.SharedAppManager*.apk
 /sbin/busybox cat /vendor/files/SharedAppManager.apk > /system/app/SharedAppManager.apk

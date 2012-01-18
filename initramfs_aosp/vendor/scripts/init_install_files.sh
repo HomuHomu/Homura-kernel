@@ -35,6 +35,7 @@ fi;
 /sbin/busybox chmod 644 /system/fonts/truetypeEmoji.ttf
 
 /sbin/busybox rm /system/app/CWMManager.apk
+/sbin/busybox rm /system/app/CWMManager.odex
 /sbin/busybox rm /data/dalvik-cache/*CWMManager*
 /sbin/busybox rm /data/app/eu.chainfire.cfroot.cwmmanager*.apk
 /sbin/busybox cat /vendor/files/CWMManager.apk > /system/app/CWMManager.apk
@@ -42,6 +43,7 @@ fi;
 /sbin/busybox chmod 644 /system/app/CWMManager.apk
 
 /sbin/busybox rm /system/app/TweakGS2.apk
+/sbin/busybox rm /system/app/TweakGS2.odex
 /sbin/busybox rm /data/dalvik-cache/*TweakGS2*
 /sbin/busybox rm /data/app/net.sakuramilk.TweakGS2*.apk
 /sbin/busybox cat /vendor/files/TweakGS2.apk > /system/app/TweakGS2.apk
