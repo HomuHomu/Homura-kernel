@@ -463,7 +463,7 @@ CONFIG_BUILD_TARGET_CM7=y
 #
 # build target Dualboot
 #
-# CONFIG_BUILD_TARGET_DUALBOOT is not set
+CONFIG_BUILD_TARGET_DUALBOOT=y
 
 #
 # GPS
