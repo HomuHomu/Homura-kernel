@@ -1,5 +1,5 @@
-Homura_kernel rev21
-自分の趣味を押し付けるからこうなるんだろ。
+Homura_kernel rev21a
+調整中
 
 1.CPU scaling level is changed from 5 to 17
 (1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -40,24 +40,16 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 29.AFTR ARM Idle Mode
 30.800MHz Sleep Death Fix
 31.SLQB allocator(New!)
-32.Automatic process group scheduler(New!)
-33.Supports CPUFreq VoltageControl for setCPU(New!)
-34.Supports GPUFreq VoltageControl for TweakGS2(again)
-35.UnderVoltage arm And Internal
+32.Supports CPUFreq VoltageControl for setCPU
+33.Supports GPUFreq VoltageControl for TweakGS2
+34.UnderVoltage arm And Internal
 35.etc...etc..
 
 前回との修正点
-ブートロゴが評判悪かったため、多少マシなのにチェンジ
-反映されてない箇所が多数あったため
-init_scriptで値を無理やり反映（Multi-core schedulerなど）
-SDCARDの読み込み速度を最適化
-Miscellaneous tweaks
-EXT4 Speed Tweaks
-TCP tweaks
-setprop debug.performance.tuning 1; 
-setprop video.accelerate.hw 1;
-setprop debug.sf.hw 1;
-メモリ電圧を1.2V→1.1V
+ブートロゴ戻し
+SCHED_AUTOGROUP is not set(問題切り分けのため）
+AOSPでBootAnimationが一周しない問題をFix(相変わらずSKRMLK先生 GJ)
+※ただし、起動が少し遅れます。
 
 既知の問題
-もう持ってないから、わからない。と言ってみるテス（ry
+もう持ってないから、わからない。と言ってみるテ（ry

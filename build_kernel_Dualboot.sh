@@ -12,7 +12,7 @@ KERNEL_NAME="Homura-Kernel"
 CONFIG_FILE="$KERNEL_PATH/arch/arm/configs/Homura_Dualboot_defconfig"
 
 export LOCALVERSION="-$KERNEL_NAME"
-export KBUILD_BUILD_VERSION="Dual21"
+export KBUILD_BUILD_VERSION="Dual21a"
 
 export WHOAMI_MOD="Homura"
 export HOSTNAME_MOD="Akemi"
