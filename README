@@ -39,7 +39,7 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 28.New ARM Mali-400 Drivers(From GalaxyNote)
 29.AFTR ARM Idle Mode
 30.800MHz Sleep Death Fix
-31.SLQB allocator(New!)
+31.SLQB allocator
 32.Supports CPUFreq VoltageControl for setCPU
 33.Supports GPUFreq VoltageControl for TweakGS2
 34.UnderVoltage arm And Internal
