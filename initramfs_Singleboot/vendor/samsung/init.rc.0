@@ -757,8 +757,8 @@ service playsound /system/bin/playsound
     oneshot
 
 service samsungani /sbin/bootanimation.sh
-    user graphics
-    group graphics
+    user root
+    group root
     disabled
     oneshot
 
@@ -1003,7 +1003,7 @@ on property:encryption.bootmode=remount
     start DR-deamon
     start mobex-daemon
 
-on property:sys.boot_completed=1
+on property:sys.bootanim_completed=1
     stop samsungani
 
 on property:conf.androidLogger=1
