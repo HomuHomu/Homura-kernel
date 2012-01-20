@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Fri Jan 20 22:26:05 2012
+ * Fri Jan 20 22:57:22 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -74,6 +74,7 @@
 #define CONFIG_S3C_DEV_RTC 1
 #define CONFIG_VIDEO_MFC5X 1
 #define CONFIG_HAVE_ARM_SCU 1
+#define CONFIG_ALLOW_CPU_ALIGNMENT 1
 #define CONFIG_SERIAL_SAMSUNG 1
 #define CONFIG_DM_MULTIPATH_QL 1
 #define CONFIG_LEGACY_PTYS 1

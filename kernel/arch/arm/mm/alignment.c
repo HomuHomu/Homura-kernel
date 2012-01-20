@@ -717,7 +717,7 @@ do_alignment_t32_to_handler(unsigned long *pinstr, struct pt_regs *regs,
 static int
 do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 {
-	union offset_union offset;
+	union offset_union offset = {.un = 0};
 	unsigned long instr = 0, instrptr;
 	int (*handler)(unsigned long addr, unsigned long instr, struct pt_regs *regs);
 	unsigned int type;
@@ -826,7 +826,6 @@ do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 			handler = do_alignment_t32_to_handler(&instr, regs, &offset);
 		else
 			handler = do_alignment_ldmstm;
-			offset.un = 0;
 		break;
 
 	default:
@@ -886,8 +885,23 @@ do_alignment(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 
 	if (ai_usermode & UM_SIGNAL)
 		force_sig(SIGBUS, current);
-	else
-		set_cr(cr_no_alignment);
+	else {
+		/*
+		 * We're about to disable the alignment trap and return to
+		 * user space.  But if an interrupt occurs before actually
+		 * reaching user space, then the IRQ vector entry code will
+		 * notice that we were still in kernel space and therefore
+		 * the alignment trap won't be re-enabled in that case as it
+		 * is presumed to be always on from kernel space.
+		 * Let's prevent that race by disabling interrupts here (they
+		 * are disabled on the way back to user space anyway in
+		 * entry-common.S) and disable the alignment trap only if
+		 * there is no work pending for this thread.
+		 */
+		raw_local_irq_disable();
+		if (!(current_thread_info()->flags & _TIF_WORK_MASK))
+			set_cr(cr_no_alignment);
+	}
 
 	return 0;
 }
