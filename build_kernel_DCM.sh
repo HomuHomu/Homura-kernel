@@ -12,7 +12,7 @@ KERNEL_NAME="Homura-Kernel"
 CONFIG_FILE="$KERNEL_PATH/arch/arm/configs/Homura_defconfig"
 
 export LOCALVERSION="-$KERNEL_NAME"
-export KBUILD_BUILD_VERSION="DCM21b"
+export KBUILD_BUILD_VERSION="DCM22"
 export WHOAMI_MOD="Homura"
 export HOSTNAME_MOD="Akemi"
 

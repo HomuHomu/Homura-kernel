@@ -1,5 +1,5 @@
-Homura_kernel rev21b
-まだ調整中
+Homura_kernel rev22
+BT HID Drivers Supports(KL4)
 
 1.CPU scaling level is changed from 5 to 17
 (1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -45,12 +45,14 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 34.UnderVoltage arm Core
 35.Memory UnderVoltage
 36.LED UnderVoltage
-37.etc...etc..
+37.BTHID Driver From GalaxyNote
+38.etc...etc..
 
 前回との修正点
-Internal Voltage をDefault(1.0V～1.1V)に
-BootAnimationバイナリをSKRMLKさん最新作にチェンジ
+デフォROMでBTHIDを使えるようにした。
+※ただし、全部動くのかどうかは知らん。
+LulzactiveとConservativeを再調整
 
 既知の問題
-19あたりまで一気に巻き戻すと、何が原因かわからなくなるので、ちょっとずつ巻き戻し
-これが、おかしくても、まだまだ打つ手はある。（多分）
+別のことしてる間に、BTHIDネタが出たので、急遽上げたから
+変な所がデてるかもね。
