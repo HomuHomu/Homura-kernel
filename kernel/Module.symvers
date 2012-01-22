@@ -2265,6 +2265,7 @@
 0x0645f3ec	__scsi_get_command	vmlinux	EXPORT_SYMBOL_GPL
 0x06050741	__scsi_put_command	vmlinux	EXPORT_SYMBOL
 0x690378ec	crypto_default_rng	vmlinux	EXPORT_SYMBOL_GPL
+0xf89615c7	d_make_root	vmlinux	EXPORT_SYMBOL
 0x64652e1e	inet_csk_listen_start	vmlinux	EXPORT_SYMBOL_GPL
 0xfcc2a43c	utf32_to_utf8	vmlinux	EXPORT_SYMBOL
 0x800df1d7	groups_free	vmlinux	EXPORT_SYMBOL
