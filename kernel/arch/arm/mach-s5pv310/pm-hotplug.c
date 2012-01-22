@@ -26,6 +26,7 @@
 #include <linux/sched.h>
 #include <linux/suspend.h>
 #include <linux/reboot.h>
+#include <linux/earlysuspend.h>
 
 #include <plat/map-base.h>
 #include <plat/gpio-cfg.h>
@@ -33,16 +34,13 @@
 #include <mach/regs-gpio.h>
 #include <mach/regs-irq.h>
 #include <linux/gpio.h>
-#include <linux/cpufreq.h>
 
 #include <linux/device.h> 		//for second_core by tegrak
 #include <linux/miscdevice.h> 	//for second_core by tegrak
 
-#define CPUMON 0
-
-#define CHECK_DELAY	(.5*HZ)
-#define TRANS_LOAD_L	20
-#define TRANS_LOAD_H	(TRANS_LOAD_L*3)
+#define CHECK_DELAY	(HZ >> 1)
+#define TRANS_LOAD_L	35
+#define TRANS_LOAD_H	75
 
 #define HOTPLUG_UNLOCKED 0
 #define HOTPLUG_LOCKED 1
@@ -68,6 +66,8 @@ struct cpu_time_info {
 
 static DEFINE_PER_CPU(struct cpu_time_info, hotplug_cpu_time);
 
+static bool screen_off;
+
 /* mutex can be used since hotplug_timer does not run in
    timer(softirq) context but in process context */
 static DEFINE_MUTEX(hotplug_lock);
@@ -80,23 +80,21 @@ int hotplug_on = 1;
 static void hotplug_timer(struct work_struct *work)
 {
 	unsigned int i, avg_load = 0, load = 0;
-	unsigned int cur_freq;
 
 	mutex_lock(&hotplug_lock);
-	
-	/* screen_off event is more likely */  
-	if (screen_off && !cpu_online(1)) {
-		printk(KERN_INFO "pm-hotplug: disable cpu auto-hotplug\n");
-		goto out;
-	}
 
-	/* exit if we turned off dynamic hotplug by tegrak cancel the timer - by tegrak */
+	// exit if we turned off dynamic hotplug by tegrak
+	// cancel the timer
 	if (!hotplug_on) {
 		if (!second_core_on && cpu_online(1) == 1)
 			cpu_down(1);
 		goto off_hotplug;
 	}
 
+	if (screen_off && !cpu_online(1)) {
+		printk(KERN_INFO "pm-hotplug: disable cpu auto-hotplug\n");
+		goto off_hotplug;
+	}
 	if (user_lock == 1)
 		goto no_hotplug;
 
@@ -127,32 +125,20 @@ static void hotplug_timer(struct work_struct *work)
 
 	avg_load = load / num_online_cpus();
 
-	cur_freq = cpufreq_get(0);
-
-	if (((avg_load < trans_load_l) || (cur_freq <= 200 * 1000)) &&
-	    (cpu_online(1) == 1)) {
+	if (avg_load < trans_load_l && cpu_online(1)) {
 		printk("cpu1 turning off!\n");
 		cpu_down(1);
-#if CPUMON
-		printk(KERN_ERR "CPUMON D %d\n", avg_load);
-#endif
 		printk("cpu1 off end!\n");
 		hotpluging_rate = CHECK_DELAY;
-	} else if (((avg_load > trans_load_h) && (cur_freq > 200 * 1000)) &&
-		   (cpu_online(1) == 0)) {
+	} else if (avg_load > trans_load_h && !cpu_online(1)) {
 		printk("cpu1 turning on!\n");
 		cpu_up(1);
-#if CPUMON
-		printk(KERN_ERR "CPUMON U %d\n", avg_load);
-#endif
 		printk("cpu1 on end!\n");
 		hotpluging_rate = CHECK_DELAY * 4;
 	}
-	
-no_hotplug:
-	//printk("hotplug_timer done.\n");
-	queue_delayed_work_on(0, hotplug_wq, &hotplug_work, hotpluging_rate);
 
+no_hotplug:
+	queue_delayed_work_on(0, hotplug_wq, &hotplug_work, hotpluging_rate);
 off_hotplug:
 	mutex_unlock(&hotplug_lock);
 }
@@ -318,6 +304,29 @@ static struct miscdevice second_core_device = {
 		.name = "second_core",
 };
 
+static void hotplug_early_suspend(struct early_suspend *handler)
+{
+	mutex_lock(&hotplug_lock);
+	screen_off = true;
+	mutex_unlock(&hotplug_lock);
+}
+
+static void hotplug_late_resume(struct early_suspend *handler)
+{
+	printk(KERN_INFO "pm-hotplug: enable cpu auto-hotplug\n");
+
+	mutex_lock(&hotplug_lock);
+	screen_off = false;
+	queue_delayed_work_on(0, hotplug_wq, &hotplug_work, hotpluging_rate);
+	mutex_unlock(&hotplug_lock);
+}
+
+static struct early_suspend hotplug_early_suspend_notifier = {
+	.suspend = hotplug_early_suspend,
+	.resume = hotplug_late_resume,
+	.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN,
+};
+
 static int __init s5pv310_pm_hotplug_init(void)
 {
 	int ret;
@@ -334,6 +343,7 @@ static int __init s5pv310_pm_hotplug_init(void)
 
 	register_pm_notifier(&s5pv310_pm_hotplug_notifier);
 	register_reboot_notifier(&hotplug_reboot_notifier);
+	register_early_suspend(&hotplug_early_suspend_notifier);
 	
 	// register second_core device by tegrak
 	ret = misc_register(&second_core_device);
