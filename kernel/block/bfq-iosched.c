@@ -63,7 +63,7 @@
 #include "bfq.h"
 
 /* Max number of dispatches in one round of service. */
-static const int bfq_quantum = 8;
+static const int bfq_quantum = 4;
 
 /* Expiration time of sync (0) and async (1) requests, in jiffies. */
 static const int bfq_fifo_expire[2] = { HZ / 4, HZ / 8 };
@@ -72,7 +72,7 @@ static const int bfq_fifo_expire[2] = { HZ / 4, HZ / 8 };
 static const int bfq_back_max = 16 * 1024;
 
 /* Penalty of a backwards seek, in number of sectors. */
-static const int bfq_back_penalty = 1;
+static const int bfq_back_penalty = 2;
 
 /* Idling period duration, in jiffies. */
 static int bfq_slice_idle = HZ / 125;
@@ -142,7 +142,7 @@ static DEFINE_IDA(cic_index_ida);
  */
 static inline int bfq_bio_sync(struct bio *bio)
 {
-	if (bio_data_dir(bio) == READ || (bio->bi_rw & BIO_RW_SYNCIO))
+	if (bio_data_dir(bio) == READ || (bio->bi_rw & REQ_SYNC))
 		return 1;
 
 	return 0;
@@ -192,9 +192,9 @@ static struct request *bfq_choose_req(struct bfq_data *bfqd,
 		return rq1;
 	else if (rq_is_sync(rq2) && !rq_is_sync(rq1))
 		return rq2;
-	if (rq_is_meta(rq1) && !rq_is_meta(rq2))
+	if ((rq1->cmd_flags & REQ_META) && !(rq2->cmd_flags & REQ_META))
 		return rq1;
-	else if (rq_is_meta(rq2) && !rq_is_meta(rq1))
+	else if ((rq2->cmd_flags & REQ_META) && !(rq1->cmd_flags & REQ_META))
 		return rq2;
 
 	s1 = blk_rq_pos(rq1);
@@ -504,7 +504,9 @@ static void bfq_add_rq_rb(struct request *rq)
 add_bfqq_busy:
 		bfq_add_bfqq_busy(bfqd, bfqq);
         } else {
-                if(old_raising_coeff == 1 && bfqq->last_rais_start_finish +
+                if(bfqd->low_latency && old_raising_coeff == 1 &&
+			!rq_is_sync(rq) &&
+			bfqq->last_rais_start_finish +
                         bfqd->bfq_raising_min_idle_time < jiffies) {
                         bfqq->raising_coeff = bfqd->bfq_raising_coeff;
 
@@ -585,7 +587,7 @@ static void bfq_remove_request(struct request *rq)
 	list_del_init(&rq->queuelist);
 	bfq_del_rq_rb(rq);
 
-	if (rq_is_meta(rq)) {
+	if (rq->cmd_flags & REQ_META) {
 		WARN_ON(bfqq->meta_pending == 0);
 		bfqq->meta_pending--;
 	}
@@ -2094,7 +2096,7 @@ static void bfq_rq_enqueued(struct bfq_data *bfqd, struct bfq_queue *bfqq,
 {
 	struct cfq_io_context *cic = RQ_CIC(rq);
 
-	if (rq_is_meta(rq))
+	if (rq->cmd_flags & REQ_META)
 		bfqq->meta_pending++;
 
 	bfq_update_io_thinktime(bfqd, cic);
@@ -2775,7 +2777,7 @@ static ssize_t								\
 __FUNC(struct elevator_queue *e, const char *page, size_t count)	\
 {									\
 	struct bfq_data *bfqd = e->elevator_data;			\
-	unsigned long __data = 0;						\
+	unsigned long __data;						\
 	int ret = bfq_var_store(&__data, (page), count);		\
 	if (__data < (MIN))						\
 		__data = (MIN);						\
@@ -2833,7 +2835,7 @@ static ssize_t bfq_max_budget_store(struct elevator_queue *e,
 				    const char *page, size_t count)
 {
 	struct bfq_data *bfqd = e->elevator_data;
-	unsigned long __data = 0;
+	unsigned long __data;
 	int ret = bfq_var_store(&__data, (page), count);
 
 	if (__data == 0)
@@ -2853,7 +2855,7 @@ static ssize_t bfq_timeout_sync_store(struct elevator_queue *e,
 				      const char *page, size_t count)
 {
 	struct bfq_data *bfqd = e->elevator_data;
-	unsigned long __data = 0;
+	unsigned long __data;
 	int ret = bfq_var_store(&__data, (page), count);
 
 	if (__data < 1)
@@ -2872,7 +2874,7 @@ static ssize_t bfq_low_latency_store(struct elevator_queue *e,
 				     const char *page, size_t count)
 {
 	struct bfq_data *bfqd = e->elevator_data;
-	unsigned long __data = 0;
+	unsigned long __data;
 	int ret = bfq_var_store(&__data, (page), count);
 
 	if (__data > 1)
