@@ -1,5 +1,5 @@
-Homura_kernel rev23
-安定しているカーネルなど要らない。
+Homura_kernel rev24
+SpeedMod厨
 
 1.CPU scaling level is changed from 5 to 17
 (1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -9,7 +9,7 @@ https://market.android.com/details?id=com.tegrak.overclock.ultimate
 4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/intellidemand/Hotplug/
   PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive V2 Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
-6.BFQ v3-r1/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
+6.BFQ v3-r2(New!)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode XZ
 8.supports bootanimation
 9.based on GT-I9100 gingerbread_update3 source
@@ -49,10 +49,10 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 38.etc...etc..
 
 前回との修正点
-SpeedModのパッチ当てた。
-2ndCoreで2コア使うときに、ラグってるのをfix(したつもり）
-Lagfree Govを多少使えるものにチェンジ
+BFQ V3-r1→r2
+LCD LED RAM 電圧設定をデフォルトに
+SpeedModの最新パッチk2-19 取り込み
 
 既知の問題
 最近、動かない報告が続出していまして、動かない人ごめんなさい。
-※こちらでは動いてるので…（検証用に白ROMもう一台買わなきゃダメか？）
+いくつか電圧を、また元に戻したのですが、どうでしょうか？
