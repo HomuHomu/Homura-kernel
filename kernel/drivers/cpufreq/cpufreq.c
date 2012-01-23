@@ -480,6 +480,17 @@ static ssize_t store_##file_name					\
 	if (ret)							\
 		return -EINVAL;						\
 									\
+/*	char * string_object = "object";				\
+	if (strcmp (string_object, "max")) {				\
+	unsigned int max_value;						\
+	unsigned int max_cpu = 1400000;					\
+	unsigned int max_threshold = 1200000;				\
+	sscanf(buf, "%u", &max_value);					\
+	if (max_value >= max_threshold) {				\
+		sprintf(buf, "%u", max_cpu);				\
+		}							\
+	}								\
+*/									\
 	ret = sscanf(buf, "%u", &new_policy.object);			\
 	if (ret != 1)							\
 		return -EINVAL;						\

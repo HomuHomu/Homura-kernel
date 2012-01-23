@@ -812,6 +812,8 @@ enum cpu_idle_type {
 #define SCHED_POWER_SHIFT	10
 #define SCHED_POWER_SCALE	(1L << SCHED_POWER_SHIFT)
 
+extern int __weak arch_sd_sibling_asym_packing(void);
+
 /*
  * sched-domains (multiprocessor balancing) declarations:
  */
@@ -887,6 +889,7 @@ struct sched_group {
 	 * single CPU.
 	 */
 	unsigned int cpu_power;
+	unsigned long next_update;
 
 	/*
 	 * The CPUs this group covers.

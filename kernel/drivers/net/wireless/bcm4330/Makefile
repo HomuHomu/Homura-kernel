@@ -1,3 +1,5 @@
+#subdir-ccflags-y += -fno-inline-functions
+
 EXTRA_CFLAGS += -Dlinux -DLINUX -DBDC -DBCMDRIVER -DBCMDONGLEHOST -DDHDTHREAD \
     -DDHD_GPL -DDHD_SCHED -DBCMSDIO -DBCMLXSDMMC -DBCMPLATFORM_BUS -DDHD_BCMEVENTS \
     -DSHOW_EVENTS -DENABLE_DEEP_SLEEP
@@ -8,6 +10,9 @@ EXTRA_CFLAGS += -Dlinux -DLINUX -DBDC -DBCMDRIVER -DBCMDONGLEHOST -DDHDTHREAD \
 # For Samsung Aries only.
 EXTRA_CFLAGS += -DCUSTOMER_HW_SAMSUNG
 EXTRA_CFLAGS += -DSYSLSI_SPECIFIC
+
+# To Enable Packet filter as White list instead of Black list 
+#EXTRA_CFLAGS += -DWHITELIST_PKT_FILTER 
 
 # To Enable Packet filter as White list instead of Black list 
 #EXTRA_CFLAGS += -DWHITELIST_PKT_FILTER 
