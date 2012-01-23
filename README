@@ -43,10 +43,9 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 32.Supports CPUFreq VoltageControl for setCPU
 33.Supports GPUFreq VoltageControl for TweakGS2
 34.UnderVoltage arm Core
-35.Memory UnderVoltage
-36.LED UnderVoltage
-37.BTHID Driver From GalaxyNote
-38.etc...etc..
+35.BTHID Driver From GalaxyNote
+36.Speedmod features
+37.etc...etc..
 
 前回との修正点
 BFQ V3-r1→r2
