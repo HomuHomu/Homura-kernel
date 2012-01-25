@@ -1,7 +1,7 @@
 /*
  * Automatically generated C config: don't edit
  * Linux kernel version: 2.6.35.7
- * Wed Jan 25 22:59:00 2012
+ * Thu Jan 26 01:10:57 2012
  */
 #define AUTOCONF_INCLUDED
 #define CONFIG_NF_CONNTRACK_H323 1
@@ -282,6 +282,7 @@
 #define CONFIG_NETFILTER_XT_MATCH_LENGTH 1
 #define CONFIG_FAT_FS 1
 #define CONFIG_TEXTSEARCH_FSM 1
+#define CONFIG_CPU_FREQ_GOV_WHEATLEY 1
 #define CONFIG_HIGHMEM 1
 #define CONFIG_INET_TUNNEL 1
 #define CONFIG_MMC_BLOCK_BOUNCE 1
