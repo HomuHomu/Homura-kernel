@@ -6,8 +6,9 @@ Homura_kernel rev25
 2.compatible with Tegrak Overclock (supports changing frequencies over 1000MHz)
 https://market.android.com/details?id=com.tegrak.overclock.ultimate
 3.supports CIFS
-4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/Intellidemand/Sakuractive/
-  PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/Lagfree/Wheatley/Lulzactive V2 Governors(Default)
+4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/
+  Lazy/Intellidemand/Sakuractive/PowerSave/Conservative/SavagedZen/BrazilianWax/
+  Performance/Scary/Lagfree/Wheatley/Lulzactive V2 Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
 6.BFQ v3-r2(Default)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode XZ
