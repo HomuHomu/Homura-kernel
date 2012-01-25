@@ -1,15 +1,15 @@
-Homura_kernel rev24a
-LD9040の個体差がある模様
+Homura_kernel rev25
+サラダうどんが食べたい。
 
 1.CPU scaling level is changed from 5 to 17
 (1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
 2.compatible with Tegrak Overclock (supports changing frequencies over 1000MHz)
 https://market.android.com/details?id=com.tegrak.overclock.ultimate
 3.supports CIFS
-4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/intellidemand/Hotplug/
-  PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/lagfree/Lulzactive V2 Governors(Default)
+4.Ondemand/OndemandX/Interactive/InteractiveX/Smartass/SmartassV2/MinMax/UserSpace/Lazy/Intellidemand/Sakuractive/
+  PowerSave/Conservative/SavagedZen/BrazilianWax/Performance/Scary/Lagfree/Wheatley/Lulzactive V2 Governors(Default)
 5.ClockWorkMod Recovery 5.0.2.6 r4 or 5.0.2.7 r1(Dualboot)
-6.BFQ v3-r2(New!)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
+6.BFQ v3-r2(Default)/noop/deadline/CFQ/SIO/VR/Anticipatory I/O scheduler
 7.kernel compression mode XZ
 8.supports bootanimation
 9.based on GT-I9100 gingerbread_update3 source
@@ -45,13 +45,14 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 34.UnderVoltage arm Core
 35.BTHID Driver From GalaxyNote
 36.Speedmod features
-37.etc...etc..
+37.New Battery Driver
+38.etc...etc..
 
 前回との修正点
-パネル生産ラインによって
-SpeedMod仕様のパネル輝度調整(多段階調整？）が動かない場合があるようなので
-デフォに戻しました。
+HotPlug Gov → Sakuracvtive Gov
+Mobile Battery DriverをUpdate(From SiyahKernel)
+Lazy GovをUpdate(結構使えるようになった）
+Wheatley Gov を追加(Govコレクターとして、これは入れざるを得ない）
 
 既知の問題
-最近、不安定だったりしてた方の報告を効きませんが、解決したでしょうか？
-まだなようでしたら、週末にでも心当たりを弄ってみます。（と言ってもGPUドライバしか心当たりがない）
+ないお？
