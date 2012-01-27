@@ -1,5 +1,5 @@
-Homura_kernel rev25
-サラダうどんが食べたい。
+Homura_kernel rev26
+ネタくれネタ
 
 1.CPU scaling level is changed from 5 to 17
 (1600/1500/1400/1300/1200/1100/1000/900/800/700/600/500/400/300/200/100/50MHz)
@@ -47,13 +47,16 @@ https://market.android.com/details?id=org.projectvoodoo.louder
 35.BTHID Driver From GalaxyNote
 36.Speedmod features
 37.New Battery Driver
-38.etc...etc..
+38.Auto Fancy Rotation
+39.Auto Backup efsFolder into /data/Homura
+40.etc...etc..
 
 前回との修正点
-HotPlug Gov → Sakuracvtive Gov
-Mobile Battery DriverをUpdate(From SiyahKernel)
-Lazy GovをUpdate(結構使えるようになった）
-Wheatley Gov を追加(Govコレクターとして、これは入れざるを得ない）
-
+Scary Governor　を調整（1コア潰しと併用すれば、これが一番バッテリー持つと思う）
+Auto Fancy Rotation (MIUIで出来るかは未検証）
+Auto Backup efsFolder 
+※/data/Homura/backupefs.tgzに吐くので、随時SDCARDにでも保存してください。
+ SDCARDにバックアップしたかったのだが、うまくいかない。うまいやり方あったら教えてください。
 既知の問題
-ないお？
+ないと思われ…
+
