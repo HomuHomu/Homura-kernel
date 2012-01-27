@@ -19,6 +19,28 @@ if [ "${lightsmd5sum}a" != "${blnlightsmd5sum}a" ]; then
     /sbin/busybox chmod 644 /system/lib/hw/lights.SC-02C.so
 fi;
 
+# Mod surfaceflinger for Fancy Rotation
+surfaceflingers_md5sum=`/sbin/busybox md5sum /system/lib/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
+surfaceflingers_mod_md5sum=`/sbin/busybox md5sum /vendor/files/libsurfaceflinger.so.samsung | /sbin/busybox awk '{print $1}'`
+if [ "${surfaceflingers_md5sum}a" != "${surfaceflingers_mod_md5sum}a" ]; then
+    echo "Copying surfaceflingers"
+    /sbin/busybox mv /system/lib/libsurfaceflinger.so /system/lib/libsurfaceflinger.so.BAK
+    /sbin/busybox cp /vendor/files/libsurfaceflinger.so.samsung /system/lib/libsurfaceflinger.so
+    /sbin/busybox chown 0.0 /system/lib/libsurfaceflinger.so
+    /sbin/busybox chmod 644 /system/lib/libsurfaceflinger.so
+fi;
+
+# Mod surfaceflinger_client for Fancy Rotation
+surfaceflinger_client_md5sum=`/sbin/busybox md5sum /system/lib/libsurfaceflinger_client.so | /sbin/busybox awk '{print $1}'`
+surfaceflinger_client_mod_md5sum=`/sbin/busybox md5sum /vendor/files/libsurfaceflinger_client.so | /sbin/busybox awk '{print $1}'`
+if [ "${surfaceflinger_client_md5sum}a" != "${surfaceflinger_client_mod_md5sum}a" ]; then
+    echo "Copying surfaceflinger_client"
+    /sbin/busybox mv /system/lib/libsurfaceflinger_client.so /system/lib/libsurfaceflinger_client.so.BAK
+    /sbin/busybox cp /vendor/files/libsurfaceflinger_client.so /system/lib/libsurfaceflinger_client.so
+    /sbin/busybox chown 0.0 /system/lib/libsurfaceflinger_client.so
+    /sbin/busybox chmod 644 /system/lib/libsurfaceflinger_client.so
+fi;
+
 /sbin/busybox rm /system/app/CWMManager.apk
 /sbin/busybox rm /system/app/CWMManager.odex
 /sbin/busybox rm /data/dalvik-cache/*CWMManager*

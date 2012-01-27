@@ -20,8 +20,8 @@ fi;
 
 # Mod surfaceflinger
 surfaceflingers_md5sum=`/sbin/busybox md5sum /system/lib/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
-surfaceflingers_mod_smd5sum=`/sbin/busybox md5sum /vendor/files/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
-if [ "${surfaceflingers_md5sum}a" != "${surfaceflingers_mod_smd5sum}a" ]; then
+surfaceflingers_mod_md5sum=`/sbin/busybox md5sum /vendor/files/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
+if [ "${surfaceflingers_md5sum}a" != "${surfaceflingers_mod_md5sum}a" ]; then
     echo "Copying surfaceflingers"
     /sbin/busybox mv /system/lib/libsurfaceflinger.so /system/lib/libsurfaceflinger.so.BAK
     /sbin/busybox cp /vendor/files/libsurfaceflinger.so /system/lib/libsurfaceflinger.so
