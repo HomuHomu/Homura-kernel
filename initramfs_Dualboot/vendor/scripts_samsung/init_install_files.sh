@@ -106,3 +106,13 @@ fi
 
 /sbin/busybox mount -o remount,ro /system /system
 
+# Backup efs Folder
+if [ ! -f /data/Homura/backupefs.tar.gz ];
+then
+	/sbin/busybox mkdir /data/Homura
+	/sbin/busybox chmod 777 /data/Homura
+	/sbin/busybox tar zcvf /data/Homura/backupefs.tar.gz /efs
+	/sbin/busybox sleep 500
+fi;
+
+

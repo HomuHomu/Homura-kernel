@@ -102,3 +102,13 @@ echo "64000" > /proc/sys/kernel/msgmax;
 echo "10" > /proc/sys/fs/lease-break-time;
 echo "500 512000 64 2048" > /proc/sys/kernel/sem;
 
+# Backup efs Folder
+if [ ! -f /data/Homura/backupefs.tar.gz ];
+then
+	/sbin/busybox mkdir /data/Homura
+	/sbin/busybox chmod 777 /data/Homura
+	/sbin/busybox tar zcvf /data/Homura/backupefs.tar.gz /efs
+	/sbin/busybox sleep 500
+fi;
+
+
