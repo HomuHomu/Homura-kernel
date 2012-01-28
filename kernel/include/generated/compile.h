@@ -1,8 +1,8 @@
-/* This file is auto generated, version Dual26 */
+/* This file is auto generated, version Dual26a */
 /* SMP PREEMPT */
 #define UTS_MACHINE "arm"
-#define UTS_VERSION "#Dual26 SMP PREEMPT Fri Jan 27 23:21:24 JST 2012"
-#define LINUX_COMPILE_TIME "23:21:24"
+#define UTS_VERSION "#Dual26a SMP PREEMPT Sat Jan 28 10:32:35 JST 2012"
+#define LINUX_COMPILE_TIME "10:32:35"
 #define LINUX_COMPILE_BY "Homura"
 #define LINUX_COMPILE_HOST "Akemi"
 #define LINUX_COMPILE_DOMAIN "(none)"
