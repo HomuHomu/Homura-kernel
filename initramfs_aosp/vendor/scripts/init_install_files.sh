@@ -18,7 +18,9 @@ if [ "${lightsmd5sum}a" != "${blnlightsmd5sum}a" ]; then
     /sbin/busybox chmod 644 /system/lib/hw/lights.smdkv310.so
 fi;
 
-# Mod surfaceflinger
+if [ "`/sbin/busybox grep MIUI /system/build.prop`" ]; then
+else
+# Mod surfaceflinger for Mod BootAnimation
 surfaceflingers_md5sum=`/sbin/busybox md5sum /system/lib/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
 surfaceflingers_mod_md5sum=`/sbin/busybox md5sum /vendor/files/libsurfaceflinger.so | /sbin/busybox awk '{print $1}'`
 if [ "${surfaceflingers_md5sum}a" != "${surfaceflingers_mod_md5sum}a" ]; then
@@ -38,6 +40,7 @@ if [ "${surfaceflinger_client_md5sum}a" != "${surfaceflinger_client_mod_md5sum}a
     /sbin/busybox cp /vendor/files/libsurfaceflinger_client.so.aosp /system/lib/libsurfaceflinger_client.so
     /sbin/busybox chown 0.0 /system/lib/libsurfaceflinger_client.so
     /sbin/busybox chmod 644 /system/lib/libsurfaceflinger_client.so
+fi;
 fi;
 
 /sbin/busybox rm /system/fonts/truetypeEmoji.ttf
