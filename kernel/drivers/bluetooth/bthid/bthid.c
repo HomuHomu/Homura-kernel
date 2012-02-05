@@ -271,35 +271,35 @@ static int bthid_ioctl(struct inode *inode, struct file *file, unsigned int cmd,
             p_dev->hid->version = di.version;
             p_dev->hid->country = di.ctry_code;  
     } else if (cmd == BTHID_IOCTL_RPT_DSCP) {
-        p_ctrl = kmalloc(sizeof(struct bthid_ctrl), GFP_KERNEL);
-        if (p_ctrl == NULL)
-        {
-            return -ENOMEM;
-        }
-    
-        if (copy_from_user(p_ctrl, (void __user *) arg, sizeof(struct bthid_ctrl)) != 0)
-        {
-            kfree(p_ctrl);
-            return -EFAULT;
-        }
-    
-        if (p_ctrl->size <= 0) 
-        {
-            printk("Oops: Invalid BT HID report descriptor size %d\n", p_ctrl->size); 
-    
-            kfree(p_ctrl);
-            return -EINVAL;
-        }
+    p_ctrl = kmalloc(sizeof(struct bthid_ctrl), GFP_KERNEL);
+    if (p_ctrl == NULL)
+    {
+        return -ENOMEM;
+    }
+
+    if (copy_from_user(p_ctrl, (void __user *) arg, sizeof(struct bthid_ctrl)) != 0)
+    {
+        kfree(p_ctrl);
+        return -EFAULT;
+    }
+
+    if (p_ctrl->size <= 0) 
+    {
+        printk("Oops: Invalid BT HID report descriptor size %d\n", p_ctrl->size); 
+
+        kfree(p_ctrl);
+        return -EINVAL;
+    }
     
         if (!p_dev->hid) {
-            p_dev->hid = hid_allocate_device();
-            if (p_dev->hid == NULL)
-            {
-                printk("Oops: Failed to allocation HID device.\n");
-    
-                kfree(p_ctrl);
-                return -ENOMEM;
-            }
+    p_dev->hid = hid_allocate_device();
+    if (p_dev->hid == NULL)
+    {
+        printk("Oops: Failed to allocation HID device.\n");
+
+        kfree(p_ctrl);
+        return -ENOMEM;
+    }
         }
 
     //temperaly use hard code. GB does not support id kl
@@ -310,34 +310,34 @@ static int bthid_ioctl(struct inode *inode, struct file *file, unsigned int cmd,
             strcpy(p_dev->hid->name, "Broadcom Bluetooth HID");
             p_dev->hid->name[strlen("Broadcom Bluetooth HID")] =  '\0';	
         }
-                    
-        p_dev->hid->bus         = BUS_BLUETOOTH;
-        p_dev->hid->ll_driver   = &bthid_ll_driver;
-        p_dev->hid->driver_data = p_ctrl;
     
+    p_dev->hid->bus         = BUS_BLUETOOTH;
+    p_dev->hid->ll_driver   = &bthid_ll_driver;
+    p_dev->hid->driver_data = p_ctrl;
 
-        ret = hid_add_device(p_dev->hid);
-    
-        printk("hid_add_device: ret = %d, hid->status = %d\n", ret, p_dev->hid->status);
-    
-        if (ret != 0)
-        {
-            printk("Oops: Failed to add HID device");
-    
-            kfree(p_ctrl);
-            hid_destroy_device(p_dev->hid);
-            p_dev->hid = NULL;
-            return -EINVAL;
-        }
-        p_dev->hid->claimed |= HID_CLAIMED_INPUT;
-    
-        if (p_dev->hid->status != (HID_STAT_ADDED | HID_STAT_PARSED))
-        {
-            printk("Oops: Failed to process HID report descriptor");
-            return -EINVAL;
-        }
-    
-        p_dev->dscp_set = 1;
+
+    ret = hid_add_device(p_dev->hid);
+
+    printk("hid_add_device: ret = %d, hid->status = %d\n", ret, p_dev->hid->status);
+
+    if (ret != 0)
+    {
+        printk("Oops: Failed to add HID device");
+
+        kfree(p_ctrl);
+        hid_destroy_device(p_dev->hid);
+        p_dev->hid = NULL;
+        return -EINVAL;
+    }
+    p_dev->hid->claimed |= HID_CLAIMED_INPUT;
+
+    if (p_dev->hid->status != (HID_STAT_ADDED | HID_STAT_PARSED))
+    {
+        printk("Oops: Failed to process HID report descriptor");
+        return -EINVAL;
+    }
+
+    p_dev->dscp_set = 1;
     } else {
         printk("Invlid ioctl value");
         return -EINVAL;
