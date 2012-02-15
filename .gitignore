@@ -15,7 +15,6 @@
 *.a
 *.s
 *.ko
-*.so
 *.so.dbg
 *.mod.c
 *.i
@@ -85,5 +84,5 @@ GTAGS
 *.zip
 *.tar
 *.md5
-*zImage
+zImage
 \#*#
